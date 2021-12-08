@@ -5,22 +5,22 @@ Das Tool stellt die eingetragenen Fragen in zufälliger Reihenfolge und die Antw
 bearbeitet.</p>
 <p>Das Tool wird zwei Ebenen besitzen Ebene 1 => Lernmodus Ebene 2 => Prüfungsmodus</p>
 
-###Lernmodus (Primärprojekt)
+### Lernmodus (Primärprojekt)
 <p>Im Lernmodus soll die Antwort direkt auf ihre Richtigkeit geprüft werden und die Lösung zur Frage wird direkt
 innerhalb der View mit Verweis auf die Referenzlösung dargestellt.</p>
 
-###Prüfungsmodus (Optionalprojekt)
+### Prüfungsmodus (Optionalprojekt)
 <p>Im Prüfungsmodus werden die Antworten erst am Ende auf Richtigkeit geprüft und es wird berechnet wieviele Prozent
 der Prüfling korrekt beantwortet hat</p>
 
-###Start GUI Struktur
+### Start GUI Struktur
 <ul>
 <li>Titel der Mainview</li>
 <li>Button für Lernmodus</li>
 <li>Button für Fragenverwaltung</li>
 </ul>
 
-###Lernmodus GUI Struktur
+### Lernmodus GUI Struktur
 <ul>
 <li>Titel für die Lernview</li>
 <li>ChoiceBox oder InputField für Anzahl Fragen</li>
@@ -28,7 +28,7 @@ der Prüfling korrekt beantwortet hat</p>
 <li>Startbutton</li>
 </ul>
 
-###Lernmodus aktiv GUI Struktur
+### Lernmodus aktiv GUI Struktur
 <ul>
 <li>Titel mit Frage</li>
 <li>Antwortoptionen per CheckBox</li>
@@ -36,7 +36,7 @@ der Prüfling korrekt beantwortet hat</p>
 <li>Button für Check/Next</li>
 </ul>
 
-###Endview GUI Struktur
+### Endview GUI Struktur
 <ul>
 <li>Titel der Endview</li>
 <li>Button mit Ende</li>
@@ -47,7 +47,7 @@ der Prüfling korrekt beantwortet hat</p>
 <li>Button Exit</li>
 </ul>
 
-###Verwaltungsmaske GUI Struktur
+### Verwaltungsmaske GUI Struktur
 <ul>
 <li>Titel für View</li>
 <li>Fragen/Antworten hinzufügen</li>
@@ -56,7 +56,7 @@ der Prüfling korrekt beantwortet hat</p>
 <li>Highscore Tabelle zurücksetzen</li>
 </ul>
 
-####GUI für Fragen/Antworten hinzufügen
+#### GUI für Fragen/Antworten hinzufügen
 <ul>
 <li>Titel</li>
 <li>Textfeld für Frage</li>
@@ -67,7 +67,7 @@ der Prüfling korrekt beantwortet hat</p>
 <li>Button für Speichern</li>
 </ul>
 
-####GUI für Fragen/Antworten bearbeiten
+#### GUI für Fragen/Antworten bearbeiten
 <ul>
 <li>Titel</li>
 <li>Ausgabefeld der Frage</li>
