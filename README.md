@@ -13,34 +13,37 @@ innerhalb der View mit Verweis auf die Referenzlösung dargestellt.</p>
 <p>Im Prüfungsmodus werden die Antworten erst am Ende auf Richtigkeit geprüft und es wird berechnet wieviele Prozent
 der Prüfling korrekt beantwortet hat</p>
 
-<table>
-<tr>
-<td>
+<div style="width: 70%; display: flex;">
+<div style="float: left">
+<p>
 
 ### Start GUI Struktur
 - Titel der Mainview
 - Button für Lernmodus
-- Button für Fragenverwaltung
-</td>
-<td>
+- Button für Fragenverwaltung</p>
+</div>
+<div style="float: left">
+<p>
 
 ### Lernmodus GUI Struktur
 - Titel für die Lernview
 - ChoiceBox oder InputField für Anzahl Fragen 
 - Label mit max. Anzahl Fragen möglich 
-- Startbutton
-</td>
-<td>
+- Startbutton</p>
+</div>
+<div style="float: left">
+<p>
 
 ### Lernmodus aktiv GUI Struktur
 - Titel mit Frage
 - Antwortoptionen per CheckBox
 - Hinweistext zu Lösung (Grün/Rot)
-- Button für Check/Next
-</td>
-</tr>
-<tr>
-<td>
+- Button für Check/Next</p>
+</div>
+</div>
+<div style="width: 70%; display: flex;">
+<div style="float: left">
+<p>
 
 ### Endview GUI Struktur
 
@@ -51,8 +54,11 @@ der Prüfling korrekt beantwortet hat</p>
 - Anzeige der letzten 10 Lerndurchgänge
 - Button Zurück/Home
 - Button Exit
-</td>
-<td>
+
+</p>
+</div>
+<div style="float: left">
+<p>
 
 ### Verwaltungsmaske GUI Struktur
 - Titel für View
@@ -60,36 +66,32 @@ der Prüfling korrekt beantwortet hat</p>
 - Fragen/Antworten bearbeiten
 - Fragen/Antworten löschen
 - Highscore Tabelle zurücksetzen
-</td>
-<td>
+</p>
+</div>
+</div>
+<div style="width: 70%; display: flex;">
+<div style="float: left">
+<p>
 
-#### GUI für Fragen/Antworten hinzufügen
+### GUI für Fragen/Antworten hinzufügen
 - Titel
 - Textfeld für Frage
 - Button für Antwort hinzufügen/Max. 4 Antworten möglich
 - Textfeld für AntwortAuswahlfeld für Richtig/Falsch
 - Button für weitere Frage hinzufügen
 - Button für Speichern
-</td>
-</tr>
-<tr>
-<td>
+</p>
+</div>
+<div style="float: left">
+<p>
 
-#### GUI für Fragen/Antworten bearbeiten
+### GUI für Fragen/Antworten bearbeiten
 - Titel
 - Ausgabefeld der Frage
 - Ausgabefeld der Antworten
 - Auswahlfeld für TRUE/FALSE
 - Button für Speichern
-</td>
-<td></td>
-<td></td>
-</tr>
-</table>
-![ERD](/../main/assets/ERD Semesterarbeit 1.drawio.png)
-<div style="width: 100%; display: flex">
-<div style="width: 50%; float: left">
-
+</p>
 </div>
 </div>
 
