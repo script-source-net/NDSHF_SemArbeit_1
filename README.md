@@ -13,66 +13,82 @@ innerhalb der View mit Verweis auf die Referenzlösung dargestellt.</p>
 <p>Im Prüfungsmodus werden die Antworten erst am Ende auf Richtigkeit geprüft und es wird berechnet wieviele Prozent
 der Prüfling korrekt beantwortet hat</p>
 
+<table>
+<tr>
+<td>
+
 ### Start GUI Struktur
-<ul>
-<li>Titel der Mainview</li>
-<li>Button für Lernmodus</li>
-<li>Button für Fragenverwaltung</li>
-</ul>
+- Titel der Mainview
+- Button für Lernmodus
+- Button für Fragenverwaltung
+</td>
+<td>
 
 ### Lernmodus GUI Struktur
-<ul>
-<li>Titel für die Lernview</li>
-<li>ChoiceBox oder InputField für Anzahl Fragen</li>
-<li>Label mit max. Anzahl Fragen möglich</li>
-<li>Startbutton</li>
-</ul>
+- Titel für die Lernview
+- ChoiceBox oder InputField für Anzahl Fragen 
+- Label mit max. Anzahl Fragen möglich 
+- Startbutton
+</td>
+<td>
 
 ### Lernmodus aktiv GUI Struktur
-<ul>
-<li>Titel mit Frage</li>
-<li>Antwortoptionen per CheckBox</li>
-<li>Hinweistext zu Lösung (Grün/Rot)</li>
-<li>Button für Check/Next</li>
-</ul>
+- Titel mit Frage
+- Antwortoptionen per CheckBox
+- Hinweistext zu Lösung (Grün/Rot)
+- Button für Check/Next
+</td>
+</tr>
+<tr>
+<td>
 
 ### Endview GUI Struktur
-<ul>
-<li>Titel der Endview</li>
-<li>Button mit Ende</li>
-<li>Statisik der Max. und erreichten Punkte</li>
-<li>Textfeld für Name</li>
-<li>Anzeige der letzten 10 Lerndurchgänge</li>
-<li>Button Zurück/Home</li>
-<li>Button Exit</li>
-</ul>
+
+- Titel der Endview
+- Button mit Ende
+- Statisik der Max. und erreichten Punktz
+- Textfeld für Name
+- Anzeige der letzten 10 Lerndurchgänge
+- Button Zurück/Home
+- Button Exit
+</td>
+<td>
 
 ### Verwaltungsmaske GUI Struktur
-<ul>
-<li>Titel für View</li>
-<li>Fragen/Antworten hinzufügen</li>
-<li>Fragen/Antworten bearbeiten</li>
-<li>Fragen/Antworten löschen</li>
-<li>Highscore Tabelle zurücksetzen</li>
-</ul>
+- Titel für View
+- Fragen/Antworten hinzufügen
+- Fragen/Antworten bearbeiten
+- Fragen/Antworten löschen
+- Highscore Tabelle zurücksetzen
+</td>
+<td>
 
 #### GUI für Fragen/Antworten hinzufügen
-<ul>
-<li>Titel</li>
-<li>Textfeld für Frage</li>
-<li>Button für Antwort hinzufügen/Max. 4 Antworten möglich</li>
-<li>Textfeld für Antwort</li>
-<li>Auswahlfeld für Richtig/Falsch</li>
-<li>Button für weitere Frage hinzufügen</li>
-<li>Button für Speichern</li>
-</ul>
+- Titel
+- Textfeld für Frage
+- Button für Antwort hinzufügen/Max. 4 Antworten möglich
+- Textfeld für AntwortAuswahlfeld für Richtig/Falsch
+- Button für weitere Frage hinzufügen
+- Button für Speichern
+</td>
+</tr>
+<tr>
+<td>
 
 #### GUI für Fragen/Antworten bearbeiten
-<ul>
-<li>Titel</li>
-<li>Ausgabefeld der Frage</li>
-<li>Ausgabefeld der Antworten</li>
-<li>Auswahlfeld für TRUE/FALSE</li>
-<li>Button für Speichern</li>
-</ul>
+- Titel
+- Ausgabefeld der Frage
+- Ausgabefeld der Antworten
+- Auswahlfeld für TRUE/FALSE
+- Button für Speichern
+</td>
+<td></td>
+<td></td>
+</tr>
+</table>
+<div style="width: 100%; display: flex">
+<div style="width: 50%; float: left">
+![Image](/../main/
+</div>
+</div>
 
