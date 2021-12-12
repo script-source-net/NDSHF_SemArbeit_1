@@ -86,9 +86,10 @@ der Prüfling korrekt beantwortet hat</p>
 <td></td>
 </tr>
 </table>
+![ERD](/../main/assets/ERD Semesterarbeit 1.drawio.png)
 <div style="width: 100%; display: flex">
 <div style="width: 50%; float: left">
-![ERD](ERD Semesterarbeit 1.drawio.png)
+
 </div>
 </div>
 
