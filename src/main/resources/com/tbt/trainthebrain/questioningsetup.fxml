@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
-
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="960.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.QuestionsetupController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="960.0" styleClass="stage" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.QuestionsetupController">
     <children>
-        <VBox layoutX="116.0" layoutY="-25.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox layoutX="116.0" layoutY="-25.0" prefHeight="200.0" prefWidth="100.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
             </padding>
@@ -19,6 +20,71 @@
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subTitle" text="Editor Modus" />
                     </children>
                 </HBox>
+            <VBox fx:id="editListQuestionContainerOutter" prefHeight="200.0" prefWidth="100.0" spacing="3.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox prefHeight="0.0" prefWidth="920.0" styleClass="editListQuestionContainer">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="editListQuestionText" text="Eine Einfache Frage steht hier die gegebenfalls auch länger sein kann?" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="920.0" styleClass="editListQuestionContainer">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="editListQuestionText" text="Eine Einfache Frage steht hier die gegebenfalls auch länger sein kann?" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="920.0" styleClass="editListQuestionContainer">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="editListQuestionText" text="Eine Einfache Frage steht hier die gegebenfalls auch länger sein kann?" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="920.0" styleClass="editListQuestionContainer">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="editListQuestionText" text="Eine Einfache Frage steht hier die gegebenfalls auch länger sein kann?" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="920.0" styleClass="editListQuestionContainer">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="editListQuestionText" text="Eine Einfache Frage steht hier die gegebenfalls auch länger sein kann?" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="920.0" styleClass="editListQuestionContainer">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="editListQuestionText" text="Eine Einfache Frage steht hier die gegebenfalls auch länger sein kann?" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <HBox prefHeight="0.0" prefWidth="920.0" styleClass="editListQuestionContainer">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="editListQuestionText" text="Eine Einfache Frage steht hier die gegebenfalls auch länger sein kann?" />
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="920.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Frage hinzufügen" />
+               </children>
+            </HBox>
             </children>
         </VBox>
     </children>
