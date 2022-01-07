@@ -1,0 +1,21 @@
+#mainTitle{
+    -fx-font-size: 3em;
+    -fx-font-family: "Arial";
+}
+
+.mainButton{
+    -fx-background-color: #111;
+    -fx-text-fill: #ececec;
+}
+
+/* SubSites */
+#subTitleTtB{
+    -fx-font-size: 2em;
+    -fx-font-family: "Arial";
+}
+
+.subTitle{
+    -fx-font-size: 1.2em;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+}
