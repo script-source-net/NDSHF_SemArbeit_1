@@ -1,3 +1,4 @@
+
 #mainTitle{
     -fx-font-size: 3em;
     -fx-font-family: "Arial";
@@ -43,4 +44,15 @@
 
 .editListQuestionContainer .editListQuestionText {
     -fx-fill: #eee;
+}
+
+.label {
+    -fx-text-fill: #ececec;
+    -fx-fill: #ececec;
+}
+
+.check-box{
+    -fx-text-fill: #ececec;
+    -fx-fill: #ececec;
+    -fx-padding: 10px 5px;
 }
