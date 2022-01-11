@@ -9,29 +9,74 @@
     -fx-fill: #bdbdbd;
 }
 
+.lead {
+    -fx-font-size: 1.5em;
+}
+
 .bold {
     -fx-font-weight: bold;
 }
 
-#mainTitle{
-    -fx-font-size: 3em;
-    -fx-fill: #bdbdbd;
+#mainHeader {
+    -fx-background-image: url('img/header.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center,bottom;
+    -fx-background-repeat: no-repeat;
 }
+
+/*#mainTitle{*/
+/*    -fx-font-size: 3em;*/
+/*    -fx-fill: #bdbdbd;*/
+/*}*/
 
 /* Buttons */
 
 .btn{
     -fx-cursor: hand;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
 }
 
 .btn-default {
     -fx-background-color: #262626;
-    -fx-text-fill: #ececec;
+}
+
+.btn-default .text {
+    -fx-fill: #c2c2c2;
 }
 
 .btn-default:hover {
     -fx-background-color: #3d3d3d;
-    -fx-text-fill: #fafafa;
+
+}
+
+.btn-default:hover .text{
+    -fx-fill: #fafafa;
+}
+
+.btn-success{
+    -fx-background-color: #1c7a15;
+    -fx-border-width: 1px;
+    -fx-border-color: #209318;
+
+}
+.btn-success .text {
+    -fx-fill: rgba(255, 255, 255, 0.7);
+}
+
+.btn-success:hover{
+    -fx-background-color: #208f18;
+    -fx-border-width: 1px;
+    -fx-border-color: #22a219;
+}
+
+.btn-success:hover .text {
+    -fx-fill: rgba(255, 255, 255, 0.9);
+}
+
+.button.large {
+    -fx-padding: 20px;
+    -fx-font-size: 2.5em;
 }
 
 .mainButton{
@@ -41,6 +86,13 @@
 
 
 /* SubSites */
+
+#header {
+    -fx-background-image: url('img/subheader.jpg');
+    -fx-background-size: cover;
+    -fx-background-position: center,bottom;
+    -fx-background-repeat: no-repeat;
+}
 #subTitleTtB{
     -fx-font-size: 2em;
     -fx-font-family: "Arial";
@@ -82,4 +134,28 @@
     -fx-text-fill: #ececec;
     -fx-fill: #ececec;
     -fx-padding: 10px 5px;
+}
+
+.text-field {
+
+}
+
+.text-field.tfprimary {
+    -fx-background-color: transparent;
+    -fx-text-fill: #4b4b4b;
+    -fx-padding: 10px 20px;
+    -fx-border-width: 1px;
+    -fx-border-color: transparent transparent #2d2d2d transparent ;
+    -fx-border-style: solid;
+    -fx-alignment: center;
+    -fx-font-size: 3em;
+}
+
+.text-field.tfprimary:focused {
+    -fx-text-fill: #676767;
+    -fx-border-color: transparent transparent #676767 transparent ;
+}
+
+.icon-selection{
+    -fx-font-size: 30px;
 }
