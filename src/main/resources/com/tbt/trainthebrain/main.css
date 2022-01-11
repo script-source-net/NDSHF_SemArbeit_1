@@ -1,17 +1,44 @@
 
-#mainTitle{
-    -fx-font-size: 3em;
+.stage, .root{
+    -fx-background-color: #171616;
     -fx-font-family: "Arial";
 }
 
-.mainButton{
-    -fx-background-color: #111;
+.text {
+    -fx-text-fill: #bdbdbd;
+    -fx-fill: #bdbdbd;
+}
+
+.bold {
+    -fx-font-weight: bold;
+}
+
+#mainTitle{
+    -fx-font-size: 3em;
+    -fx-fill: #bdbdbd;
+}
+
+/* Buttons */
+
+.btn{
+    -fx-cursor: hand;
+}
+
+.btn-default {
+    -fx-background-color: #262626;
     -fx-text-fill: #ececec;
 }
 
-.stage{
-    -fx-background-color: #171616;
+.btn-default:hover {
+    -fx-background-color: #3d3d3d;
+    -fx-text-fill: #fafafa;
 }
+
+.mainButton{
+    -fx-font-size: 1.5em;
+    -fx-padding: 20px 30px;
+}
+
 
 /* SubSites */
 #subTitleTtB{

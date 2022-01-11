@@ -1,38 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.glyphfont.Glyph?>
 
-
-<AnchorPane fx:id="mainRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="960.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.MainController">
+<AnchorPane fx:id="mainRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="960.0" styleClass="stage" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.MainController">
    <children>
       <VBox layoutX="116.0" layoutY="-25.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <padding>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </padding>
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefWidth="1920.0">
                <children>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="560.0">
-               <children>
-                  <Text fx:id="mainTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="Train the Brain" />
+                  <ImageView fitHeight="436.0" fitWidth="982.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/header.jpg" />
+                     </image></ImageView>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToLearningModeClick" styleClass="mainButton" text="Lernmodus starten" />
-                  <Button minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToEditQuestionsClick" styleClass="mainButton" text="Fragen editieren" />
+                  <Button minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToLearningModeClick" styleClass="btn,btn-default,mainButton" text="Lernmodus starten">
+                     <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="GRADUATION_CAP" />
+                     </graphic>
+                  </Button>
+                  <Button minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToEditQuestionsClick" styleClass="btn,btn-default,mainButton" text="Fragen editieren">
+                     <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="COGS" />
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="26.0" prefWidth="336.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eine Semesterarbeit für das NDS Applikationsentwickler 2022">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="bold" />
+                           </styleClass>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Entwickelt von Claudia Martinez, Gion Desax &amp; Marco Rensch" />
+                     </children>
+                  </VBox>
                </children>
             </HBox>
          </children>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
       </VBox>
    </children>
 </AnchorPane>
