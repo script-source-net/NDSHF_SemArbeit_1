@@ -4,6 +4,7 @@ public class Answer {
     int id;
     String text;
     boolean isCorrect;
+    boolean isSelected = false;
 
     public Answer(int id, String text, boolean isCorrect) {
         this.id = id;
