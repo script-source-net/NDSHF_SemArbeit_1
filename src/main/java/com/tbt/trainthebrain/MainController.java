@@ -29,7 +29,7 @@ public class MainController extends AppController{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("question-edit-overview.fxml"));
         try {
             Scene questioningScene = new Scene(loader.load());
-            AppController sceneController = loader.getController();
+            QuestionEditOverviewController sceneController = loader.getController();        // TODO: QuestionEditOverviewController has to extend AppController
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
