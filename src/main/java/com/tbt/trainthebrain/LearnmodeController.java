@@ -46,15 +46,15 @@ public class LearnmodeController extends AppController implements Initializable 
 
         // --> TEMP SOLUTION OBJEKTE HARDCODED
         ArrayList<Answer> tempA = new ArrayList<>();
-        tempA.add(new Answer(0,"Das ist meine erste Antwort", true));
-        tempA.add(new Answer(1,"Das ist meine 2. Antwort", false));
-        tempA.add(new Answer(2,"Das ist die 3. Option", true));
+        tempA.add(new Answer(0,"Das ist meine erste Antwort", true,1));
+        tempA.add(new Answer(1,"Das ist meine 2. Antwort", false,1));
+        tempA.add(new Answer(2,"Das ist die 3. Option", true,1));
 
         ArrayList<Answer> tempB = new ArrayList<>();
-        tempB.add(new Answer(0,"Robin", false));
-        tempB.add(new Answer(1,"Marshall Bruce Mathers III", true));
-        tempB.add(new Answer(2,"Van Gogh", false));
-        tempB.add(new Answer(3,"Brian Tillmore", false));
+        tempB.add(new Answer(0,"Robin", false,1));
+        tempB.add(new Answer(1,"Marshall Bruce Mathers III", true,1));
+        tempB.add(new Answer(2,"Van Gogh", false,1));
+        tempB.add(new Answer(3,"Brian Tillmore", false,1));
 
         Collections.shuffle(tempB);
 
@@ -109,7 +109,7 @@ public class LearnmodeController extends AppController implements Initializable 
             // Setze die Id der Antwort
             answerBoxes.get(i).setAnswerId(String.valueOf(questions.get(qindex).getAnswers().get(i).getId()));
             // Setze ob die Antwort korrekt ist
-            answerBoxes.get(i).setIsCorrectAnswer(questions.get(qindex).getAnswers().get(i).isCorrect);
+            answerBoxes.get(i).setIsCorrectAnswer(questions.get(qindex).getAnswers().get(i).getIsCorrect());
             // Setze Antworttext
             answerTextNodes.get(i).setText(questions.get(qindex).getAnswers().get(i).getText());
 

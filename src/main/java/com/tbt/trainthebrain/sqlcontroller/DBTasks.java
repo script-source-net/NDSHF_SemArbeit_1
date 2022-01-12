@@ -1,16 +1,17 @@
-package com.tbt.trainthebrain;
+package com.tbt.trainthebrain.sqlcontroller;
+
+import com.tbt.trainthebrain.Answer;
 
 import java.sql.*;
-import java.util.ArrayList;
 
-public class DBConnection {
+public class DBTasks {
 
     public void addOneAnswerInDB(Answer answer){
 
-        String query = "INSERT INTO answers (answer_text, answer_correct, question_id) VALUE ('" + answer.getAnswerText() + "',"
-                + answer.isCorrect() + "," + answer.getQuestionId() + ");";
+        String query = "INSERT INTO answers (answer_text, answer_correct, question_id) VALUE ('" + answer.getText() + "',"
+                + answer.getIsCorrect() + "," + answer.getQuestionId() + ");";
 
-        try (Connection con = DriverManager.getConnection(DBData.getURL(), DBData.getUSER(), DBData.getPASSWORD());
+        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(query)) {
 
@@ -28,7 +29,7 @@ public class DBConnection {
         String query = "UPDATE answers SET answer_text='" + answerText + "', answer_correct=" + isCorrect + "" +
                 " WHERE question_id=" + questionId + " AND answer_id=" + answerId;
 
-        try (Connection con = DriverManager.getConnection(DBData.getURL(), DBData.getUSER(), DBData.getPASSWORD());
+        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(query)) {
 
@@ -45,7 +46,7 @@ public class DBConnection {
         String query = "DELETE FROM answers WHERE answer_id=" + answerId +
                 " AND question_id=" + questionId;
 
-        try (Connection con = DriverManager.getConnection(DBData.getURL(), DBData.getUSER(), DBData.getPASSWORD());
+        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(query);
         ){
@@ -64,7 +65,7 @@ public class DBConnection {
         String query = "INSERT INTO questions (question_text) VALUE ('" + questionText + "') RETURNING question_id;";
         //String query2 = "SELECT LAST_INSERT_ID();";
         int lastCreatetQuestionId = 0;
-        try (Connection con = DriverManager.getConnection(DBData.getURL(), DBData.getUSER(), DBData.getPASSWORD());
+        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(query)) {
             // ResultSet rs2 = statement.executeQuery(query2);
@@ -88,7 +89,7 @@ public class DBConnection {
     public void UpdateQuestion(int questionId, String questionText) {
         String query = "UPDATE questions SET question_text='" + questionText + "' WHERE question_id=" + questionId;
 
-        try (Connection con = DriverManager.getConnection(DBData.getURL(), DBData.getUSER(), DBData.getPASSWORD());
+        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
              ResultSet rs = statement.executeQuery(query)) {
 
@@ -105,7 +106,7 @@ public class DBConnection {
         String query2 = "DELETE FROM answers WHERE question_id=" + questionId;
 
 
-        try (Connection con = DriverManager.getConnection(DBData.getURL(), DBData.getUSER(), DBData.getPASSWORD());
+        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
              Statement statement2 = con.createStatement();
 

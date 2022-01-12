@@ -1,5 +1,6 @@
 package com.tbt.trainthebrain;
 
+import com.tbt.trainthebrain.sqlcontroller.DBTasks;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +53,7 @@ public class QuestionEditController implements Initializable {
         int questionId = Integer.parseInt(id.getText());
         String question = questionText.getText().trim();
 
-        DBConnection con = new DBConnection();
+        DBTasks con = new DBTasks();
 
         if (questionId == 0 && !question.isEmpty()) {
             // insert in question table --> question_text
@@ -117,7 +118,7 @@ public class QuestionEditController implements Initializable {
         ArrayList<Answer> updateAnswers = createNewAnswerObjects(oldQuestionId);
         //Question addDBQuestion = new Question(questionId, question,createNewAnswerObjects(questionId));
 
-        DBConnection con = new DBConnection();
+        DBTasks con = new DBTasks();
         //Wenn answer id 0 und Text ist leer gar nichts machen
 
         //wenn answer id 0 und Text hat länge = neue antwort in Db hinzufügen (insert mit question id und answerText)
@@ -138,7 +139,7 @@ public class QuestionEditController implements Initializable {
                 if (aId0 > 0 && !answer0.isEmpty()) {
                     //Update Antwort
                     System.out.println("eingelesene Id = " + aId0);
-                    con.updateAnswers(updateAnswers.get(0).getQuestionId(), updateAnswers.get(0).getText(), updateAnswers.get(0).isCorrect(), updateAnswers.get(0).getId());
+                    con.updateAnswers(updateAnswers.get(0).getQuestionId(), updateAnswers.get(0).getText(), updateAnswers.get(0).getIsCorrect(), updateAnswers.get(0).getId());
                     System.out.println(updateAnswers.get(0));
 
                 }
@@ -158,7 +159,7 @@ public class QuestionEditController implements Initializable {
                 if (aId1 > 0 && !answer1.isEmpty()) {
                     //Update Antwort
                     System.out.println("eingelesene Id = " + aId1);
-                    con.updateAnswers(updateAnswers.get(1).getQuestionId(), updateAnswers.get(1).getText(), updateAnswers.get(1).isCorrect(), updateAnswers.get(1).getId());
+                    con.updateAnswers(updateAnswers.get(1).getQuestionId(), updateAnswers.get(1).getText(), updateAnswers.get(1).getIsCorrect(), updateAnswers.get(1).getId());
                     System.out.println(updateAnswers.get(1));
                 }
                 if (aId1 > 0 && answer1.isEmpty()) {
@@ -176,7 +177,7 @@ public class QuestionEditController implements Initializable {
                 if (aId2 > 0 && !answer2.isEmpty()) {
                     //Update Antwort
                     System.out.println("eingelesene Id = " + aId2);
-                    con.updateAnswers(updateAnswers.get(2).getQuestionId(), updateAnswers.get(2).getText(), updateAnswers.get(2).isCorrect(), updateAnswers.get(2).getId());
+                    con.updateAnswers(updateAnswers.get(2).getQuestionId(), updateAnswers.get(2).getText(), updateAnswers.get(2).getIsCorrect(), updateAnswers.get(2).getId());
                     System.out.println(updateAnswers.get(2));
                 }
                 if (aId2 > 0 && answer2.isEmpty()){
@@ -193,7 +194,7 @@ public class QuestionEditController implements Initializable {
                 if (aId3 > 0 && !answer3.isEmpty()) {
                     //Update Antwort
                     System.out.println("eingelesene Id = " + aId3);
-                    con.updateAnswers(updateAnswers.get(3).getQuestionId(), updateAnswers.get(3).getText(), updateAnswers.get(3).isCorrect(), updateAnswers.get(3).getId());
+                    con.updateAnswers(updateAnswers.get(3).getQuestionId(), updateAnswers.get(3).getText(), updateAnswers.get(3).getIsCorrect(), updateAnswers.get(3).getId());
                     System.out.println(updateAnswers.get(3));
 
                 }
@@ -249,7 +250,7 @@ public class QuestionEditController implements Initializable {
 // array von Answers mit answerObjekten, die questionId enthält von neu erstellter Question
         ArrayList<Answer> addAnswers = createNewAnswerObjects(newCreatetQuestionId);
 
-        DBConnection con = new DBConnection();
+        DBTasks con = new DBTasks();
 
         //wenn answer id 0 und Text hat länge = neue antwort in Db hinzufügen (insert mit question id und answerText)
         //Wenn verifytrue ist, dann kontrollier ob Antworten id = 0 und Text vorhanden --> Create new Answer Insert in DB
@@ -459,7 +460,7 @@ public class QuestionEditController implements Initializable {
         for (int i = 0; i < answers.size(); i++) {
             answerText.get(i).setText(answers.get(i).getText());
             answerIds.get(i).setText(String.valueOf(answers.get(i).getId()));
-            checkBoxes.get(i).setSelected(answers.get(i).isCorrect());
+            checkBoxes.get(i).setSelected(answers.get(i).getIsCorrect());
         }
     }
 

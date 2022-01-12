@@ -13,4 +13,6 @@ module com.tbt.trainthebrain {
 
     opens com.tbt.trainthebrain to javafx.fxml;
     exports com.tbt.trainthebrain;
+    exports com.tbt.trainthebrain.sqlcontroller;
+    opens com.tbt.trainthebrain.sqlcontroller to javafx.fxml;
 }
