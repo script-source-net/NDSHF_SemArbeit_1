@@ -21,8 +21,8 @@ public class QuestionEditOverviewController implements Initializable {
         // ***** Demo Object ToDo: Just temp REMOVE
         ListItemHelper lih = new ListItemHelper();
         ArrayList<Answer> answers = new ArrayList<Answer>();
-        answers.add(new Answer(0,"Antwort A",false));
-        answers.add(new Answer(0,"Antwort B",true));
+        answers.add(new Answer(2,"Antwort A",false, 0));
+        answers.add(new Answer(8,"Antwort B",true, 0));
 
         Question tmpQ = new Question(0,"Eine einfache Frage oder?", answers );
         // **** end of Demo Obj
