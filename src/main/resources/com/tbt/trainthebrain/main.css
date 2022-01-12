@@ -59,14 +59,25 @@
     -fx-fill: #fafafa;
 }
 
+
+.btn-primary{
+    -fx-background-color: #15447a;
+    -fx-border-width: 1px;
+    -fx-border-color: #186493;
+
+}
+
+.btn-primary:hover{
+    -fx-background-color: #184e8c;
+    -fx-border-width: 1px;
+    -fx-border-color: #186798;
+}
+
 .btn-success{
     -fx-background-color: #1c7a15;
     -fx-border-width: 1px;
     -fx-border-color: #209318;
 
-}
-.btn-success .text {
-    -fx-fill: rgba(255, 255, 255, 0.7);
 }
 
 .btn-success:hover{
@@ -75,8 +86,20 @@
     -fx-border-color: #22a219;
 }
 
+.btn-success .text,
+.btn-primary .text {
+    -fx-fill: rgba(255, 255, 255, 0.7);
+}
+
+
+
 .btn-success:hover .text {
     -fx-fill: rgba(255, 255, 255, 0.9);
+}
+
+.button.medium {
+    -fx-padding: 7px 20px;
+    -fx-font-size: 1.1em;
 }
 
 .button.large {
@@ -109,6 +132,37 @@
     -fx-font-family: "Arial";
     -fx-font-weight: bold;
     -fx-fill: #e1e1e1;
+}
+.answerBox {
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-background-color: rgba(35, 35, 35, 0.71);
+    -fx-border-color: #101010;
+    -fx-cursor: hand;
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-scale-x: 1;
+}
+
+.answerBox.selected {
+    -fx-background-color: rgba(21, 68, 122, 0.9);
+    -fx-border-color: #186798;
+}
+
+.answerBox.false {
+    -fx-background-color: rgba(122, 21, 21, 0.9);
+    -fx-border-color: #981818;
+}
+
+.answerBox.correct {
+    -fx-background-color: rgba(21, 122, 34, 0.9);
+    -fx-border-color: #189823;
+}
+
+.answerNum{
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 8em;
+    -fx-fill: rgba(255,255,255, 0.02);
 }
 
 /* Question Edit */

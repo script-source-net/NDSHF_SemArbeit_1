@@ -32,7 +32,8 @@ public class LearnmodeSetupController extends AppController implements Initializ
     @FXML
     HBox questionSetupOptionsContainer;
 
-    int countOfQuestionsInDB = 4;          // TODO: mit 0 initiieren
+    int countOfQuestionsInDB = 3;          // TODO: mit 0 initiieren
+    int questionsCounter = 0;
 
 
 
@@ -42,7 +43,8 @@ public class LearnmodeSetupController extends AppController implements Initializ
         FXMLLoader loader = new FXMLLoader(getClass().getResource("learnmode.fxml"));
         try {
             Scene questioningScene = new Scene(loader.load());
-            AppController sceneController = loader.getController();
+            LearnmodeController sceneController = loader.getController();
+            sceneController.initLearnmode(questionsCounter);
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
@@ -76,6 +78,7 @@ public class LearnmodeSetupController extends AppController implements Initializ
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (!newValue.matches("\\d*") || newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1 )) {
                     questionsToPlayCounter.setText(oldValue);
+                    questionsCounter = Integer.parseInt(oldValue);
                 }
 
                 if(questionsToPlayCounter.getText().length() > 0){
@@ -83,14 +86,18 @@ public class LearnmodeSetupController extends AppController implements Initializ
                 }else{
                     startBtn.setDisable(true);
                 }
+                // Anzahl der Fragen wird aktualisiert
+                questionsCounter = Integer.parseInt(newValue);
             }
         });
 
         // Anzahl der Fragen aus der Datenbank laden und im Text platzieren
 
-        // Die Anzahl der Fragen werden in der Seite ausgegeben:
+
+        // Die Anzahl der Fragen werden in der Seite ausgegeben UND für die übergabe in die nächste Scene übernommen:
         countOfQuestions.setText(String.valueOf(countOfQuestionsInDB));
         questionsToPlayCounter.setText(String.valueOf(countOfQuestionsInDB));
+        questionsCounter = countOfQuestionsInDB;
 
         // Text anpassen wenn keine Fragen eingetragen sind:
         if(countOfQuestionsInDB == 0){

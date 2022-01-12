@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.LearnmodeSetupController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="700" prefHeight="700.0" prefWidth="960.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.LearnmodeSetupController">
     <children>
         <VBox layoutX="116.0" layoutY="-25.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
