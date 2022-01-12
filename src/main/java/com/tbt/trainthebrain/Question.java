@@ -24,13 +24,7 @@ public class Question {
     public ArrayList<Answer> getAnswers() {
         return answers;
     }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "question='" + question + '\'' +
-                '}';
-    }
+    
 }
 
 
