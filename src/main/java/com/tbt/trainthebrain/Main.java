@@ -13,8 +13,8 @@ public class Main extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 960, 700);
         stage.setTitle("TtB - Train the Brain");
-        stage.setMaxWidth(1280.0);
-        stage.setMaxHeight(1080.0);
+//        stage.setMaxWidth(1280.0);
+//        stage.setMaxHeight(1080.0);
         stage.setMinWidth(960);
         stage.setMinHeight(700);
         stage.setScene(scene);

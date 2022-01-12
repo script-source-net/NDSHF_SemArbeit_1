@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<AnchorPane maxHeight="1080.0" maxWidth="1280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="960.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.QuestioningController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.LearnmodeSetupController">
     <children>
         <VBox layoutX="116.0" layoutY="-25.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <padding>
@@ -28,7 +28,7 @@
             </HBox>
             <HBox prefHeight="0.0" prefWidth="960.0">
                <children>
-                  <Button mnemonicParsing="false" text="Zurück" onAction="#backToMainClicked">
+                  <Button mnemonicParsing="false" onAction="#backToMainClicked" text="Zurück">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-default" />
@@ -42,51 +42,55 @@
                   <Insets left="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="960.0" VBox.vgrow="NEVER">
+            <VBox fx:id="learnModeInfoContainer" alignment="CENTER" prefHeight="0.0" prefWidth="960.0">
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Es befinden sich aktuell">
-                     <styleClass>
-                        <String fx:value="text" />
-                        <String fx:value="lead" />
-                     </styleClass>
-                  </Text>
-                  <Text fx:id="countOfQuestions" strokeType="OUTSIDE" strokeWidth="0.0" text="#num">
-                     <styleClass>
-                        <String fx:value="text" />
-                        <String fx:value="lead" />
-                        <String fx:value="bold" />
-                     </styleClass>
-                     <HBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </HBox.margin>
-                  </Text>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fragen in der Datenbank">
-                     <styleClass>
-                        <String fx:value="text" />
-                        <String fx:value="lead" />
-                     </styleClass>
-                  </Text>
+                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="960.0" VBox.vgrow="NEVER">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Es befinden sich aktuell">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="lead" />
+                           </styleClass>
+                        </Text>
+                        <Text fx:id="countOfQuestions" strokeType="OUTSIDE" strokeWidth="0.0" text="#num">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="lead" />
+                              <String fx:value="bold" />
+                           </styleClass>
+                           <HBox.margin>
+                              <Insets left="5.0" right="5.0" />
+                           </HBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fragen in der Datenbank">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="lead" />
+                           </styleClass>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="0.0" prefWidth="960.0">
+                     <children>
+                        <Text fx:id="howManyQuestionsText" strokeType="OUTSIDE" strokeWidth="0.0" text="Wie viele Fragen sollen gespielt werden?">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="lead" />
+                           </styleClass>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
+                     </padding>
+                  </HBox>
                </children>
-               <padding>
-                  <Insets left="20.0" right="20.0" top="20.0" />
-               </padding>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="960.0">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wie viele Fragen sollen gespielt werden?">
-                     <styleClass>
-                        <String fx:value="text" />
-                        <String fx:value="lead" />
-                     </styleClass>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" top="5.0" />
-               </padding>
-            </HBox>
+            </VBox>
             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="TOP_CENTER" prefHeight="0.0" prefWidth="920.0" spacing="2.0">
+                  <HBox fx:id="questionSetupOptionsContainer" alignment="TOP_CENTER" prefHeight="0.0" prefWidth="920.0" spacing="2.0">
                      <children>
                         <TextField fx:id="questionsToPlayCounter" prefHeight="88.0" prefWidth="112.0" styleClass="tfprimary" text="" />
                         <Button fx:id="counterMinusBtn" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#counterChangeClicked" text="-">

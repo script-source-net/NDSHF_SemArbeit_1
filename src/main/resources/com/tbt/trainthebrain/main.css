@@ -9,6 +9,11 @@
     -fx-fill: #bdbdbd;
 }
 
+.text-error {
+    -fx-font-weight: bold;
+    -fx-fill: #c20202;
+}
+
 .lead {
     -fx-font-size: 1.5em;
 }
