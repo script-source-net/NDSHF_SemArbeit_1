@@ -1,15 +1,76 @@
 package com.tbt.trainthebrain.sqlcontroller;
 
 import com.tbt.trainthebrain.Answer;
+import com.tbt.trainthebrain.Question;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBTasks {
 
+    /* Methoden für QuestionEditOverviewController */
+
+    public ArrayList<Question> getAllQuestionsFromDb(){
+        ArrayList<Question> questions = new ArrayList<>();
+        String query =  "SELECT * FROM tbl_questions";
+
+        try (
+                Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
+                Statement statement = con.createStatement();
+                ) {
+
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()){
+                ArrayList<Answer> answers = getAllAnswersForQuestion(rs.getInt("question_id"));
+                questions.add(
+                        new Question(
+                            rs.getInt("question_id"),
+                            rs.getString("question_text"),
+                            answers
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Fehler beim laden aller Question aus der Datenbank:");
+            ex.printStackTrace();
+        }
+        return questions;
+    }
+
+    private ArrayList<Answer> getAllAnswersForQuestion(int questionId){
+        ArrayList<Answer> answers = new ArrayList<>();
+        String query =  "SELECT * FROM tbl_answers WHERE question_id = '"+questionId+"'";
+        try (
+                Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
+                Statement statement = con.createStatement();
+        ) {
+
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()){
+                answers.add(
+                        new Answer(
+                                rs.getInt("answer_id"),
+                                rs.getString("answer_text"),
+                                rs.getBoolean("answer_correct"),
+                                questionId
+                        )
+                );
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("UpdateAnswers hat Fehler geworfen:");
+            ex.printStackTrace();
+
+        }
+        return answers;
+    }
+
+    /* Methoden für QuestionEditController */
+
     public void addOneAnswerInDB(Answer answer){
 
-        String query = "INSERT INTO answers (answer_text, answer_correct, question_id) VALUE ('" + answer.getText() + "',"
-                + answer.getIsCorrect() + "," + answer.getQuestionId() + ");";
+        String query = "INSERT INTO tbl_answers (answer_text, answer_correct, question_id) VALUE ('" + answer.getText() + "'," + answer.getIsCorrect() + "," + answer.getQuestionId() + ");";
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
@@ -17,17 +78,15 @@ public class DBTasks {
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Connection NOT OK");
+            System.out.println("addOneAnswerInDB hat Fehler geworfen:");
             ex.printStackTrace();
 
         }
 
     }
 
-
     public void updateAnswers(int questionId, String answerText, boolean isCorrect, int answerId){
-        String query = "UPDATE answers SET answer_text='" + answerText + "', answer_correct=" + isCorrect + "" +
-                " WHERE question_id=" + questionId + " AND answer_id=" + answerId;
+        String query = "UPDATE tbl_answers SET answer_text='" + answerText + "', answer_correct=" + isCorrect + "" + " WHERE question_id=" + questionId + " AND answer_id=" + answerId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
@@ -35,7 +94,7 @@ public class DBTasks {
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Connection NOT OK");
+            System.out.println("UpdateAnswers hat Fehler geworfen:");
             ex.printStackTrace();
 
         }
@@ -43,8 +102,7 @@ public class DBTasks {
     }
 
     public void deleteAnswerInDb(int questionId, int answerId){
-        String query = "DELETE FROM answers WHERE answer_id=" + answerId +
-                " AND question_id=" + questionId;
+        String query = "DELETE FROM tbl_answers WHERE answer_id=" + answerId + " AND question_id=" + questionId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
@@ -54,7 +112,7 @@ public class DBTasks {
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Connection NOT OK");
+            System.out.println("DeleteAnswerInDb hat Fehler geworfen:");
             ex.printStackTrace();
 
         }
@@ -62,7 +120,7 @@ public class DBTasks {
     }
 
     public int insertNewQuestion(String questionText) {
-        String query = "INSERT INTO questions (question_text) VALUE ('" + questionText + "') RETURNING question_id;";
+        String query = "INSERT INTO tbl_questions (question_text) VALUE ('" + questionText + "') RETURNING question_id;";
         //String query2 = "SELECT LAST_INSERT_ID();";
         int lastCreatetQuestionId = 0;
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
@@ -78,7 +136,7 @@ public class DBTasks {
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Connection NOT OK");
+            System.out.println("insertNewQuestion hat einen Fehler geworfen:");
             ex.printStackTrace();
 
 
@@ -87,7 +145,7 @@ public class DBTasks {
     }
 
     public void UpdateQuestion(int questionId, String questionText) {
-        String query = "UPDATE questions SET question_text='" + questionText + "' WHERE question_id=" + questionId;
+        String query = "UPDATE tbl_questions SET question_text='" + questionText + "' WHERE question_id=" + questionId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
@@ -95,15 +153,15 @@ public class DBTasks {
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Connection NOT OK");
+            System.out.println("UpdateQuestion Methode hat einen Fehler geworfen:");
             ex.printStackTrace();
 
         }
     }
 
     public void deleteQuestionAndAnswersInDb(int questionId){
-        String query = "DELETE FROM questions WHERE question_id =" + questionId;
-        String query2 = "DELETE FROM answers WHERE question_id=" + questionId;
+        String query = "DELETE FROM tbl_questions WHERE question_id =" + questionId;
+        String query2 = "DELETE FROM tbl_answers WHERE question_id=" + questionId;
 
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
@@ -115,7 +173,7 @@ public class DBTasks {
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
-            System.out.println("Connection NOT OK");
+            System.out.println("deleteQuestionAndAnswersInDb hat Fehler geworfen:");
             ex.printStackTrace();
 
         }
