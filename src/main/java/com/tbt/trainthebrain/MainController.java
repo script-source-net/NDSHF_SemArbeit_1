@@ -42,7 +42,6 @@ public class MainController extends AppController implements Initializable {
         try {
             Scene questioningScene = new Scene(loader.load());
             QuestionEditOverviewController sceneController = loader.getController();        // TODO: QuestionEditOverviewController has to extend AppController
-            sceneController.loadQuestionsFromDatabase();
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
