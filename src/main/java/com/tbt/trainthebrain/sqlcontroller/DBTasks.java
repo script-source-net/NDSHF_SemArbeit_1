@@ -110,14 +110,18 @@ public class DBTasks {
 
     }
 
+    // TODO: Delete Answer löscht einfach - prüfen das mindestens eine korrekte Antwort vorhanden ist aktuelle Prüfung lässt löschung zu wenn Text empty ist
     public void deleteAnswerInDb(int questionId, int answerId){
         String query = "DELETE FROM tbl_answers WHERE answer_id=" + answerId + " AND question_id=" + questionId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(query);
         ){
 
+            Boolean status = statement.execute(query);
+            if(status){
+                System.out.println("Antwort mit der ID " + answerId + " gelöscht");
+            }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
