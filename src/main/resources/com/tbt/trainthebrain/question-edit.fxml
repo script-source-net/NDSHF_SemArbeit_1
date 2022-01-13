@@ -26,7 +26,7 @@
                 </HBox>
             <VBox fx:id="editListQuestionContainerOutter" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                   <TextField fx:id="id" text="" />
+                   <TextField fx:id="id" text="0" />
                   <Label text="Fragentext:" />
                   <TextArea fx:id="questionText" prefHeight="200.0" prefWidth="200.0" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
@@ -42,7 +42,7 @@
                         <Label text="Antwort:" />
                         <CheckBox fx:id="answerCorrect0" mnemonicParsing="false" text="Korrekte Antwort" />
                         <TextArea fx:id="answerText0" prefHeight="68.0" prefWidth="920.0" />
-                         <TextField fx:id="answerId0"/>
+                         <TextField fx:id="answerId0" text="0"/>
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
@@ -50,7 +50,7 @@
                         <Label text="Antwort:" />
                         <CheckBox fx:id="answerCorrect1" mnemonicParsing="false" text="Korrekte Antwort" />
                         <TextArea fx:id="answerText1" prefHeight="68.0" prefWidth="920.0" />
-                         <TextField fx:id="answerId1"/>
+                         <TextField fx:id="answerId1" text="0"/>
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
@@ -58,7 +58,7 @@
                         <Label text="Antwort:" />
                         <CheckBox fx:id="answerCorrect2" mnemonicParsing="false" text="Korrekte Antwort" />
                         <TextArea fx:id="answerText2" prefHeight="68.0" prefWidth="920.0" />
-                         <TextField fx:id="answerId2"/>
+                         <TextField fx:id="answerId2" text="0"/>
                      </children>
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0">
@@ -66,7 +66,7 @@
                         <Label text="Antwort:" />
                         <CheckBox fx:id="answerCorrect3" mnemonicParsing="false" text="Korrekte Antwort" />
                         <TextArea fx:id="answerText3" prefHeight="68.0" prefWidth="920.0" />
-                         <TextField fx:id="answerId3"/>
+                         <TextField fx:id="answerId3" text="0"/>
                      </children>
                   </VBox>
                </children>

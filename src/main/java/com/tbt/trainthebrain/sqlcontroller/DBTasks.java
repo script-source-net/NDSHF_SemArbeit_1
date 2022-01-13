@@ -133,28 +133,28 @@ public class DBTasks {
     }
 
     public int insertNewQuestion(String questionText) {
-        String query = "INSERT INTO tbl_questions (question_text) VALUE ('" + questionText + "') RETURNING question_id;";
+        int insertedId = 0;
+        String query = "INSERT INTO tbl_questions (question_text) VALUE ('" + questionText + "')";
         //String query2 = "SELECT LAST_INSERT_ID();";
-        int lastCreatetQuestionId = 0;
-        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-             Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(query)) {
-            // ResultSet rs2 = statement.executeQuery(query2);
 
-            while (rs.next()) {
-                lastCreatetQuestionId = rs.getInt("question_id");
-            }
-            System.out.println("letze generierte question_ID " + lastCreatetQuestionId);
+        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
+             Statement statement = con.createStatement()) {
+                int affected = statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
+                ResultSet rs = statement.getGeneratedKeys();
+                if(rs.next()){
+                    insertedId = rs.getInt(1);
+                }
+            System.out.println("Status des insert ist: " + affected);
+            System.out.println("Die neue ID ist: " + insertedId);
 
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             System.out.println("insertNewQuestion hat einen Fehler geworfen:");
             ex.printStackTrace();
-
-
         }
-        return lastCreatetQuestionId;
+
+        return insertedId;
     }
 
     public void UpdateQuestion(int questionId, String questionText) {
