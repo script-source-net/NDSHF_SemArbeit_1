@@ -73,8 +73,15 @@ public class DBTasks {
         String query = "INSERT INTO tbl_answers (answer_text, answer_correct, question_id) VALUE ('" + answer.getText() + "'," + answer.getIsCorrect() + "," + answer.getQuestionId() + ");";
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-             Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(query)) {
+             Statement statement = con.createStatement()) {
+
+            Boolean status = statement.execute(query);
+            if(status){
+                System.out.println("Neue Antwort für QID:"+answer.getQuestionId());
+            }else{
+                System.out.println("Hinzufügen der Antwort für QID:" + answer.getQuestionId() + " gescheitert!");
+            }
+
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -161,7 +168,6 @@ public class DBTasks {
             System.out.println(ex.getMessage());
             System.out.println("UpdateQuestion Methode hat einen Fehler geworfen:");
             ex.printStackTrace();
-
         }
     }
 

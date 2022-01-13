@@ -26,11 +26,11 @@ public class QuestionEditController implements Initializable {
     @FXML
     private CheckBox answerCorrect0, answerCorrect1,answerCorrect2,answerCorrect3;
 
-    private ArrayList<TextArea> answerText = new ArrayList<>();
+    private ArrayList<TextArea> answerTextsArray = new ArrayList<>();
 
-    private  ArrayList<TextField> answerIds = new ArrayList<>();
+    private  ArrayList<TextField> answerIdsArray = new ArrayList<>();
 
-    private ArrayList<CheckBox> checkBoxes = new ArrayList<>();
+    private ArrayList<CheckBox> isCorrectCheckBoxesArray = new ArrayList<>();
 
     public void cancelQuestionEditClick(ActionEvent actionEvent) {
         // Back to List of Questions Edit screen
@@ -326,58 +326,63 @@ public class QuestionEditController implements Initializable {
     //Verifiziert ob mindestens 2 Antworten ausgefüllt wurden (Alle mögliche Kombinationen getestet)
     public boolean verifyIfMinTwoAnswers() {
         boolean verify = false;
-        String answer0 = answerText0.getText().trim();
-        String answer1 = answerText1.getText().trim();
-        String answer2 = answerText2.getText().trim();
-        String answer3 = answerText3.getText().trim();
-
-        System.out.println(answer0);
-        System.out.println(answer1);
-        System.out.println(answer2);
-        System.out.println(answer3);
-
-
-        String stringAnswerId0 = answerId0.getText().trim();
-        String stringAnswerId1 = answerId1.getText().trim();
-        String stringAnswerId2 = answerId2.getText().trim();
-        String stringAnswerId3 = answerId3.getText().trim();
-
-        // Überprüfung ob AnswerText und eine AnswerId vorhanden ist, von immer 2 Answers in der Maske
-        //Id nicht unbedingt nötig, wenn sichergestellt, dass immer eine ID eingefüllt ist und kein Leerschlag.
-        if ((!answer0.isEmpty() && !stringAnswerId0.isEmpty()) &&
-                (!answer1.isEmpty() && !stringAnswerId1.isEmpty())) {
-            verify = true;
-            System.out.println(verify);
-
-        } else if ((!answer1.isEmpty() && !stringAnswerId1.isEmpty()) &&
-                (!answer2.isEmpty() && !stringAnswerId2.isEmpty())) {
-            verify = true;
-            System.out.println(verify);
-
-        } else if ((!answer2.isEmpty() && !stringAnswerId2.isEmpty()) &&
-                (!answer3.isEmpty() && !stringAnswerId3.isEmpty())) {
-            verify = true;
-            System.out.println(verify);
-
-        } else if ((!answer3.isEmpty() && !stringAnswerId3.isEmpty()) &&
-                (!answer0.isEmpty() && !stringAnswerId0.isEmpty())) {
-            verify = true;
-            System.out.println(verify);
-
-        } else if ((!answer0.isEmpty() && !stringAnswerId0.isEmpty()) &&
-                (!answer2.isEmpty() && !stringAnswerId2.isEmpty())) {
-            verify = true;
-            System.out.println(verify);
-
-        } else if ((!answer3.isEmpty() && !stringAnswerId3.isEmpty()) &&
-                (!answer1.isEmpty() && !stringAnswerId1.isEmpty())) {
-            verify = true;
-            System.out.println(verify);
-
-        } else {
-            verify = false;
-            System.out.println(verify);
+        int answersCount = 0;
+        /* Check mit for Schleife und möglichem Abbruch */
+        for (int i = 0; i < 3; i++) {
+            if(!answerTextsArray.get(i).getText().trim().isEmpty()){
+                answersCount++;
+            }
+            if(answersCount == 2){
+                verify = true;
+                break;
+            }
         }
+//        String answer0 = answerText0.getText().trim();
+//        String answer1 = answerText1.getText().trim();
+//        String answer2 = answerText2.getText().trim();
+//        String answer3 = answerText3.getText().trim();
+//
+//        System.out.println(answer0);
+//        System.out.println(answer1);
+//        System.out.println(answer2);
+//        System.out.println(answer3);
+//
+//
+//        String stringAnswerId0 = answerId0.getText().trim();
+//        String stringAnswerId1 = answerId1.getText().trim();
+//        String stringAnswerId2 = answerId2.getText().trim();
+//        String stringAnswerId3 = answerId3.getText().trim();
+//
+//        // Überprüfung ob AnswerText und eine AnswerId vorhanden ist, von immer 2 Answers in der Maske
+//        //Id nicht unbedingt nötig, wenn sichergestellt, dass immer eine ID eingefüllt ist und kein Leerschlag.
+//        if ((!answer0.isEmpty() && !stringAnswerId0.isEmpty()) && (!answer1.isEmpty() && !stringAnswerId1.isEmpty())) {
+//            verify = true;
+//            System.out.println(verify);
+//
+//        } else if ((!answer1.isEmpty() && !stringAnswerId1.isEmpty()) && (!answer2.isEmpty() && !stringAnswerId2.isEmpty())) {
+//            verify = true;
+//            System.out.println(verify);
+//
+//        } else if ((!answer2.isEmpty() && !stringAnswerId2.isEmpty()) && (!answer3.isEmpty() && !stringAnswerId3.isEmpty())) {
+//            verify = true;
+//            System.out.println(verify);
+//
+//        } else if ((!answer3.isEmpty() && !stringAnswerId3.isEmpty()) && (!answer0.isEmpty() && !stringAnswerId0.isEmpty())) {
+//            verify = true;
+//            System.out.println(verify);
+//
+//        } else if ((!answer0.isEmpty() && !stringAnswerId0.isEmpty()) && (!answer2.isEmpty() && !stringAnswerId2.isEmpty())) {
+//            verify = true;
+//            System.out.println(verify);
+//
+//        } else if ((!answer3.isEmpty() && !stringAnswerId3.isEmpty()) && (!answer1.isEmpty() && !stringAnswerId1.isEmpty())) {
+//            verify = true;
+//            System.out.println(verify);
+//
+//        } else {
+//            verify = false;
+//            System.out.println(verify);
+//        }
 
 
         return verify;
@@ -457,9 +462,9 @@ public class QuestionEditController implements Initializable {
 
         //answers werden den answerText zugeteilt, wenn nur 3 answers bleibt 4. textarea einfach leer.
         for (int i = 0; i < answers.size(); i++) {
-            answerText.get(i).setText(answers.get(i).getText());
-            answerIds.get(i).setText(String.valueOf(answers.get(i).getId()));
-            checkBoxes.get(i).setSelected(answers.get(i).getIsCorrect());
+            answerTextsArray.get(i).setText(answers.get(i).getText());
+            answerIdsArray.get(i).setText(String.valueOf(answers.get(i).getId()));
+            isCorrectCheckBoxesArray.get(i).setSelected(answers.get(i).getIsCorrect());
         }
     }
 
@@ -467,20 +472,20 @@ public class QuestionEditController implements Initializable {
         //AnswerText in ArrayList abgefüllt
         //AnswerId's in ArrayList abgefüllt
         //Checkboxes in ArrayList abgefüllt
-        answerText.add(answerText0);
-        answerText.add(answerText1);
-        answerText.add(answerText2);
-        answerText.add(answerText3);
+        answerTextsArray.add(answerText0);
+        answerTextsArray.add(answerText1);
+        answerTextsArray.add(answerText2);
+        answerTextsArray.add(answerText3);
 
-        answerIds.add(answerId0);
-        answerIds.add(answerId1);
-        answerIds.add(answerId2);
-        answerIds.add(answerId3);
+        answerIdsArray.add(answerId0);
+        answerIdsArray.add(answerId1);
+        answerIdsArray.add(answerId2);
+        answerIdsArray.add(answerId3);
 
-        checkBoxes.add(answerCorrect0);
-        checkBoxes.add(answerCorrect1);
-        checkBoxes.add(answerCorrect2);
-        checkBoxes.add(answerCorrect3);
+        isCorrectCheckBoxesArray.add(answerCorrect0);
+        isCorrectCheckBoxesArray.add(answerCorrect1);
+        isCorrectCheckBoxesArray.add(answerCorrect2);
+        isCorrectCheckBoxesArray.add(answerCorrect3);
 
     }
 
