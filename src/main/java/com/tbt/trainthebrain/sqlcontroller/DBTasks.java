@@ -96,9 +96,11 @@ public class DBTasks {
         String query = "UPDATE tbl_answers SET answer_text='" + answerText + "', answer_correct=" + isCorrect + "" + " WHERE question_id=" + questionId + " AND answer_id=" + answerId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-             Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(query)) {
-
+             Statement statement = con.createStatement()) {
+            Boolean status = statement.execute(query);
+            if(status){
+                System.out.println("Antwort ("+answerId+") für Frage "+ questionId + " aktualisiert");
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             System.out.println("UpdateAnswers hat Fehler geworfen:");
