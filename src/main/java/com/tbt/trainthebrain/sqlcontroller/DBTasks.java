@@ -145,11 +145,17 @@ public class DBTasks {
     }
 
     public void UpdateQuestion(int questionId, String questionText) {
+
+        System.out.println(questionId);
+        System.out.println(questionText);
+        System.out.println("-------");
         String query = "UPDATE tbl_questions SET question_text='" + questionText + "' WHERE question_id=" + questionId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-             Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(query)) {
+             Statement statement = con.createStatement()){
+
+            Boolean status = statement.execute(query);
+            System.out.println("Question "+questionId+ "updated: "+status);
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

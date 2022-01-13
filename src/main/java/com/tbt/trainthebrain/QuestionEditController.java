@@ -82,8 +82,6 @@ public class QuestionEditController implements Initializable {
 
     }
 
-
-
     public void editNewAnswer(int oldQuestionId, int newCreatedQuestionId) {
         // erstellt neue Answers zu den bereits erstellten Questions
         //ändert bestehende Answers
@@ -206,14 +204,9 @@ public class QuestionEditController implements Initializable {
 
             } else {
                 System.out.println("Mindestens eine Antwort muss als korrekt markiert sein");
-
-
-
             }
         } else {
             System.out.println("Mindestens 2 Antworten müssen eingetragen werden!");
-
-
         }
 
     }
@@ -309,6 +302,7 @@ public class QuestionEditController implements Initializable {
         }
 
     }
+
     // Verifiziert ob mindestens eine Antwort als korrekt markiert wurde
     public boolean verifyMinOneAnswerIsTrue() {
         boolean verify = false;
@@ -336,6 +330,11 @@ public class QuestionEditController implements Initializable {
         String answer1 = answerText1.getText().trim();
         String answer2 = answerText2.getText().trim();
         String answer3 = answerText3.getText().trim();
+
+        System.out.println(answer0);
+        System.out.println(answer1);
+        System.out.println(answer2);
+        System.out.println(answer3);
 
 
         String stringAnswerId0 = answerId0.getText().trim();

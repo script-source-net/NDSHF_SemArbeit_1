@@ -16,16 +16,16 @@ public class QuestionEditOverviewController extends AppController implements Ini
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+    }
+
+    public void loadQuestionsFromDatabase() {
+
         ListItemHelper lih = new ListItemHelper();
-
         DBTasks con = new DBTasks();
-
         ArrayList<Question> questionsArray = con.getAllQuestionsFromDb();
-
         for (Question q: questionsArray) {
             editListQuestionContainerOutter.getChildren().add(lih.createSimpleListElementWithLink(q));
         }
-
 
     }
 }
