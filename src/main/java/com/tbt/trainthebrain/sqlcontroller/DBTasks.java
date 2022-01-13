@@ -73,8 +73,15 @@ public class DBTasks {
         String query = "INSERT INTO tbl_answers (answer_text, answer_correct, question_id) VALUE ('" + answer.getText() + "'," + answer.getIsCorrect() + "," + answer.getQuestionId() + ");";
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-             Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(query)) {
+             Statement statement = con.createStatement()) {
+
+            Boolean status = statement.execute(query);
+            if(status){
+                System.out.println("Neue Antwort für QID:"+answer.getQuestionId());
+            }else{
+                System.out.println("Hinzufügen der Antwort für QID:" + answer.getQuestionId() + " gescheitert!");
+            }
+
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -89,9 +96,11 @@ public class DBTasks {
         String query = "UPDATE tbl_answers SET answer_text='" + answerText + "', answer_correct=" + isCorrect + "" + " WHERE question_id=" + questionId + " AND answer_id=" + answerId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-             Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(query)) {
-
+             Statement statement = con.createStatement()) {
+            Boolean status = statement.execute(query);
+            if(status){
+                System.out.println("Antwort ("+answerId+") für Frage "+ questionId + " aktualisiert");
+            }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             System.out.println("UpdateAnswers hat Fehler geworfen:");
@@ -101,14 +110,18 @@ public class DBTasks {
 
     }
 
+    // TODO: Delete Answer löscht einfach - prüfen das mindestens eine korrekte Antwort vorhanden ist aktuelle Prüfung lässt löschung zu wenn Text empty ist
     public void deleteAnswerInDb(int questionId, int answerId){
         String query = "DELETE FROM tbl_answers WHERE answer_id=" + answerId + " AND question_id=" + questionId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(query);
         ){
 
+            Boolean status = statement.execute(query);
+            if(status){
+                System.out.println("Antwort mit der ID " + answerId + " gelöscht");
+            }
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -145,17 +158,22 @@ public class DBTasks {
     }
 
     public void UpdateQuestion(int questionId, String questionText) {
+
+        System.out.println(questionId);
+        System.out.println(questionText);
+        System.out.println("-------");
         String query = "UPDATE tbl_questions SET question_text='" + questionText + "' WHERE question_id=" + questionId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-             Statement statement = con.createStatement();
-             ResultSet rs = statement.executeQuery(query)) {
+             Statement statement = con.createStatement()){
+
+            Boolean status = statement.execute(query);
+            System.out.println("Question "+questionId+ "updated: "+status);
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
             System.out.println("UpdateQuestion Methode hat einen Fehler geworfen:");
             ex.printStackTrace();
-
         }
     }
 
