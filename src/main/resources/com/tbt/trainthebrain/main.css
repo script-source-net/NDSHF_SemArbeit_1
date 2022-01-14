@@ -22,6 +22,10 @@
     -fx-font-weight: bold;
 }
 
+.padding-small{
+    -fx-padding: 10px;
+}
+
 #mainHeader {
     -fx-background-image: url('img/header.jpg');
     -fx-background-size: cover;
@@ -40,10 +44,16 @@
     -fx-cursor: hand;
     -fx-background-radius: 4px;
     -fx-border-radius: 4px;
+    -fx-border-width: 1px;
 }
 
 .btn-default {
     -fx-background-color: #262626;
+    -fx-border-color: #313131;
+}
+
+.border-remove{
+    -fx-border-width: 0;
 }
 
 .btn-default .text {
@@ -62,27 +72,23 @@
 
 .btn-primary{
     -fx-background-color: #15447a;
-    -fx-border-width: 1px;
     -fx-border-color: #186493;
 
 }
 
 .btn-primary:hover{
     -fx-background-color: #184e8c;
-    -fx-border-width: 1px;
     -fx-border-color: #186798;
 }
 
 .btn-success{
     -fx-background-color: #1c7a15;
-    -fx-border-width: 1px;
     -fx-border-color: #209318;
 
 }
 
 .btn-success:hover{
     -fx-background-color: #208f18;
-    -fx-border-width: 1px;
     -fx-border-color: #22a219;
 }
 
@@ -165,11 +171,34 @@
     -fx-fill: rgba(255,255,255, 0.02);
 }
 
+/* Question Edit Overview */
+
+.delete-icon {
+    -fx-background-image: url('img/trash_icon_white_128.png');
+    -fx-min-height: 16.0;
+    -fx-min-width: 16.0;
+    -fx-background-size: contain;
+    -fx-background-position: center,center;
+    -fx-background-repeat: no-repeat;
+    -fx-cursor: hand;
+}
+
+.delete-icon:hover {
+    -fx-background-image: url('img/trash_icon_red_128.png');
+    -fx-cursor: hand;
+}
+
+
+
 /* Question Edit */
+.editListQuestionOutterContainer{
+    -fx-padding: 3px 0 3px 0;
+}
+
 .editListQuestionContainer{
     -fx-background-color: #262626;
-    -fx-background-radius: 4px;
-    -fx-border-radius: 4px;
+    -fx-background-radius: 2px;
+    -fx-border-radius: 2px;
     -fx-border-color: #2c2c2c;
     -fx-border-style: solid;
     -fx-border-width: 1px;
@@ -231,9 +260,14 @@
     -fx-border-radius: 4px;
 }
 
+.text-area.answerTextArea {
+    -fx-min-height: 80px;
+}
+
 .text-area:focused{
     -fx-background-color: rgba(255,255,255, .05);
     -fx-text-fill: #efefef;
+    -fx-border-color: #424242;
 }
 
 .text-area .scroll-pane {
@@ -254,4 +288,38 @@
 
 .icon-selection{
     -fx-font-size: 30px;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: transparent;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-radius: 5em;
+}
+
+.scroll-pane > .corner {
+    -fx-background-color: transparent;
 }

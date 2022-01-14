@@ -337,53 +337,6 @@ public class QuestionEditController implements Initializable {
                 break;
             }
         }
-//        String answer0 = answerText0.getText().trim();
-//        String answer1 = answerText1.getText().trim();
-//        String answer2 = answerText2.getText().trim();
-//        String answer3 = answerText3.getText().trim();
-//
-//        System.out.println(answer0);
-//        System.out.println(answer1);
-//        System.out.println(answer2);
-//        System.out.println(answer3);
-//
-//
-//        String stringAnswerId0 = answerId0.getText().trim();
-//        String stringAnswerId1 = answerId1.getText().trim();
-//        String stringAnswerId2 = answerId2.getText().trim();
-//        String stringAnswerId3 = answerId3.getText().trim();
-//
-//        // Überprüfung ob AnswerText und eine AnswerId vorhanden ist, von immer 2 Answers in der Maske
-//        //Id nicht unbedingt nötig, wenn sichergestellt, dass immer eine ID eingefüllt ist und kein Leerschlag.
-//        if ((!answer0.isEmpty() && !stringAnswerId0.isEmpty()) && (!answer1.isEmpty() && !stringAnswerId1.isEmpty())) {
-//            verify = true;
-//            System.out.println(verify);
-//
-//        } else if ((!answer1.isEmpty() && !stringAnswerId1.isEmpty()) && (!answer2.isEmpty() && !stringAnswerId2.isEmpty())) {
-//            verify = true;
-//            System.out.println(verify);
-//
-//        } else if ((!answer2.isEmpty() && !stringAnswerId2.isEmpty()) && (!answer3.isEmpty() && !stringAnswerId3.isEmpty())) {
-//            verify = true;
-//            System.out.println(verify);
-//
-//        } else if ((!answer3.isEmpty() && !stringAnswerId3.isEmpty()) && (!answer0.isEmpty() && !stringAnswerId0.isEmpty())) {
-//            verify = true;
-//            System.out.println(verify);
-//
-//        } else if ((!answer0.isEmpty() && !stringAnswerId0.isEmpty()) && (!answer2.isEmpty() && !stringAnswerId2.isEmpty())) {
-//            verify = true;
-//            System.out.println(verify);
-//
-//        } else if ((!answer3.isEmpty() && !stringAnswerId3.isEmpty()) && (!answer1.isEmpty() && !stringAnswerId1.isEmpty())) {
-//            verify = true;
-//            System.out.println(verify);
-//
-//        } else {
-//            verify = false;
-//            System.out.println(verify);
-//        }
-
 
         return verify;
     }
