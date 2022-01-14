@@ -16,12 +16,12 @@
             <HBox fx:id="mainHeader" alignment="CENTER" minHeight="430.0" prefHeight="430.0" prefWidth="960.0" VBox.vgrow="NEVER" />
             <HBox fx:id="menuContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToLearningModeClick" styleClass="btn,btn-default,mainButton" text="Lernmodus starten">
+                  <Button minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToLearningModeClick" styleClass="btn,btn-default,mainButton,border-remove" text="Lernmodus starten">
                      <graphic>
                         <Glyph fontFamily="FontAwesome" icon="GRADUATION_CAP" />
                      </graphic>
                   </Button>
-                  <Button minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToEditQuestionsClick" styleClass="btn,btn-default,mainButton" text="Fragen editieren">
+                  <Button minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToEditQuestionsClick" styleClass="btn,btn-default,mainButton,border-remove" text="Fragen editieren">
                      <graphic>
                         <Glyph fontFamily="FontAwesome" icon="COGS" />
                      </graphic>
