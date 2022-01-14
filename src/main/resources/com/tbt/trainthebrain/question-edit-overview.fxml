@@ -10,10 +10,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import org.controlsfx.glyphfont.Glyph?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="960.0" styleClass="stage" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.QuestionEditOverviewController">
     <children>
-        <HBox fx:id="header" alignment="BOTTOM_CENTER" prefHeight="134.0" prefWidth="960.0" VBox.vgrow="NEVER">
+        <HBox fx:id="header" alignment="BOTTOM_CENTER" prefHeight="134.0" prefWidth="960.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="NEVER">
             <children>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="subTitle" text="Editor Modus" />
             </children>
@@ -55,12 +56,15 @@
             </StackPane>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="920.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#addNewQuestionClicked" text="Frage hinzufügen">
+                  <Button mnemonicParsing="false" onAction="#addNewQuestionClicked" text="Neue Frage hinzufügen">
                      <styleClass>
                         <String fx:value="btn" />
                         <String fx:value="btn-default" />
                         <String fx:value="lead" />
-                     </styleClass></Button>
+                     </styleClass>
+                     <graphic>
+                        <Glyph fontFamily="FontAwesome" icon="PLUS_CIRCLE" fontSize="18" />
+                     </graphic></Button>
                </children>
             </HBox>
             </children>
