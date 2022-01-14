@@ -184,10 +184,10 @@ public class DBTasks {
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
-             Statement statement2 = con.createStatement();
+             Statement statement2 = con.createStatement();) {
 
-             ResultSet rs = statement.executeQuery(query2)) {
-            ResultSet rs2 = statement2.executeQuery(query);
+            int affectedAnswerRows = statement.executeUpdate(query2);
+            int affectedQuestionRows = statement2.executeUpdate(query);
 
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());

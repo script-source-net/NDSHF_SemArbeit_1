@@ -24,7 +24,14 @@ public class Question {
     public ArrayList<Answer> getAnswers() {
         return answers;
     }
-    
+
+    public String getQuestionTextCutted(int i, String ellipsis) {
+        if(question.length() > i){
+            return question.substring(0, i) + ellipsis;
+        }
+
+        return question;
+    }
 }
 
 
