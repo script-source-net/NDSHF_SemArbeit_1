@@ -95,3 +95,14 @@ der Prüfling korrekt beantwortet hat</p>
 </div>
 </div>
 
+# Installation
+## Hinweis
+Für die Funktion wird eine lokale Installation der MariaDB vorausgesetzt. MariaDB kann unter MacOS mittels Homebrew installiert werden.
+
+### Installation Datenbank unter MacOS
+Eine Anleitung zur Installation der MariaDB mittels Homebrew findest du hier:
+https://mariadb.com/kb/en/installing-mariadb-on-macos-using-homebrew/
+
+### Installation Datenbank unter Windows
+EIne Anleitung zur Installation der MariaDB auf Windows Systemen findest du hier:
+https://mariadb.com/kb/en/installing-mariadb-msi-packages-on-windows/
