@@ -1,5 +1,6 @@
 package com.tbt.trainthebrain;
 
+import com.tbt.trainthebrain.sqlcontroller.DBTasks;
 import javafx.animation.FadeTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -14,7 +15,12 @@ import java.util.ArrayList;
 public class AppController {
 
     boolean statusDb;
-    ArrayList<Question> questions = new ArrayList<>();
+    public ArrayList<Question> questions = new ArrayList<>();
+
+    public ArrayList<Question> getQuestionsFromDatabase() {
+        DBTasks con = new DBTasks();
+        return con.getAllQuestionsFromDb();
+    }
 
     public void backToMainClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();

@@ -1,7 +1,6 @@
 package com.tbt.trainthebrain;
 
 import com.tbt.trainthebrain.LayoutHelpers.ListItemHelper;
-import com.tbt.trainthebrain.sqlcontroller.DBTasks;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,32 +12,29 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class QuestionEditOverviewController extends AppController implements Initializable {
     @FXML
     VBox editListQuestionContainerOutter, emptyNotificationContainer;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        loadQuestionsFromDatabase();
+        questions = getQuestionsFromDatabase();
+        setQuestionsIntoList();
     }
 
-    public void loadQuestionsFromDatabase() {
-        System.out.println("load called");
+    private void setQuestionsIntoList(){
+        System.out.println("Anzahl Fragen im questions obj:" + questions.size());
         ListItemHelper lih = new ListItemHelper();
-        DBTasks con = new DBTasks();
-        ArrayList<Question> questionsArray = con.getAllQuestionsFromDb();
-
-        for (Question q: questionsArray) {
+        for (Question q: questions) {
             editListQuestionContainerOutter.getChildren().add(lih.createSimpleListElementWithLink(q));
         }
         /* Liste ersetzen durch Icon & Message wenn Liste leer ist */
-        if(questionsArray.size() > 0){
+        if(questions.size() > 0){
             emptyNotificationContainer.setVisible(false);
         }
-
     }
 
     public void addNewQuestionClicked(ActionEvent actionEvent) {
