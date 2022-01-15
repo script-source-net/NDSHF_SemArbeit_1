@@ -10,10 +10,10 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class AppController {
 
+    boolean statusDb;
     ArrayList<Question> questions = new ArrayList<>();
 
     public void backToMainClicked(ActionEvent actionEvent) {

@@ -196,4 +196,18 @@ public class DBTasks {
 
         }
     }
+
+    public static ConnectionCheck simpleDatabaseCheck(){
+        ConnectionCheck response = new ConnectionCheck();
+        try (Connection c = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD())) {
+            response.setSuccessfull(true);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            response.setSuccessfull(false);
+            response.setErrorText(ex.getMessage());
+
+        }
+
+        return response;
+    }
 }

@@ -145,9 +145,6 @@
     -fx-background-color: rgba(35, 35, 35, 0.71);
     -fx-border-color: #101010;
     -fx-cursor: hand;
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
-    -fx-scale-x: 1;
 }
 
 .answerBox.selected {
@@ -322,4 +319,26 @@
 
 .scroll-pane > .corner {
     -fx-background-color: transparent;
+}
+
+.errorBox{
+    -fx-background-color: rgba(98, 0, 0, 0.55);
+    -fx-background-radius: 3px;
+    -fx-border-width: 1px;
+    -fx-border-color: rgba(98, 0, 0, 0.8);
+}
+
+.errorBox .errtitle{
+    -fx-fill: rgba(255, 255, 255, 0.9);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+
+.errorBox .errtext{
+    -fx-fill: rgba(255, 255, 255, 0.8);
+}
+
+.errorBox .errdesc{
+    -fx-fill: rgba(255, 255, 255, 0.8);
+    -fx-font-family: monospace;
 }
