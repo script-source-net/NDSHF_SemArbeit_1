@@ -39,7 +39,7 @@
                               <String fx:value="bold" />
                            </styleClass>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Entwickelt von Claudia Martinez, Gion Desax &amp; Marco Rensch" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Entwickelt von Claudia Martinez &amp; Marco Rensch" />
                      </children>
                   </VBox>
                </children>
