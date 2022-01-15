@@ -14,10 +14,10 @@ public class DBTasks {
         ArrayList<Question> questions = new ArrayList<>();
         String query =  "SELECT * FROM tbl_questions";
 
-        try (
-                Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-                Statement statement = con.createStatement();
-                ) {
+        System.out.println(SQLConnectionData.getURL());
+
+        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
+             Statement statement = con.createStatement()) {
 
             ResultSet rs = statement.executeQuery(query);
             while(rs.next()){
@@ -43,7 +43,7 @@ public class DBTasks {
         String query =  "SELECT * FROM tbl_answers WHERE question_id = '"+questionId+"'";
         try (
                 Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-                Statement statement = con.createStatement();
+                Statement statement = con.createStatement()
         ) {
 
             ResultSet rs = statement.executeQuery(query);
@@ -75,7 +75,7 @@ public class DBTasks {
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement()) {
 
-            Boolean status = statement.execute(query);
+            boolean status = statement.execute(query);
             if(status){
                 System.out.println("Neue Antwort für QID:"+answer.getQuestionId());
             }else{
@@ -97,7 +97,7 @@ public class DBTasks {
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement()) {
-            Boolean status = statement.execute(query);
+            boolean status = statement.execute(query);
             if(status){
                 System.out.println("Antwort ("+answerId+") für Frage "+ questionId + " aktualisiert");
             }
@@ -115,10 +115,10 @@ public class DBTasks {
         String query = "DELETE FROM tbl_answers WHERE answer_id=" + answerId + " AND question_id=" + questionId;
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
-             Statement statement = con.createStatement();
+             Statement statement = con.createStatement()
         ){
 
-            Boolean status = statement.execute(query);
+            boolean status = statement.execute(query);
             if(status){
                 System.out.println("Antwort mit der ID " + answerId + " gelöscht");
             }
@@ -167,7 +167,7 @@ public class DBTasks {
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement()){
 
-            Boolean status = statement.execute(query);
+            boolean status = statement.execute(query);
             System.out.println("Question "+questionId+ "updated: "+status);
 
         } catch (SQLException ex) {
@@ -184,7 +184,7 @@ public class DBTasks {
 
         try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
              Statement statement = con.createStatement();
-             Statement statement2 = con.createStatement();) {
+             Statement statement2 = con.createStatement()) {
 
             int affectedAnswerRows = statement.executeUpdate(query2);
             int affectedQuestionRows = statement2.executeUpdate(query);

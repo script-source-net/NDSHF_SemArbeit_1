@@ -1,16 +1,14 @@
 package com.tbt.trainthebrain.sqlcontroller;
 
 public class SQLConnectionData {
-    private final static String URL = "jdbc:mysql://webdev.script-source.net:3306/trainthebrain";
     private final static String USER = "trainthebrain";
-    private final static String PASSWORD = "dhKKNUOIxgG@7Ivx";
+    private final static String PASSWORD = "trainthebrain";
     private final static String DATABASE = "trainthebrain";
-    private final static String DATABASETYPE = "mysql";
-    private final static int PORT =3306;
+    private final static String HOST = "localhost";
+    private final static String DATABASETYPE = "mariadb";
+    private final static int PORT = 3306;
 
-    public static String getURL(){
-        return URL;
-    }
+    public static String getURL(){ return "jdbc:"+DATABASETYPE+"://"+HOST+":"+PORT+"/"+DATABASE; }
 
     public static String getUSER() {
         return USER;
@@ -23,10 +21,12 @@ public class SQLConnectionData {
     public static String getDB(){
         return DATABASE;
     }
-    public static String getDBType(){
+
+    public static String getTYPE(){
         return DATABASETYPE;
     }
-    public static int getPort(){
+
+    public static int getPORT(){
         return PORT;
     }
 

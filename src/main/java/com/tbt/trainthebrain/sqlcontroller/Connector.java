@@ -4,15 +4,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Connector {
-    private String url;
-    private String database;
-    private String databaseType;
-    private int port;
-    private String user;
-    private String pwd;
+    private final String url;
+    private final String database;
+    private final String databaseType;
+    private final int port;
+    private final String user;
+    private final String pwd;
     private Connection connection = null;
 
-    public Connector(String url, int port, String database,String databaseType, String user, String pwd) {
+    public Connector(String url, int port, String database, String databaseType, String user, String pwd) {
         this.url = url;
         this.database = database;
         this.databaseType = databaseType;
@@ -24,8 +24,8 @@ public class Connector {
     public Connector(){
         this.url = SQLConnectionData.getURL();
         this.database = SQLConnectionData.getDB();
-        this.databaseType = SQLConnectionData.getDBType();
-        this.port = SQLConnectionData.getPort();
+        this.databaseType = SQLConnectionData.getTYPE();
+        this.port = SQLConnectionData.getPORT();
         this.user = SQLConnectionData.getUSER();
         this.pwd = SQLConnectionData.getPASSWORD();
     }
