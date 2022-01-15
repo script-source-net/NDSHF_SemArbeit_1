@@ -20,11 +20,13 @@ import java.util.ResourceBundle;
 
 public class LearnmodeController extends AppController implements Initializable {
 
-    int questionIndex = 0;                                      // Aktueller (Fragen) index 0-based
-    int questionsCount = 0;                                     // Anzahl (max) Fragen gem. Selektion
-    ArrayList<AnswerBox> answerBoxes = new ArrayList<>();       // AntwortBoxen FXML Elemente
+    int questionIndex = 0;                                          // Aktueller (Fragen) index 0-based
+    int questionsCount = 0;                                         // Anzahl (max) Fragen gem. Selektion
+    ArrayList<AnswerBox> answerBoxes = new ArrayList<>();           // AntwortBoxen FXML Elemente
+    ArrayList<Question> selectedQuestions = new ArrayList<>();      // Liste der Auswahl an Fragen die getroffen wurde
 
-    ArrayList<Question> selectedQuestions = new ArrayList<>();
+    int points = 0;                                                 // Erreichte Punktzahl
+    int maxPoints = 0;                                              // Maximale Punktzahl anhand der gewählten Fragen
 
     @FXML
     AnswerBox answerBox0,answerBox1,answerBox2,answerBox3;
@@ -112,10 +114,7 @@ public class LearnmodeController extends AppController implements Initializable 
         // Einblende Animationen
         fadeInTransition(questionText,1000,0);
         fadeInTransition(answersGrid, 1000,300);
-
     }
-
-
 
     public void clickedOnAnswer(MouseEvent mouseEvent) {
         // Identifiziere das geklickte Element
@@ -177,7 +176,8 @@ public class LearnmodeController extends AppController implements Initializable 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("learnmode-endcard.fxml"));
         try {
             Scene questioningScene = new Scene(loader.load());
-            AppController sceneController = loader.getController();
+            LearnmodeEndcardController sceneController = loader.getController();
+            sceneController.initResults(points, maxPoints);
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");

@@ -33,9 +33,6 @@ public class LearnmodeSetupController extends AppController implements Initializ
     int countOfQuestionsInDB = 0;
     int questionsCounter = 0;
 
-
-
-
     public void startTrainingClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("learnmode.fxml"));
@@ -55,7 +52,7 @@ public class LearnmodeSetupController extends AppController implements Initializ
         FXMLLoader loader = new FXMLLoader(getClass().getResource("question-edit-overview.fxml"));
         try {
             Scene questioningScene = new Scene(loader.load());
-            QuestionEditOverviewController sceneController = loader.getController();        // TODO: QuestionEditOverviewController soll AppController extenden damit man einheitlichen Code schreiben kann
+            QuestionEditOverviewController sceneController = loader.getController();
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
@@ -63,16 +60,11 @@ public class LearnmodeSetupController extends AppController implements Initializ
         }
     }
 
-
-    
-    
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // Hole die aktuelle Liste aller Fragen aus der Datenbank (vollständig)
         questions = getQuestionsFromDatabase();
-
         countOfQuestionsInDB = questions.size();
 
         // TextField listener um sicherzustellen das nur nummern eingetragen werden
@@ -86,9 +78,6 @@ public class LearnmodeSetupController extends AppController implements Initializ
             // Anzahl der Fragen wird aktualisiert
             questionsCounter = Integer.parseInt(newValue);
         });
-
-        // Anzahl der Fragen aus der Datenbank laden und im Text platzieren
-
 
         // Die Anzahl der Fragen werden in der Seite ausgegeben UND für die übergabe in die nächste Scene übernommen:
         countOfQuestions.setText(String.valueOf(countOfQuestionsInDB));
@@ -114,10 +103,7 @@ public class LearnmodeSetupController extends AppController implements Initializ
             howManyQuestionsText.setText("Es sind nur sehr wenige Fragen in der Datenbank gespeichert, lege jetzt neue Fragen an.\nWie viele Fragen möchtest du spielen?");
             howManyQuestionsText.getStyleClass().add("text-warning");
             howManyQuestionsText.setTextAlignment(TextAlignment.CENTER);
-
         }
-
-        
     }
 
     public void counterChangeClicked(ActionEvent actionEvent) {
@@ -136,7 +122,5 @@ public class LearnmodeSetupController extends AppController implements Initializ
         }else if(c == '+' && ++oldQCount <= countOfQuestionsInDB){
             questionsToPlayCounter.setText(String.valueOf(++oldQCount));
         }
-
     }
-
 }
