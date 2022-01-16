@@ -70,14 +70,16 @@ public class LearnmodeSetupController extends AppController implements Initializ
         if(countOfQuestionsInDB>0) {
             // TextField listener um sicherzustellen das nur nummern eingetragen werden
             questionsToPlayCounter.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (!newValue.matches("\\d*") || newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1)) {
-                    questionsToPlayCounter.setText(oldValue);
-                    questionsCounter = Integer.parseInt(oldValue);
-                }
+                if (!newValue.isEmpty() || Integer.parseInt(newValue) > 0) {
+                    if (!newValue.matches("\\d*") || newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1)) {
+                        questionsToPlayCounter.setText(oldValue);
+                        questionsCounter = Integer.parseInt(oldValue);
+                    }
 
-                startBtn.setDisable(questionsToPlayCounter.getText().length() <= 0);
-                // Anzahl der Fragen wird aktualisiert
-                questionsCounter = Integer.parseInt(newValue);
+                    startBtn.setDisable(questionsToPlayCounter.getText().length() <= 0);
+                    // Anzahl der Fragen wird aktualisiert
+                    questionsCounter = Integer.parseInt(newValue);
+                }
             });
         }
 

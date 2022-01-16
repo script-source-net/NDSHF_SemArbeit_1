@@ -93,7 +93,14 @@ public class QuestionEditController implements Initializable {
                     } else if (answer.getId() > 0 && !answer.getText().isEmpty()) {
                         con.updateAnswers(answer);
                     } else if (answer.getId() > 0 && answer.getText().isEmpty()) {
-                        con.deleteAnswerInDb(answer.getQuestionId(), answer.getId());
+                        if (answer.getIsCorrect()) {
+                            answer.setCorrect(false);
+                            if (checkMinOneAnswerIsTrue(answers)){
+                                con.deleteAnswerInDb(answer.getQuestionId(), answer.getId());
+                            }
+                        } else {
+                            con.deleteAnswerInDb(answer.getQuestionId(), answer.getId());
+                        }
                     }
                 }
             } else {
@@ -124,6 +131,17 @@ public class QuestionEditController implements Initializable {
         boolean verify = false;
         for (CheckBox checkBox : isCorrectCheckBoxesArray) {
             if (checkBox.isSelected()) {
+                verify = true;
+                break;
+            }
+        }
+        return verify;
+    }
+    // Verifiziert ob mindestens ein Answerobjekt als korrekt deklariert wurde.
+    public boolean checkMinOneAnswerIsTrue(ArrayList<Answer> answers) {
+        boolean verify = false;
+        for (Answer answer : answers) {
+            if (answer.getIsCorrect()) {
                 verify = true;
                 break;
             }

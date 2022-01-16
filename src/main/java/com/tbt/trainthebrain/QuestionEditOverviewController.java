@@ -73,7 +73,7 @@ public class QuestionEditOverviewController extends AppController implements Ini
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Soll wirklich gelöscht werden?", ButtonType.YES, ButtonType.NO);
         alert.initOwner(stage);
         alert.setTitle("Sicher?");
-        alert.setHeaderText("Ein anderer Text?");
+        alert.setHeaderText("Sollen alle Fragen gelöscht werden?");
         alert.showAndWait();
 
         if (alert.getResult() == ButtonType.YES)

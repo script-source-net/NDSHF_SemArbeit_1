@@ -42,4 +42,8 @@ public class Answer {
                 ", questionId=" + questionId +
                 '}';
     }
+
+    public void setCorrect(boolean correct) {
+        isCorrect = correct;
+    }
 }
