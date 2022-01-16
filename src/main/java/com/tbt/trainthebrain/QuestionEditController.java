@@ -22,13 +22,13 @@ public class QuestionEditController implements Initializable {
     @FXML
     private TextField id, answerId0, answerId1, answerId2, answerId3;
     @FXML
-    private TextArea questionText,answerText0,answerText1,answerText2,answerText3;
+    private TextArea questionText, answerText0, answerText1, answerText2, answerText3;
     @FXML
-    private CheckBox answerCorrect0, answerCorrect1,answerCorrect2,answerCorrect3;
+    private CheckBox answerCorrect0, answerCorrect1, answerCorrect2, answerCorrect3;
 
     private final ArrayList<TextArea> answerTextsArray = new ArrayList<>();
 
-    private final   ArrayList<TextField> answerIdsArray = new ArrayList<>();
+    private final ArrayList<TextField> answerIdsArray = new ArrayList<>();
 
     private final ArrayList<CheckBox> isCorrectCheckBoxesArray = new ArrayList<>();
 
@@ -50,15 +50,15 @@ public class QuestionEditController implements Initializable {
     private void handleQuestionInDb() {
         //Wenn question id = 0 und Text hat Länge = insert Questiontext (wenn erzeugt brauche id von Question für Answers)
         int createdQuestionId;
-        if (id.getText().isEmpty()){
+        if (id.getText().isEmpty()) {
             id.setText("0");
         }
         int questionId = Integer.parseInt(id.getText());
         String question = questionText.getText().trim();
         DBTasks con = new DBTasks();
         if (questionId == 0 && !question.isEmpty()) {
-            if (verifyIfMinTwoAnswers()){
-                if (verifyMinOneAnswerIsTrue()){
+            if (verifyIfMinTwoAnswers()) {
+                if (verifyMinOneAnswerIsTrue()) {
                     createdQuestionId = con.insertNewQuestion(question);
                     addAnswerFromCreatedQuestion(createdQuestionId);
                 }
@@ -86,13 +86,13 @@ public class QuestionEditController implements Initializable {
         DBTasks con = new DBTasks();
         if (verifyIfMinTwoAnswers()) {
             if (verifyMinOneAnswerIsTrue()) {
-                for (Answer answer: answers) {
+                for (Answer answer : answers) {
                     // erstellt, aktualisiert oder löscht Answer in DB
-                    if (answer.getId() == 0 && !answer.getText().isEmpty()){
+                    if (answer.getId() == 0 && !answer.getText().isEmpty()) {
                         con.addOneAnswerInDB(answer);
-                    }else if (answer.getId() > 0 && !answer.getText().isEmpty()){
+                    } else if (answer.getId() > 0 && !answer.getText().isEmpty()) {
                         con.updateAnswers(answer);
-                    }else if (answer.getId() > 0 && answer.getText().isEmpty()){
+                    } else if (answer.getId() > 0 && answer.getText().isEmpty()) {
                         con.deleteAnswerInDb(answer.getQuestionId(), answer.getId());
                     }
                 }
@@ -104,7 +104,7 @@ public class QuestionEditController implements Initializable {
         }
     }
 
-    public void addAnswerFromCreatedQuestion(int newCreatedQuestionId){
+    public void addAnswerFromCreatedQuestion(int newCreatedQuestionId) {
         // Erstellt Answers für neu erstellte Question mit neu erstellter Questionid
         //Diese Methode wird nur ausgeführt, wenn neue question erstellt wird.
         // Array von Answers mit answerObjekten, die questionId enthält von neu erstellter Question
@@ -112,11 +112,11 @@ public class QuestionEditController implements Initializable {
         ArrayList<Integer> intAnswerIds = parsingAnswerIdIntoInteger();
         DBTasks con = new DBTasks();
         //wenn Answer id = 0 und Text hat Länge = neue Answer in Db hinzufügen (insert mit questionid und answerText)
-                for (int i = 0; i < intAnswerIds.size(); i++) {
-                    if (intAnswerIds.get(i) == 0 && !answerTextsArray.get(i).getText().trim().isEmpty()){
-                        con.addOneAnswerInDB(addAnswers.get(i));
-                    }
-                }
+        for (int i = 0; i < intAnswerIds.size(); i++) {
+            if (intAnswerIds.get(i) == 0 && !answerTextsArray.get(i).getText().trim().isEmpty()) {
+                con.addOneAnswerInDB(addAnswers.get(i));
+            }
+        }
     }
 
     // Verifiziert ob mindestens eine Answer als korrekt markiert wurde.
@@ -137,10 +137,10 @@ public class QuestionEditController implements Initializable {
         int answersCount = 0;
         /* Check mit for Schleife und möglichem Abbruch */
         for (int i = 0; i < 3; i++) {
-            if(!answerTextsArray.get(i).getText().trim().isEmpty()){
+            if (!answerTextsArray.get(i).getText().trim().isEmpty()) {
                 answersCount++;
             }
-            if(answersCount == 2){
+            if (answersCount == 2) {
                 verify = true;
                 break;
             }
@@ -150,8 +150,7 @@ public class QuestionEditController implements Initializable {
     }
 
 
-
-    public ArrayList<Answer> createNewAnswerObjects(int questionID){
+    public ArrayList<Answer> createNewAnswerObjects(int questionID) {
         //erzeugt neue Answerobjekte befüllt sie mit answerId, text, isCorrect, question id von zugehöriger Frage
         //Füllt alle Answerojekte in eine Answer ArrayList
         ArrayList<Answer> answerAddList = new ArrayList<>();
@@ -160,7 +159,7 @@ public class QuestionEditController implements Initializable {
                     parsingAnswerIdIntoInteger().get(i),
                     answerTextsArray.get(i).getText().trim(),
                     isCorrectCheckBoxesArray.get(i).isSelected(),
-                    questionID )
+                    questionID)
             );
         }
         return answerAddList;
@@ -172,13 +171,13 @@ public class QuestionEditController implements Initializable {
         try {
             Scene questioningScene = new Scene(loader.load());
             stage.setScene(questioningScene);
-        }catch (IOException ioe){
+        } catch (IOException ioe) {
             System.out.println("Could not load scene");
             ioe.printStackTrace();
         }
     }
 
-    public void initWithData(Question question){
+    public void initWithData(Question question) {
         id.setText(Integer.toString(question.getId()));
         questionText.setText(question.getQuestion());
         ArrayList<Answer> answers = question.getAnswers();
@@ -227,6 +226,6 @@ public class QuestionEditController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Question edit Init called");
-       fillAnswerTextAndAnswerIdsCheckboxesInArray();
+        fillAnswerTextAndAnswerIdsCheckboxesInArray();
     }
 }
