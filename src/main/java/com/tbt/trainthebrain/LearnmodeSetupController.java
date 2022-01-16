@@ -67,17 +67,19 @@ public class LearnmodeSetupController extends AppController implements Initializ
         questions = getQuestionsFromDatabase();
         countOfQuestionsInDB = questions.size();
 
-        // TextField listener um sicherzustellen das nur nummern eingetragen werden
-        questionsToPlayCounter.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("\\d*") || newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1 )) {
-                questionsToPlayCounter.setText(oldValue);
-                questionsCounter = Integer.parseInt(oldValue);
-            }
+        if(countOfQuestionsInDB>0) {
+            // TextField listener um sicherzustellen das nur nummern eingetragen werden
+            questionsToPlayCounter.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue.matches("\\d*") || newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1)) {
+                    questionsToPlayCounter.setText(oldValue);
+                    questionsCounter = Integer.parseInt(oldValue);
+                }
 
-            startBtn.setDisable(questionsToPlayCounter.getText().length() <= 0);
-            // Anzahl der Fragen wird aktualisiert
-            questionsCounter = Integer.parseInt(newValue);
-        });
+                startBtn.setDisable(questionsToPlayCounter.getText().length() <= 0);
+                // Anzahl der Fragen wird aktualisiert
+                questionsCounter = Integer.parseInt(newValue);
+            });
+        }
 
         // Die Anzahl der Fragen werden in der Seite ausgegeben UND für die übergabe in die nächste Scene übernommen:
         countOfQuestions.setText(String.valueOf(countOfQuestionsInDB));
