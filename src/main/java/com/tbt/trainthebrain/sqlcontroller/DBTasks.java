@@ -126,6 +126,9 @@ public class DBTasks {
         }
 
     }
+    public void updateAnswers(Answer answer){
+        updateAnswers(answer.getQuestionId(), answer.getText(), answer.getIsCorrect(), answer.getId());
+    }
 
     // TODO: Delete Answer löscht einfach - prüfen das mindestens eine korrekte Antwort vorhanden ist aktuelle Prüfung lässt löschung zu wenn Text empty ist
     public void deleteAnswerInDb(int questionId, int answerId){
