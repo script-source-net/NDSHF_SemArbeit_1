@@ -26,11 +26,11 @@ public class QuestionEditController implements Initializable {
     @FXML
     private CheckBox answerCorrect0, answerCorrect1,answerCorrect2,answerCorrect3;
 
-    private ArrayList<TextArea> answerTextsArray = new ArrayList<>();
+    private final ArrayList<TextArea> answerTextsArray = new ArrayList<>();
 
-    private  ArrayList<TextField> answerIdsArray = new ArrayList<>();
+    private final   ArrayList<TextField> answerIdsArray = new ArrayList<>();
 
-    private ArrayList<CheckBox> isCorrectCheckBoxesArray = new ArrayList<>();
+    private final ArrayList<CheckBox> isCorrectCheckBoxesArray = new ArrayList<>();
 
     public void cancelQuestionEditClick(ActionEvent actionEvent) {
         // Back to List of Questions Edit screen
@@ -49,7 +49,7 @@ public class QuestionEditController implements Initializable {
      */
     private void handleQuestionInDb() {
         //Wenn question id = 0 und Text hat Länge = insert Questiontext (wenn erzeugt brauche id von Question für Answers)
-        int createdQuestionId = 0;
+        int createdQuestionId;
         if (id.getText().isEmpty()){
             id.setText("0");
         }
@@ -57,8 +57,6 @@ public class QuestionEditController implements Initializable {
         String question = questionText.getText().trim();
         DBTasks con = new DBTasks();
         if (questionId == 0 && !question.isEmpty()) {
-            // insert in question table --> question_text
-            //return generierte question id von DB --> LAST_INSERT_ID();
             if (verifyIfMinTwoAnswers()){
                 if (verifyMinOneAnswerIsTrue()){
                     createdQuestionId = con.insertNewQuestion(question);
@@ -71,7 +69,7 @@ public class QuestionEditController implements Initializable {
             editNewAnswer(questionId);
             System.out.println("QuestionId > 0 = Question Update in DB");
 
-        } else if (questionId > 0 && question.isEmpty()) {
+        } else if (questionId > 0) {
             //Question und dazugehörige answers werden gelöscht
             con.deleteQuestionAndAnswersInDb(questionId);
             System.out.println("QuestionId > 0 und text ist leer = Question löschen und dazugehörige Answer werden gelöscht in DB");
@@ -173,7 +171,6 @@ public class QuestionEditController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("question-edit-overview.fxml"));
         try {
             Scene questioningScene = new Scene(loader.load());
-            QuestionEditOverviewController sceneController = loader.getController();
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
