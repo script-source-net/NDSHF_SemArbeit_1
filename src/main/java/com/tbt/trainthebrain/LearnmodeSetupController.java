@@ -120,9 +120,9 @@ public class LearnmodeSetupController extends AppController implements Initializ
         // Prüfe ob der char ein minus oder plus char ist
         // schreibe den neuen wert in das textfield
         if(c == '-' && --oldQCount > 0){
-            questionsToPlayCounter.setText(String.valueOf(--oldQCount));
+            questionsToPlayCounter.setText(String.valueOf(oldQCount--));
         }else if(c == '+' && ++oldQCount <= countOfQuestionsInDB){
-            questionsToPlayCounter.setText(String.valueOf(++oldQCount));
+            questionsToPlayCounter.setText(String.valueOf(oldQCount++));
         }
     }
 }
