@@ -187,7 +187,7 @@ public class LearnmodeController extends AppController implements Initializable 
         }
     }
 
-    // Note: @TESTING Diese Methode kann getestet werden
+    // Note: @Claudia Diese Methode kann getestet werden mittels Injection
     private QuestionResult calcQuestionPts(ArrayList<AnswerBox> answerBoxes){
         QuestionResult qr = new QuestionResult();
         for (AnswerBox a: answerBoxes) {

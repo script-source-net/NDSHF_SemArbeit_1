@@ -92,6 +92,21 @@
     -fx-border-color: #22a219;
 }
 
+.btn-danger{
+    -fx-background-color: transparent;
+    -fx-border-color: #4d0605;
+
+}
+
+.btn-danger:hover{
+    -fx-background-color: rgba(121, 11, 9, 0.1);
+    -fx-border-color: #6b0907;
+}
+
+.btn-danger .text{
+    -fx-fill: #831a17;
+}
+
 .btn-success .text,
 .btn-primary .text {
     -fx-fill: rgba(255, 255, 255, 0.7);
