@@ -20,7 +20,7 @@ public class AnswerBox extends HBox implements AnswerBoxConfig{
 
     @Override
     public boolean getIsCorrectAnswer() {
-        return false;
+        return isCorrect;
     }
 
     @Override

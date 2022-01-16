@@ -76,19 +76,38 @@
                   </ScrollPane>
                </children>
             </StackPane>
-            <HBox alignment="BOTTOM_RIGHT" prefHeight="0.0" prefWidth="920.0">
+            <AnchorPane>
                <children>
-                  <Button mnemonicParsing="false" onAction="#addNewQuestionClicked" text="Neue Frage hinzufügen">
-                     <styleClass>
-                        <String fx:value="btn" />
-                        <String fx:value="btn-default" />
-                        <String fx:value="lead" />
-                     </styleClass>
-                     <graphic>
-                        <Glyph fontFamily="FontAwesome" fontSize="18" icon="PLUS_CIRCLE" />
-                     </graphic></Button>
+                  <HBox alignment="BOTTOM_RIGHT" layoutX="661.0" prefHeight="39.0" prefWidth="259.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#addNewQuestionClicked" text="Neue Frage hinzufügen">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-default" />
+                              <String fx:value="lead" />
+                           </styleClass>
+                           <graphic>
+                              <Glyph fontFamily="FontAwesome" fontSize="15" icon="PLUS_CIRCLE" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" layoutX="671.0" layoutY="10.0" prefHeight="39.0" prefWidth="259.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button fx:id="deleteAllQuestionsBtn" mnemonicParsing="false" onAction="#trashAllClicked" text="Alle Fragen löschen" disable="true">
+                           <styleClass>
+                              <String fx:value="btn" />
+                              <String fx:value="btn-danger" />
+                              <String fx:value="lead" />
+                           </styleClass>
+                           <graphic>
+                              <Glyph fontFamily="FontAwesome" fontSize="15" icon="TRASH" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+            </AnchorPane>
             </children>
         </VBox>
     </children>

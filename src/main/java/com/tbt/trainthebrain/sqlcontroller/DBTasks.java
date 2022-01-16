@@ -7,6 +7,23 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DBTasks {
+    public static void deleteAllQuestions() {
+        String answersQuery =  "DELETE FROM tbl_answers";
+        String questionsQuery =  "DELETE FROM tbl_questions";
+
+        try (Connection con = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD());
+             Statement statement = con.createStatement()) {
+
+            int acount = statement.executeUpdate(answersQuery);
+            int qcount = statement.executeUpdate(questionsQuery);
+
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            System.out.println("Fehler beim löschen aller Daten");
+            ex.printStackTrace();
+        }
+
+    }
 
     /* Methoden für QuestionEditOverviewController */
 
@@ -195,5 +212,19 @@ public class DBTasks {
             ex.printStackTrace();
 
         }
+    }
+
+    public static ConnectionCheck simpleDatabaseCheck(){
+        ConnectionCheck response = new ConnectionCheck();
+        try (Connection c = DriverManager.getConnection(SQLConnectionData.getURL(), SQLConnectionData.getUSER(), SQLConnectionData.getPASSWORD())) {
+            response.setSuccessfull(true);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            response.setSuccessfull(false);
+            response.setErrorText(ex.getMessage());
+
+        }
+
+        return response;
     }
 }

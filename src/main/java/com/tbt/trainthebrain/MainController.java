@@ -6,8 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -20,21 +22,15 @@ public class MainController extends AppController implements Initializable {
     AnchorPane mainRoot;
 
     @FXML
-    HBox mainHeader, menuContainer, notes;
+    HBox mainHeader, menuContainer, notes, errorContainerOutter;
 
-    public void switchToLearningModeClick(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("learnmode-setup.fxml"));
+    @FXML
+    Button learnModeBtn, editModeBtn;
 
-        try {
-            Scene newscene = new Scene(loader.load());
-            AppController sceneController = loader.getController();
-            stage.setScene(newscene);
-        }catch (IOException ioe){
-            System.out.println("Could not load scene");
-            ioe.printStackTrace();
-        }
-    }
+    @FXML
+    Text errText, errDesc;
+
+
 
     public void switchToEditQuestionsClick(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();

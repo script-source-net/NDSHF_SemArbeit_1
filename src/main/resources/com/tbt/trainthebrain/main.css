@@ -92,6 +92,21 @@
     -fx-border-color: #22a219;
 }
 
+.btn-danger{
+    -fx-background-color: transparent;
+    -fx-border-color: #4d0605;
+
+}
+
+.btn-danger:hover{
+    -fx-background-color: rgba(121, 11, 9, 0.1);
+    -fx-border-color: #6b0907;
+}
+
+.btn-danger .text{
+    -fx-fill: #831a17;
+}
+
 .btn-success .text,
 .btn-primary .text {
     -fx-fill: rgba(255, 255, 255, 0.7);
@@ -145,9 +160,6 @@
     -fx-background-color: rgba(35, 35, 35, 0.71);
     -fx-border-color: #101010;
     -fx-cursor: hand;
-    -fx-scale-x: 1;
-    -fx-scale-y: 1;
-    -fx-scale-x: 1;
 }
 
 .answerBox.selected {
@@ -323,3 +335,39 @@
 .scroll-pane > .corner {
     -fx-background-color: transparent;
 }
+
+.errorBox{
+    -fx-background-color: rgba(98, 0, 0, 0.55);
+    -fx-background-radius: 3px;
+    -fx-border-width: 1px;
+    -fx-border-color: rgba(98, 0, 0, 0.8);
+}
+
+.errorBox .errtitle{
+    -fx-fill: rgba(255, 255, 255, 0.9);
+    -fx-font-weight: bold;
+    -fx-font-size: 1.1em;
+}
+
+.errorBox .errtext{
+    -fx-fill: rgba(255, 255, 255, 0.8);
+}
+
+.errorBox .errdesc{
+    -fx-fill: rgba(255, 255, 255, 0.8);
+    -fx-font-family: monospace;
+}
+
+/* Chart Data */
+.chart-pie {
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+}
+
+.chart-legend {
+    -fx-background-color: rgba(0, 0, 0, 0.85);
+    -fx-stroke: #fff;
+}
+
+.default-color0.chart-pie { -fx-pie-color: #207200; }
+.default-color1.chart-pie { -fx-pie-color: #440000; }

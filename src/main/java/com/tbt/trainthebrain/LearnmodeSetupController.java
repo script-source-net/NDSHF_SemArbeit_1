@@ -1,7 +1,5 @@
 package com.tbt.trainthebrain;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,11 +30,8 @@ public class LearnmodeSetupController extends AppController implements Initializ
     @FXML
     HBox questionSetupOptionsContainer;
 
-    int countOfQuestionsInDB = 3;          // TODO: mit 0 initiieren
+    int countOfQuestionsInDB = 0;
     int questionsCounter = 0;
-
-
-
 
     public void startTrainingClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
@@ -44,7 +39,7 @@ public class LearnmodeSetupController extends AppController implements Initializ
         try {
             Scene questioningScene = new Scene(loader.load());
             LearnmodeController sceneController = loader.getController();
-            sceneController.initLearnmode(questionsCounter);
+            sceneController.initLearnmode(questionsCounter, questions);
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
@@ -57,7 +52,7 @@ public class LearnmodeSetupController extends AppController implements Initializ
         FXMLLoader loader = new FXMLLoader(getClass().getResource("question-edit-overview.fxml"));
         try {
             Scene questioningScene = new Scene(loader.load());
-            QuestionEditOverviewController sceneController = loader.getController();        // TODO: QuestionEditOverviewController soll AppController extenden damit man einheitlichen Code schreiben kann
+            QuestionEditOverviewController sceneController = loader.getController();
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
@@ -65,34 +60,26 @@ public class LearnmodeSetupController extends AppController implements Initializ
         }
     }
 
-
-    
-    
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        // TextField listener um sicherzustellen das nur nummern eingetragen werden
-        questionsToPlayCounter.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (!newValue.matches("\\d*") || newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1 )) {
+        // Hole die aktuelle Liste aller Fragen aus der Datenbank (vollständig)
+        questions = getQuestionsFromDatabase();
+        countOfQuestionsInDB = questions.size();
+
+        if(countOfQuestionsInDB>0) {
+            // TextField listener um sicherzustellen das nur nummern eingetragen werden
+            questionsToPlayCounter.textProperty().addListener((observable, oldValue, newValue) -> {
+                if (!newValue.matches("\\d*") || newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1)) {
                     questionsToPlayCounter.setText(oldValue);
                     questionsCounter = Integer.parseInt(oldValue);
                 }
 
-                if(questionsToPlayCounter.getText().length() > 0){
-                    startBtn.setDisable(false);
-                }else{
-                    startBtn.setDisable(true);
-                }
+                startBtn.setDisable(questionsToPlayCounter.getText().length() <= 0);
                 // Anzahl der Fragen wird aktualisiert
                 questionsCounter = Integer.parseInt(newValue);
-            }
-        });
-
-        // Anzahl der Fragen aus der Datenbank laden und im Text platzieren
-
+            });
+        }
 
         // Die Anzahl der Fragen werden in der Seite ausgegeben UND für die übergabe in die nächste Scene übernommen:
         countOfQuestions.setText(String.valueOf(countOfQuestionsInDB));
@@ -106,9 +93,7 @@ public class LearnmodeSetupController extends AppController implements Initializ
             // Button generieren für Switch To
             Button switchToEditBtn = new Button("Jetzt Fragen eintragen");
             switchToEditBtn.getStyleClass().addAll("btn", "btn-default", "large");
-            switchToEditBtn.addEventHandler(ActionEvent.ACTION, e -> {
-                switchToEditOverviewClicked(e);
-            });
+            switchToEditBtn.addEventHandler(ActionEvent.ACTION, this::switchToEditOverviewClicked);
             // Text anpassen
             howManyQuestionsText.setWrappingWidth(500.0);
             howManyQuestionsText.setTextAlignment(TextAlignment.CENTER);
@@ -120,10 +105,7 @@ public class LearnmodeSetupController extends AppController implements Initializ
             howManyQuestionsText.setText("Es sind nur sehr wenige Fragen in der Datenbank gespeichert, lege jetzt neue Fragen an.\nWie viele Fragen möchtest du spielen?");
             howManyQuestionsText.getStyleClass().add("text-warning");
             howManyQuestionsText.setTextAlignment(TextAlignment.CENTER);
-
         }
-
-        
     }
 
     public void counterChangeClicked(ActionEvent actionEvent) {
@@ -134,7 +116,7 @@ public class LearnmodeSetupController extends AppController implements Initializ
         }
 
         // hole den Character im Button Text
-        Character c = ((Button) actionEvent.getSource()).getText().charAt(0);
+        char c = ((Button) actionEvent.getSource()).getText().charAt(0);
         // Prüfe ob der char ein minus oder plus char ist
         // schreibe den neuen wert in das textfield
         if(c == '-' && --oldQCount > 0){
@@ -142,7 +124,5 @@ public class LearnmodeSetupController extends AppController implements Initializ
         }else if(c == '+' && ++oldQCount <= countOfQuestionsInDB){
             questionsToPlayCounter.setText(String.valueOf(oldQCount++));
         }
-
     }
-
 }

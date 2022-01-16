@@ -14,13 +14,18 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ResourceBundle;
 
 public class LearnmodeController extends AppController implements Initializable {
 
-    int questionIndex = 0;                                      // Aktueller (Fragen) index 0-based
-    int questionsCount = 0;                                     // Anzahl (max) Fragen gem. Selektion
-    ArrayList<AnswerBox> answerBoxes = new ArrayList<>();       // AntwortBoxen FXML Elemente
+    int questionIndex = 0;                                          // Aktueller (Fragen) index 0-based
+    int questionsCount = 0;                                         // Anzahl (max) Fragen gem. Selektion
+    ArrayList<AnswerBox> answerBoxes = new ArrayList<>();           // AntwortBoxen FXML Elemente
+    ArrayList<Question> selectedQuestions = new ArrayList<>();      // Liste der Auswahl an Fragen die getroffen wurde
+    ArrayList<QuestionResult> questionResults = new ArrayList<>();  // Beinhaltet alle Resultate des aktuellen Durchlaufs
+
 
     @FXML
     AnswerBox answerBox0,answerBox1,answerBox2,answerBox3;
@@ -39,56 +44,28 @@ public class LearnmodeController extends AppController implements Initializable 
 //        System.out.println(questions);
     }
 
-    private ArrayList<Question> getQuestionsFromDatabase(int limit){
-        ArrayList<Question> questions = new ArrayList<>();
-
-        // TODO: SQL request to get questions from database
-
-        // --> TEMP SOLUTION OBJEKTE HARDCODED
-        ArrayList<Answer> tempA = new ArrayList<>();
-        tempA.add(new Answer(0,"Das ist meine erste Antwort", true,1));
-        tempA.add(new Answer(1,"Das ist meine 2. Antwort", false,1));
-        tempA.add(new Answer(2,"Das ist die 3. Option", true,1));
-
-        ArrayList<Answer> tempB = new ArrayList<>();
-        tempB.add(new Answer(0,"Robin", false,1));
-        tempB.add(new Answer(1,"Marshall Bruce Mathers III", true,1));
-        tempB.add(new Answer(2,"Van Gogh", false,1));
-        tempB.add(new Answer(3,"Brian Tillmore", false,1));
-
-        Collections.shuffle(tempB);
-
-        questions.add(new Question(2,"Batman verhält sich zu Bruce Wayne wie Eminem zu?", tempB));
-        questions.add(new Question(0,"Eine Frage die ich stellen muss?", tempA));
-        Collections.shuffle(tempA);
-        questions.add(new Question(1,"Eine andere Question of interest die ich stellen muss?", tempA));
-        // TEMP <---
-        return questions;
-    }
-
-    private ArrayList<Question> getAnswersForQuestionFromDatabase(int questionId){
-        ArrayList<Question> answers = new ArrayList<>();
-
-        // TODO: SQL request to get answers vor question from database
-
-        return answers;
-    }
-
     /* Custom Init */
-    public void initLearnmode(int questionsCount){
+    public void initLearnmode(int questionsCount, ArrayList<Question> questions){
         // setze questionsCount basierend auf Wert der Selektion & passe TextNode an
         this.questionsCount = questionsCount;
         actualQuestionNum.setText(Integer.toString(questionIndex+1));
 
         questionCountText.setText(Integer.toString(questionsCount));
-        questions = getQuestionsFromDatabase(questionsCount);
+
+        Collections.shuffle(questions);
+        for (int i = 0; i < questionsCount; i++) {
+            selectedQuestions.add(questions.get(i));
+            Collections.shuffle(selectedQuestions.get(i).getAnswers());
+        }
+        System.out.println("Anzahl Fragen:" + selectedQuestions.size());
         // "Baue" Frage in die Scene ein:
-        setNextQuestion(0, questions);
+        setNextQuestion(0);
     }
 
-    private void setNextQuestion(int qindex, ArrayList<Question> questions){
+    private void setNextQuestion(int qindex){
+        System.out.println(selectedQuestions.size());
         // Publiziere die Frage
-        questionText.setText(questions.get(qindex).getQuestion());
+        questionText.setText(selectedQuestions.get(qindex).getQuestion());
         // Lösche alle AnswerBoxen aus der ArrayList (nötig auf Seite 2 <) und adde alle 4 Boxen
         if(qindex > 0) answerBoxes.clear();
 
@@ -105,13 +82,13 @@ public class LearnmodeController extends AppController implements Initializable 
         answerTextNodes.add(answer3);
 
         // Loop über alle Answers
-        for (int i = 0; i < questions.get(qindex).getAnswers().size(); i++) {
+        for (int i = 0; i < selectedQuestions.get(qindex).getAnswers().size(); i++) {
             // Setze die Id der Antwort
-            answerBoxes.get(i).setAnswerId(String.valueOf(questions.get(qindex).getAnswers().get(i).getId()));
+            answerBoxes.get(i).setAnswerId(String.valueOf(selectedQuestions.get(qindex).getAnswers().get(i).getId()));
             // Setze ob die Antwort korrekt ist
-            answerBoxes.get(i).setIsCorrectAnswer(questions.get(qindex).getAnswers().get(i).getIsCorrect());
+            answerBoxes.get(i).setIsCorrectAnswer(selectedQuestions.get(qindex).getAnswers().get(i).getIsCorrect());
             // Setze Antworttext
-            answerTextNodes.get(i).setText(questions.get(qindex).getAnswers().get(i).getText());
+            answerTextNodes.get(i).setText(selectedQuestions.get(qindex).getAnswers().get(i).getText());
 
             // CleanUp aller antworten
             // Alle zuvor gesetzten correct / false / selected Klassen entfernen (Styling)
@@ -127,8 +104,8 @@ public class LearnmodeController extends AppController implements Initializable 
         }
 
         // Blende "überflüssige" answerBoxes aus weil wir ggf. weniger als 4 antworten haben (Styling)
-        if(questions.get(qindex).getAnswers().size() < 4){
-            for (int i = questions.get(qindex).getAnswers().size(); i < 4 ; i++) {
+        if(selectedQuestions.get(qindex).getAnswers().size() < 4){
+            for (int i = selectedQuestions.get(qindex).getAnswers().size(); i < 4 ; i++) {
                 answerBoxes.get(i).setVisible(false);
             }
         }
@@ -136,10 +113,7 @@ public class LearnmodeController extends AppController implements Initializable 
         // Einblende Animationen
         fadeInTransition(questionText,1000,0);
         fadeInTransition(answersGrid, 1000,300);
-
-    };
-
-
+    }
 
     public void clickedOnAnswer(MouseEvent mouseEvent) {
         // Identifiziere das geklickte Element
@@ -177,6 +151,9 @@ public class LearnmodeController extends AppController implements Initializable 
         // Den CheckBtn nun ausblenden
         checkBtn.setVisible(false);
 
+        // Punkte Berechnen & ins Array übergeben:
+        questionResults.add(calcQuestionPts(answerBoxes));
+
         // Wenn wir bei der letzten Frage angekommen sind zeigen wir den Button zur Endcard sonst Next Button
         if(questionIndex+1 < questionsCount){
             nextQuestBtn.setVisible(true);
@@ -192,7 +169,7 @@ public class LearnmodeController extends AppController implements Initializable 
 
         actualQuestionNum.setText(Integer.toString(questionIndex+1));
 
-        setNextQuestion(questionIndex, questions);
+        setNextQuestion(questionIndex);
 
     }
 
@@ -201,12 +178,49 @@ public class LearnmodeController extends AppController implements Initializable 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("learnmode-endcard.fxml"));
         try {
             Scene questioningScene = new Scene(loader.load());
-            AppController sceneController = loader.getController();
+            LearnmodeEndcardController sceneController = loader.getController();
+            sceneController.initResults(questionResults);
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
             ioe.printStackTrace();
         }
+    }
 
+    // Note: @Claudia Diese Methode kann getestet werden mittels Injection
+    private QuestionResult calcQuestionPts(ArrayList<AnswerBox> answerBoxes){
+        QuestionResult qr = new QuestionResult();
+        for (AnswerBox a: answerBoxes) {
+            if(a.isVisible()) {
+                qr.countAnswers++;
+                if (a.getIsCorrectAnswer()) {
+                    qr.countCorrectAnswers++;
+                    if (a.getIsSelected()) {
+                        qr.pts++;
+                    } else {
+                        qr.pts--;
+                        qr.fullyCorrect = false;
+                    }
+                } else {
+                    qr.countWrongAnswers++;
+                    if (a.getIsSelected()) {
+                        qr.pts--;
+                        qr.fullyCorrect = false;
+                    } else {
+                        qr.pts++;
+                    }
+                }
+            }
+            // Korrektur wenn mehr falsch als richtig selektiert:
+            qr.pts = (qr.pts < 0) ? 0 : qr.pts;
+        }
+
+        System.out.println("Answers / Max Pts: "+qr.countAnswers);
+        System.out.println("Korrekte Antworten: "+qr.countCorrectAnswers);
+        System.out.println("Falsche Antworten: "+qr.countWrongAnswers);
+        System.out.println("Errecihte Punkte: "+qr.pts);
+        System.out.println("Voll Richtig? "+qr.fullyCorrect);
+
+        return qr;
     }
 }
