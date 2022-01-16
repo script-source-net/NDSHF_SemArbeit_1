@@ -344,5 +344,15 @@
 }
 
 /* Chart Data */
-.default-color0.chart-pie { -fx-pie-color: #002172; }
+.chart-pie {
+    -fx-border-color: transparent;
+    -fx-border-width: 2px;
+}
+
+.chart-legend {
+    -fx-background-color: rgba(0, 0, 0, 0.85);
+    -fx-stroke: #fff;
+}
+
+.default-color0.chart-pie { -fx-pie-color: #207200; }
 .default-color1.chart-pie { -fx-pie-color: #440000; }

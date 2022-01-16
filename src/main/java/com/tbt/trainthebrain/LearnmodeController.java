@@ -24,9 +24,8 @@ public class LearnmodeController extends AppController implements Initializable 
     int questionsCount = 0;                                         // Anzahl (max) Fragen gem. Selektion
     ArrayList<AnswerBox> answerBoxes = new ArrayList<>();           // AntwortBoxen FXML Elemente
     ArrayList<Question> selectedQuestions = new ArrayList<>();      // Liste der Auswahl an Fragen die getroffen wurde
+    ArrayList<QuestionResult> questionResults = new ArrayList<>();  // Beinhaltet alle Resultate des aktuellen Durchlaufs
 
-    int points = 0;                                                 // Erreichte Punktzahl
-    int maxPoints = 0;                                              // Maximale Punktzahl anhand der gewählten Fragen
 
     @FXML
     AnswerBox answerBox0,answerBox1,answerBox2,answerBox3;
@@ -152,6 +151,9 @@ public class LearnmodeController extends AppController implements Initializable 
         // Den CheckBtn nun ausblenden
         checkBtn.setVisible(false);
 
+        // Punkte Berechnen & ins Array übergeben:
+        questionResults.add(calcQuestionPts(answerBoxes));
+
         // Wenn wir bei der letzten Frage angekommen sind zeigen wir den Button zur Endcard sonst Next Button
         if(questionIndex+1 < questionsCount){
             nextQuestBtn.setVisible(true);
@@ -177,12 +179,48 @@ public class LearnmodeController extends AppController implements Initializable 
         try {
             Scene questioningScene = new Scene(loader.load());
             LearnmodeEndcardController sceneController = loader.getController();
-            sceneController.initResults(points, maxPoints);
+            sceneController.initResults(questionResults);
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
             ioe.printStackTrace();
         }
+    }
 
+    // Note: @TESTING Diese Methode kann getestet werden
+    private QuestionResult calcQuestionPts(ArrayList<AnswerBox> answerBoxes){
+        QuestionResult qr = new QuestionResult();
+        for (AnswerBox a: answerBoxes) {
+            if(a.isVisible()) {
+                qr.countAnswers++;
+                if (a.getIsCorrectAnswer()) {
+                    qr.countCorrectAnswers++;
+                    if (a.getIsSelected()) {
+                        qr.pts++;
+                    } else {
+                        qr.pts--;
+                        qr.fullyCorrect = false;
+                    }
+                } else {
+                    qr.countWrongAnswers++;
+                    if (a.getIsSelected()) {
+                        qr.pts--;
+                        qr.fullyCorrect = false;
+                    } else {
+                        qr.pts++;
+                    }
+                }
+            }
+            // Korrektur wenn mehr falsch als richtig selektiert:
+            qr.pts = (qr.pts < 0) ? 0 : qr.pts;
+        }
+
+        System.out.println("Answers / Max Pts: "+qr.countAnswers);
+        System.out.println("Korrekte Antworten: "+qr.countCorrectAnswers);
+        System.out.println("Falsche Antworten: "+qr.countWrongAnswers);
+        System.out.println("Errecihte Punkte: "+qr.pts);
+        System.out.println("Voll Richtig? "+qr.fullyCorrect);
+
+        return qr;
     }
 }

@@ -30,19 +30,7 @@ public class MainController extends AppController implements Initializable {
     @FXML
     Text errText, errDesc;
 
-    public void switchToLearningModeClick(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("learnmode-setup.fxml"));
 
-        try {
-            Scene newscene = new Scene(loader.load());
-            AppController sceneController = loader.getController();
-            stage.setScene(newscene);
-        }catch (IOException ioe){
-            System.out.println("Could not load scene");
-            ioe.printStackTrace();
-        }
-    }
 
     public void switchToEditQuestionsClick(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
