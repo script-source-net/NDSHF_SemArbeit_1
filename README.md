@@ -115,21 +115,24 @@ Wenn die MariaDB installiert wurde und läuft kann über den folgenden SQL Befeh
 
 Hinweis: der oben gezeigte Befehl löscht eine vorhandene Datanbank mit dem Namen trainthebrain sollte eine solche existieren!
 
-### 2.Anlegen des Benutzers (optional)
-Das Programm benötigt einen eigenen Benutzer mit Zugriff auf die oben genannte Datenbank. Standardmässig lautet der Benutzername sowie das Passwort **trainthebrain**.
+### 2. Benutzer (Optional)
+Das Programm benötigt einen eigenen Benutzer mit Zugriff auf die oben genannte Datenbank damit diese out-of-the-box verwendet werden kann. Du kannst aber auch einen eigenen Benutzeraccount nutzen. Hierzu musst du aber die Verbindungsdaten in der Applikation anpassen.
+
+#### 2.1 Anlegen des Benutzers (optional)
+Standardmässig lautet der Benutzername sowie das Passwort **trainthebrain**.
 Der folgende SQL Befehl erstellt einen neuen Benutzer mit Zugriff auf die Datenbank _trainthebrain_:
 
 `CREATE USER 'trainthebrain'@localhost IDENTIFIED BY 'trainthebrain';`
 
-### 3.Erteilen der Berechtigung (optional)
+#### 2.2. Erteilen der Berechtigung (optional)
 Damit der Benutzer in der App verwendet werden kann muss dieser über die nötigen Berechtigungen verfügen, diese erteilen wir mit dem SWL Befehl
 
 ``GRANT ALL privileges ON `trainthebrain`.* TO 'trainthebrain'@localhost;``
 
-Hinweis: Punkt 2 & 3 sind optional und dienen dazu das die App "out-of-the-box" verwendet werden kann, du kannst aber auf das anlegen eines eigenen Benutzers verzichten und stattdessen die Verbindungsparameter der App selbst anpassen.
+Hinweis: Punkt 2 ist optional und dienen dazu das die App "out-of-the-box" verwendet werden kann, du kannst aber auf das anlegen eines eigenen Benutzers verzichten und stattdessen die Verbindungsparameter der App selbst anpassen.
 Diese findest du in der Datei SQLConnectionData im package sqlcontroller.
 
-### 4.Erstellen der benötigten Tabellen
+### 3.Erstellen der benötigten Tabellen
 Führe die beiden untenstehenden SQL-Befehle aus damit die nötigen Tabellen erstellt werden.
 
 __Tabelle für Fragen:__
