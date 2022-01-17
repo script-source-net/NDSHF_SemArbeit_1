@@ -20,6 +20,8 @@ import java.util.ResourceBundle;
 
 public class LearnmodeController extends AppController implements Initializable {
 
+    boolean underCheck;                                             // Wird jeweils auf true gesetzt wenn Antworten geprüft werden
+
     int questionIndex = 0;                                          // Aktueller (Fragen) index 0-based
     int questionsCount = 0;                                         // Anzahl (max) Fragen gem. Selektion
     ArrayList<AnswerBox> answerBoxes = new ArrayList<>();           // AntwortBoxen FXML Elemente
@@ -63,7 +65,8 @@ public class LearnmodeController extends AppController implements Initializable 
     }
 
     private void setNextQuestion(int qindex){
-        System.out.println(selectedQuestions.size());
+        // Deaktiviere underCheck
+        underCheck = false;
         // Publiziere die Frage
         questionText.setText(selectedQuestions.get(qindex).getQuestion());
         // Lösche alle AnswerBoxen aus der ArrayList (nötig auf Seite 2 <) und adde alle 4 Boxen
@@ -116,24 +119,29 @@ public class LearnmodeController extends AppController implements Initializable 
     }
 
     public void clickedOnAnswer(MouseEvent mouseEvent) {
-        // Identifiziere das geklickte Element
-        Node clickedElNode = (Node) mouseEvent.getTarget();
-        // Prüfe ob klick auf AnswerBox direkt oder auf TextNode (child) ausgeführt wurde & identifiziere den entsprechenden Container
-        AnswerBox container = clickedElNode instanceof Text ? ((AnswerBox) clickedElNode.getParent()) : ((AnswerBox)clickedElNode);
+        //Prüfe ob wir im Check Modus sind (Antworten prüfen wurde aktiviert)
+        if(!underCheck) {
+            // Identifiziere das geklickte Element
+            Node clickedElNode = (Node) mouseEvent.getTarget();
+            // Prüfe ob klick auf AnswerBox direkt oder auf TextNode (child) ausgeführt wurde & identifiziere den entsprechenden Container
+            AnswerBox container = clickedElNode instanceof Text ? ((AnswerBox) clickedElNode.getParent()) : ((AnswerBox) clickedElNode);
 
-        // Toggle selectedStatus
-        container.setIsSelected();
+            // Toggle selectedStatus
+            container.setIsSelected();
 
-        // Styling anwenden
-        if(container.getStyleClass().contains("selected")){
-            container.getStyleClass().remove("selected");
-        }else{
-            container.getStyleClass().add("selected");
+            // Styling anwenden
+            if (container.getStyleClass().contains("selected")) {
+                container.getStyleClass().remove("selected");
+            } else {
+                container.getStyleClass().add("selected");
+            }
         }
-
     }
 
     public void checkAnswersClicked(ActionEvent actionEvent) {
+        // Aktiviere underCheck
+        underCheck = true;
+
         // Jede AnswerBox auf Status prüfen
         for (AnswerBox answerBox: answerBoxes) {
             if (answerBox.isSelected) {
