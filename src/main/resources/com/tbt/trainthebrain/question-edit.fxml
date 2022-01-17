@@ -39,7 +39,35 @@
                      <font>
                         <Font size="15.0" />
                      </font></Label>
-                  <TextArea fx:id="questionText" minHeight="100.0" prefHeight="150.0" prefWidth="920.0" wrapText="true" />
+                  <TextArea fx:id="questionText" minHeight="100.0" onKeyReleased="#updateQuestionTextCounterListener" prefHeight="150.0" prefWidth="920.0" wrapText="true" />
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Text fx:id="questionTextCounterText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="meta" />
+                           </styleClass>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="meta" />
+                           </styleClass>
+                        </Text>
+                        <Text fx:id="questionTextLimitText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="meta" />
+                           </styleClass>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Zeichen">
+                           <styleClass>
+                              <String fx:value="text" />
+                              <String fx:value="meta" />
+                           </styleClass>
+                        </Text>
+                     </children>
+                  </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Antworten">
@@ -65,8 +93,36 @@
                                           <CheckBox fx:id="answerCorrect0" layoutY="16.0" mnemonicParsing="false" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <TextArea fx:id="answerText0" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
+                                    <TextArea fx:id="answerText0" onKeyPressed="#updateAnswerTextCounterListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
                                      <TextField fx:id="answerId0" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" text="0" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="answer0TextCounterText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text fx:id="answer0TextLimitText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Zeichen">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                               <VBox prefHeight="0.0" prefWidth="902.0">
@@ -77,8 +133,36 @@
                                           <CheckBox fx:id="answerCorrect1" layoutY="16.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <TextArea fx:id="answerText1" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
+                                    <TextArea fx:id="answerText1" onKeyPressed="#updateAnswerTextCounterListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
                                      <TextField fx:id="answerId1" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" text="0" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="answer1TextCounterText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text fx:id="answer1TextLimitText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Zeichen">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                               <VBox prefHeight="0.0" prefWidth="902.0">
@@ -89,8 +173,36 @@
                                           <Label styleClass="bold" text="Antwort 3:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <TextArea fx:id="answerText2" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
+                                    <TextArea fx:id="answerText2" onKeyPressed="#updateAnswerTextCounterListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
                                      <TextField fx:id="answerId2" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" text="0" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="answer2TextCounterText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text fx:id="answer2TextLimitText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Zeichen">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                               <VBox prefHeight="0.0" prefWidth="902.0">
@@ -101,8 +213,36 @@
                                           <CheckBox fx:id="answerCorrect3" layoutY="16.0" mnemonicParsing="false" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <TextArea fx:id="answerText3" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
+                                    <TextArea fx:id="answerText3" onKeyPressed="#updateAnswerTextCounterListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
                                      <TextField fx:id="answerId3" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" text="0" />
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Text fx:id="answer3TextCounterText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="/">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text fx:id="answer3TextLimitText" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text=" Zeichen">
+                                             <styleClass>
+                                                <String fx:value="text" />
+                                                <String fx:value="meta" />
+                                             </styleClass>
+                                          </Text>
+                                       </children>
+                                    </HBox>
                                  </children>
                               </VBox>
                            </children>
