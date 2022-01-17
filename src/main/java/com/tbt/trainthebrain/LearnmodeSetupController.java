@@ -70,15 +70,29 @@ public class LearnmodeSetupController extends AppController implements Initializ
         if(countOfQuestionsInDB>0) {
             // TextField listener um sicherzustellen das nur nummern eingetragen werden
             questionsToPlayCounter.textProperty().addListener((observable, oldValue, newValue) -> {
-                if (!newValue.isEmpty() || Integer.parseInt(newValue) > 0) {
+                if (!newValue.isEmpty() || (!newValue.isEmpty() && Integer.parseInt(newValue) > 0)) {
                     if (!newValue.matches("\\d*") || newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1)) {
+                        //make oldvalue compatible if needed
+                        if(oldValue.isEmpty()){
+                            if(Integer.parseInt(newValue) >  countOfQuestionsInDB){
+                                oldValue = Integer.toString(countOfQuestionsInDB);
+                            }else{
+                                oldValue = "1";
+                            }
+                        }
+                        // Anzahl der Fragen wird mit oldValue (bereinigt oben) aktualisiert weil der neue ungültig ist:
                         questionsToPlayCounter.setText(oldValue);
                         questionsCounter = Integer.parseInt(oldValue);
+                    }else{
+                        // Anzahl der Fragen wird mit newValue aktualisiert weil der Wert gültig ist:
+                        questionsToPlayCounter.setText(newValue);
+                        questionsCounter = Integer.parseInt(newValue);
                     }
-
+                    // Aktiviere den Button für Start wenn ok
                     startBtn.setDisable(questionsToPlayCounter.getText().length() <= 0);
-                    // Anzahl der Fragen wird aktualisiert
-                    questionsCounter = Integer.parseInt(newValue);
+
+                }else {
+                    startBtn.setDisable(true);
                 }
             });
         }
