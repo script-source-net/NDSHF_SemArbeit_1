@@ -1,5 +1,5 @@
-# NDSHF_SemArbeit_1
-## Multiple-Choice Lern- und Prüfungsplattform 
+# NDSHF SemesterArbeit 1
+## Multiple-Choice Lern- und Prüfungsplattform (Train the Brain)
 <p>Wir erstellen ein Tool mit dem Multiple-Choice Fragen in eine Datenbank abgefüllt und verwalltet werden kann.
 Das Tool stellt die eingetragenen Fragen in zufälliger Reihenfolge und die Antworten werden auf ihre Richtigkeit
 bearbeitet.</p>
