@@ -8,6 +8,9 @@
     -fx-text-fill: #bdbdbd;
     -fx-fill: #bdbdbd;
 }
+.text.answerText{
+    -fx-wrap-text: break-word;
+}
 
 .text-error {
     -fx-font-weight: bold;

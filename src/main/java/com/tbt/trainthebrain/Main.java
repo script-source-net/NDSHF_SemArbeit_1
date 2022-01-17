@@ -13,7 +13,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("main.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 960.0, 700.0);
+        Scene scene = new Scene(fxmlLoader.load(), 960.0, 850.0);
         MainController sceneController = fxmlLoader.getController();
         stage.setTitle("TtB - Train the Brain");
 //        stage.setMaxWidth(1280.0);

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.glyphfont.Glyph?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="960.0" styleClass="stage" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.QuestionEditOverviewController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="850.0" prefWidth="960.0" styleClass="stage" stylesheets="@main.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tbt.trainthebrain.QuestionEditOverviewController">
     <children>
         <HBox fx:id="header" alignment="BOTTOM_CENTER" prefHeight="134.0" prefWidth="960.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" VBox.vgrow="NEVER">
             <children>
