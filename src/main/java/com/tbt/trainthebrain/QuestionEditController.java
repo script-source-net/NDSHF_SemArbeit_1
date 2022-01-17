@@ -10,14 +10,22 @@ import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.ResourceBundle;
 
 public class QuestionEditController implements Initializable {
+
+    int limitForQuestionText = 150;
+    int limitForAnswerText = 100;
 
     @FXML
     private TextField id, answerId0, answerId1, answerId2, answerId3;
@@ -25,6 +33,12 @@ public class QuestionEditController implements Initializable {
     private TextArea questionText, answerText0, answerText1, answerText2, answerText3;
     @FXML
     private CheckBox answerCorrect0, answerCorrect1, answerCorrect2, answerCorrect3;
+    @FXML
+    private Text questionTextCounterText, questionTextLimitText;
+    @FXML
+    private Text answer0TextLimitText, answer1TextLimitText, answer2TextLimitText, answer3TextLimitText;
+    @FXML
+    private Text answer0TextCounterText, answer1TextCounterText, answer2TextCounterText, answer3TextCounterText;
 
     private final ArrayList<TextArea> answerTextsArray = new ArrayList<>();
 
@@ -137,6 +151,7 @@ public class QuestionEditController implements Initializable {
         }
         return verify;
     }
+
     // Verifiziert ob mindestens ein Answerobjekt als korrekt deklariert wurde.
     public boolean checkMinOneAnswerIsTrue(ArrayList<Answer> answers) {
         boolean verify = false;
@@ -167,7 +182,6 @@ public class QuestionEditController implements Initializable {
         return verify;
     }
 
-
     public ArrayList<Answer> createNewAnswerObjects(int questionID) {
         //erzeugt neue Answerobjekte befüllt sie mit answerId, text, isCorrect, question id von zugehöriger Frage
         //Füllt alle Answerojekte in eine Answer ArrayList
@@ -195,37 +209,15 @@ public class QuestionEditController implements Initializable {
         }
     }
 
-    public void initWithData(Question question) {
-        id.setText(Integer.toString(question.getId()));
-        questionText.setText(question.getQuestion());
-        ArrayList<Answer> answers = question.getAnswers();
-        //answers werden den answerText zugeteilt, wenn nur 3 answers bleibt 4. textarea einfach leer.
-        for (int i = 0; i < answers.size(); i++) {
-            answerTextsArray.get(i).setText(answers.get(i).getText());
-            answerIdsArray.get(i).setText(String.valueOf(answers.get(i).getId()));
-            isCorrectCheckBoxesArray.get(i).setSelected(answers.get(i).getIsCorrect());
-        }
-    }
-
     public void fillAnswerTextAndAnswerIdsCheckboxesInArray() {
         //AnswerText in ArrayList abgefüllt
+        Collections.addAll(answerTextsArray, answerText0,answerText1,answerText2,answerText3);
+
         //AnswerId's in ArrayList abgefüllt
+        Collections.addAll(answerIdsArray, answerId0,answerId1,answerId2,answerId3);
+
         //Checkboxes in ArrayList abgefüllt
-        answerTextsArray.add(answerText0);
-        answerTextsArray.add(answerText1);
-        answerTextsArray.add(answerText2);
-        answerTextsArray.add(answerText3);
-
-        answerIdsArray.add(answerId0);
-        answerIdsArray.add(answerId1);
-        answerIdsArray.add(answerId2);
-        answerIdsArray.add(answerId3);
-
-        isCorrectCheckBoxesArray.add(answerCorrect0);
-        isCorrectCheckBoxesArray.add(answerCorrect1);
-        isCorrectCheckBoxesArray.add(answerCorrect2);
-        isCorrectCheckBoxesArray.add(answerCorrect3);
-
+        Collections.addAll(isCorrectCheckBoxesArray, answerCorrect0,answerCorrect1,answerCorrect2,answerCorrect3);
     }
 
     public ArrayList<Integer> parsingAnswerIdIntoInteger() {
@@ -240,10 +232,74 @@ public class QuestionEditController implements Initializable {
         return intAnswerIdsArray;
     }
 
+    public void updateQuestionTextCounterListener(KeyEvent keyEvent) {
+        TextArea ta = ((TextArea) keyEvent.getTarget());
+        updateTextCounter(ta, limitForQuestionText, questionTextCounterText);
+    }
+
+    public void updateAnswerTextCounterListener(KeyEvent keyEvent) {
+        TextArea ta = ((TextArea) keyEvent.getTarget());
+        Text counter = new Text("Error");
+        // Find Counter Text for this answer
+        VBox parent = (VBox) ta.getParent();
+        // Get Child of type HBox (that contains our Text Nodes)
+        for (Node child: parent.getChildren()) {
+                if(child instanceof HBox){
+                    counter = (Text)((HBox) child).getChildren().get(0);
+                    break;
+                }
+        }
+        updateTextCounter(ta, limitForAnswerText, counter);
+    }
+
+    public void updateTextCounter(TextArea textArea, int limit, Text counterText){
+        String string = textArea.getText();
+        int currentLength = textArea.getLength();
+
+        if (currentLength > limit) {
+            textArea.setText(string.substring(0, limit));
+            textArea.positionCaret(string.length());
+        }
+
+        counterText.setText(Integer.toString(Math.min(limit, currentLength)));
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("Question edit Init called");
+
         fillAnswerTextAndAnswerIdsCheckboxesInArray();
+
+        // Set question-text-length limits based on Params
+        questionTextLimitText.setText(Integer.toString(limitForQuestionText));
+        answer0TextLimitText.setText(Integer.toString(limitForAnswerText));
+        answer1TextLimitText.setText(Integer.toString(limitForAnswerText));
+        answer2TextLimitText.setText(Integer.toString(limitForAnswerText));
+        answer3TextLimitText.setText(Integer.toString(limitForAnswerText));
+
     }
+
+    public void initWithData(Question question) {
+        id.setText(Integer.toString(question.getId()));
+        questionText.setText(question.getQuestion());
+        ArrayList<Answer> answers = question.getAnswers();
+        //answers werden den answerText zugeteilt, wenn nur 3 answers bleibt 4. textarea einfach leer.
+        for (int i = 0; i < answers.size(); i++) {
+            answerTextsArray.get(i).setText(answers.get(i).getText());
+            answerIdsArray.get(i).setText(String.valueOf(answers.get(i).getId()));
+            isCorrectCheckBoxesArray.get(i).setSelected(answers.get(i).getIsCorrect());
+        }
+
+        // Set used length based on content in Question
+        updateTextCounter(questionText,limitForQuestionText,questionTextCounterText);
+
+        // Set used length based on content in Answers
+        updateTextCounter(answerText0,limitForAnswerText,answer0TextCounterText);
+        updateTextCounter(answerText1,limitForAnswerText,answer1TextCounterText);
+        updateTextCounter(answerText2,limitForAnswerText,answer2TextCounterText);
+        updateTextCounter(answerText3,limitForAnswerText,answer3TextCounterText);
+    }
+
+
 }

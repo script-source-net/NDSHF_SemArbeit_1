@@ -12,6 +12,12 @@
     -fx-wrap-text: break-word;
 }
 
+.text.meta{
+    -fx-text-fill: rgba(189, 189, 189, 0.5);
+    -fx-fill: rgba(189, 189, 189, 0.5);
+    -fx-font-size: 10px;
+}
+
 .text-error {
     -fx-font-weight: bold;
     -fx-fill: #c20202;

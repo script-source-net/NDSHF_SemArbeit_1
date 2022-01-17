@@ -56,7 +56,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="0.0" prefWidth="960.0">
                                  <children>
-                                    <Text fx:id="questionText" strokeType="OUTSIDE" strokeWidth="0.0" text="#Fragentext Wie ist die Frage die hier stehen soll?">
+                                    <Text fx:id="questionText" strokeType="OUTSIDE" strokeWidth="0.0" text="#Fragentext Wie ist die Frage die hier stehen soll?" wrappingWidth="700.0" textAlignment="CENTER">
                                        <styleClass>
                                           <String fx:value="text" />
                                           <String fx:value="lead" />
@@ -101,7 +101,7 @@
                                                       <Insets />
                                                    </GridPane.margin>
                                                 </AnswerBox>
-                                                <AnswerBox fx:id="answerBox1" alignment="CENTER_LEFT" onMouseClicked="#clickedOnAnswer" spacing="10.0" styleClass="answerBox" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                <AnswerBox fx:id="answerBox1" alignment="CENTER_LEFT" onMouseClicked="#clickedOnAnswer" spacing="10.0" styleClass="answerBox" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" GridPane.columnIndex="1">
                                                    <children>
                                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="2" translateX="10.0">
                                                          <styleClass>
@@ -113,7 +113,7 @@
                                                       <Text fx:id="answer1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text" translateX="-40.0" wrappingWidth="330.0" />
                                                    </children>
                                                 </AnswerBox>
-                                                <AnswerBox fx:id="answerBox2" alignment="CENTER_LEFT" onMouseClicked="#clickedOnAnswer" spacing="10.0" styleClass="answerBox" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                <AnswerBox fx:id="answerBox2" alignment="CENTER_LEFT" onMouseClicked="#clickedOnAnswer" spacing="10.0" styleClass="answerBox" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" GridPane.rowIndex="1">
                                                    <children>
                                                       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="3" translateX="10.0">
                                                          <styleClass>
@@ -125,9 +125,9 @@
                                                       <Text fx:id="answer2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text" translateX="-40.0" wrappingWidth="330.0" />
                                                    </children>
                                                 </AnswerBox>
-                                                <AnswerBox fx:id="answerBox3" alignment="CENTER_LEFT" onMouseClicked="#clickedOnAnswer" spacing="10.0" styleClass="HBox" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                <AnswerBox fx:id="answerBox3" alignment="CENTER_LEFT" onMouseClicked="#clickedOnAnswer" spacing="10.0" styleClass="answerBox" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                    <children>
-                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4" translateX="10.0" wrappingWidth="100.0">
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="4" translateX="10.0">
                                                          <styleClass>
                                                             <String fx:value="text" />
                                                             <String fx:value="answerNum" />
