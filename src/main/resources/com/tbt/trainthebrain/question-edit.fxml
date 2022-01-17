@@ -35,10 +35,14 @@
             <VBox fx:id="editListQuestionContainerOutter" prefHeight="200.0" prefWidth="100.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
                    <TextField fx:id="id" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" text="0" />
-                  <Label styleClass="bold" text="Frage:">
+                  <Label text="Frage">
                      <font>
                         <Font size="15.0" />
-                     </font></Label>
+                     </font>
+                     <styleClass>
+                        <String fx:value="bold" />
+                        <String fx:value="lead" />
+                     </styleClass></Label>
                   <TextArea fx:id="questionText" minHeight="100.0" onKeyReleased="#updateQuestionTextCounterListener" prefHeight="150.0" prefWidth="920.0" wrapText="true" />
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -70,7 +74,7 @@
                   </HBox>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Antworten">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Antwort Optionen">
                            <styleClass>
                               <String fx:value="text" />
                               <String fx:value="lead" />
@@ -89,11 +93,11 @@
                                  <children>
                                     <AnchorPane>
                                        <children>
-                                          <Label styleClass="bold" text="Antwort 1:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
-                                          <CheckBox fx:id="answerCorrect0" layoutY="16.0" mnemonicParsing="false" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label styleClass="bold" text="Antwort 1" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
+                                          <CheckBox fx:id="answerCorrect0" disable="true" layoutY="16.0" mnemonicParsing="false" onAction="#checkFormValidity" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <TextArea fx:id="answerText0" onKeyPressed="#updateAnswerTextCounterListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
+                                    <TextArea fx:id="answerText0" onKeyReleased="#answerTextfieldsListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
                                      <TextField fx:id="answerId0" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" text="0" />
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
@@ -129,11 +133,11 @@
                                  <children>
                                     <AnchorPane>
                                        <children>
-                                          <Label styleClass="bold" text="Antwort 2:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
-                                          <CheckBox fx:id="answerCorrect1" layoutY="16.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <Label styleClass="bold" text="Antwort 2" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
+                                          <CheckBox fx:id="answerCorrect1" disable="true" layoutY="16.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#checkFormValidity" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <TextArea fx:id="answerText1" onKeyPressed="#updateAnswerTextCounterListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
+                                    <TextArea fx:id="answerText1" onKeyReleased="#answerTextfieldsListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
                                      <TextField fx:id="answerId1" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" text="0" />
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
@@ -169,11 +173,11 @@
                                  <children>
                                     <AnchorPane>
                                        <children>
-                                          <CheckBox fx:id="answerCorrect2" mnemonicParsing="false" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                          <Label styleClass="bold" text="Antwort 3:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
+                                          <Label styleClass="bold" text="Antwort 3" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
+                                          <CheckBox fx:id="answerCorrect2" disable="true" mnemonicParsing="false" onAction="#checkFormValidity" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <TextArea fx:id="answerText2" onKeyPressed="#updateAnswerTextCounterListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
+                                    <TextArea fx:id="answerText2" onKeyReleased="#answerTextfieldsListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
                                      <TextField fx:id="answerId2" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" text="0" />
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
@@ -210,10 +214,10 @@
                                     <AnchorPane prefHeight="0.0" prefWidth="920.0">
                                        <children>
                                           <Label styleClass="bold" text="Antwort 4:" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" />
-                                          <CheckBox fx:id="answerCorrect3" layoutY="16.0" mnemonicParsing="false" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                          <CheckBox fx:id="answerCorrect3" disable="true" layoutY="16.0" mnemonicParsing="false" onAction="#checkFormValidity" text="Korrekte Antwort" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                        </children>
                                     </AnchorPane>
-                                    <TextArea fx:id="answerText3" onKeyPressed="#updateAnswerTextCounterListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
+                                    <TextArea fx:id="answerText3" onKeyReleased="#answerTextfieldsListener" prefHeight="68.0" prefWidth="920.0" styleClass="answerTextArea" wrapText="true" />
                                      <TextField fx:id="answerId3" maxHeight="0.0" minHeight="0.0" prefHeight="0.0" text="0" />
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
@@ -265,8 +269,22 @@
                <children>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Es müssen mindestens eine Frage sowie zwei Antworten eingetragen werden." wrappingWidth="543.7747497558594" />
+                        <HBox spacing="4.0">
+                           <Text fx:id="checkTextMin2Answers" text="✔" visible="false">
+                              <styleClass>
+                                 <String fx:value="text" />
+                                 <String fx:value="text-success" />
+                              </styleClass></Text>
+                           <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Es müssen mindestens eine Frage sowie zwei Antworten eingetragen werden." wrappingWidth="540.0" />
+                        </HBox>
+                        <HBox spacing="4.0">
+                           <Text fx:id="checkTextMin1True" text="✔" visible="false">
+                              <styleClass>
+                                 <String fx:value="text" />
+                                 <String fx:value="text-success" />
+                              </styleClass></Text>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Mindestens eine Antwort muss als korrekt markiert werden." />
+                        </HBox>
                      </children>
                   </VBox>
                   <HBox alignment="BOTTOM_RIGHT" prefHeight="30.0" prefWidth="258.0" spacing="10.0" GridPane.columnIndex="1">
@@ -277,7 +295,7 @@
                               <String fx:value="btn-default" />
                            </styleClass>
                         </Button>
-                        <Button mnemonicParsing="false" onAction="#saveQuestionEditClick" text="Speichern">
+                        <Button fx:id="saveQuestionBtn" disable="true" mnemonicParsing="false" onAction="#saveQuestionEditClick" text="Speichern">
                            <styleClass>
                               <String fx:value="btn" />
                               <String fx:value="btn-success" />

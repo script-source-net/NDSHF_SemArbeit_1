@@ -7,10 +7,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -39,6 +41,12 @@ public class QuestionEditController implements Initializable {
     private Text answer0TextLimitText, answer1TextLimitText, answer2TextLimitText, answer3TextLimitText;
     @FXML
     private Text answer0TextCounterText, answer1TextCounterText, answer2TextCounterText, answer3TextCounterText;
+
+    @FXML
+    private Text checkTextMin2Answers, checkTextMin1True;
+
+    @FXML
+    private Button saveQuestionBtn;
 
     private final ArrayList<TextArea> answerTextsArray = new ArrayList<>();
 
@@ -145,11 +153,18 @@ public class QuestionEditController implements Initializable {
         boolean verify = false;
         for (CheckBox checkBox : isCorrectCheckBoxesArray) {
             if (checkBox.isSelected()) {
-                verify = true;
+                verify = checkIfAnswerWithActiveCheckBoxHasAnswerText(checkBox);
                 break;
             }
         }
         return verify;
+    }
+
+    private boolean checkIfAnswerWithActiveCheckBoxHasAnswerText(CheckBox checkBox){
+        VBox parent = (VBox) checkBox.getParent().getParent();
+        TextArea answerTextArea = (TextArea) parent.getChildren().get(1);
+
+        return !answerTextArea.getText().isEmpty();
     }
 
     // Verifiziert ob mindestens ein Answerobjekt als korrekt deklariert wurde.
@@ -235,21 +250,38 @@ public class QuestionEditController implements Initializable {
     public void updateQuestionTextCounterListener(KeyEvent keyEvent) {
         TextArea ta = ((TextArea) keyEvent.getTarget());
         updateTextCounter(ta, limitForQuestionText, questionTextCounterText);
+
+        // Do the checks
+        checkFormValidity();
     }
 
-    public void updateAnswerTextCounterListener(KeyEvent keyEvent) {
+    public void answerTextfieldsListener(KeyEvent keyEvent) {
         TextArea ta = ((TextArea) keyEvent.getTarget());
         Text counter = new Text("Error");
+        CheckBox checkBox;
         // Find Counter Text for this answer
         VBox parent = (VBox) ta.getParent();
         // Get Child of type HBox (that contains our Text Nodes)
         for (Node child: parent.getChildren()) {
-                if(child instanceof HBox){
-                    counter = (Text)((HBox) child).getChildren().get(0);
-                    break;
+            // Set Checkbox "is correct" to to not selected if answerText is now empty
+            if (child instanceof AnchorPane) {
+                checkBox = ((CheckBox) ((AnchorPane) child).getChildren().get(1));
+                if(ta.getText().isEmpty()) {
+                    checkBox.setSelected(false);
+                    checkBox.setDisable(true);
+                }else{
+                    checkBox.setDisable(false);
                 }
+            }
+            if(child instanceof HBox){
+                counter = (Text)((HBox) child).getChildren().get(0);
+                break;
+            }
         }
         updateTextCounter(ta, limitForAnswerText, counter);
+
+        // Do the checks
+        checkFormValidity();
     }
 
     public void updateTextCounter(TextArea textArea, int limit, Text counterText){
@@ -264,6 +296,12 @@ public class QuestionEditController implements Initializable {
         counterText.setText(Integer.toString(Math.min(limit, currentLength)));
     }
 
+    @FXML
+    private void checkFormValidity(){
+        checkTextMin2Answers.setVisible(verifyIfMinTwoAnswers() && !questionText.getText().isEmpty());
+        checkTextMin1True.setVisible(verifyMinOneAnswerIsTrue());
+        saveQuestionBtn.setDisable(!verifyMinOneAnswerIsTrue() || !verifyIfMinTwoAnswers() || questionText.getText().isEmpty());
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
