@@ -221,7 +221,7 @@ public class LearnmodeController extends AppController implements Initializable 
     }
 
     // Note: @Claudia Diese Methode kann getestet werden mittels Injection
-    private QuestionResult calcQuestionPts(ArrayList<AnswerBox> answerBoxes){
+    public QuestionResult calcQuestionPts(ArrayList<AnswerBox> answerBoxes){
         QuestionResult qr = new QuestionResult();
         for (AnswerBox a: answerBoxes) {
             if(a.isVisible()) {
@@ -251,7 +251,7 @@ public class LearnmodeController extends AppController implements Initializable 
         System.out.println("Answers / Max Pts: "+qr.countAnswers);
         System.out.println("Korrekte Antworten: "+qr.countCorrectAnswers);
         System.out.println("Falsche Antworten: "+qr.countWrongAnswers);
-        System.out.println("Errecihte Punkte: "+qr.pts);
+        System.out.println("Erreichte Punkte: "+qr.pts);
         System.out.println("Voll Richtig? "+qr.fullyCorrect);
 
         return qr;
