@@ -1,5 +1,7 @@
 package com.tbt.trainthebrain;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -42,6 +45,8 @@ public class LearnmodeController extends AppController implements Initializable 
     @FXML
     GridPane answersGrid;
 
+    Integer timeSeconds;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Alle AnswerBoxen zur Collection hinzufügen
@@ -67,9 +72,37 @@ public class LearnmodeController extends AppController implements Initializable 
         setNextQuestion(0);
     }
 
+    private void setButtonActiveWithTimer(Button button, Integer seconds){
+        String originalBtnText = button.getText();
+        button.setMinWidth(button.getPrefWidth());
+        button.setDisable(true);
+        final Timeline tl = new Timeline(new KeyFrame(Duration.seconds(seconds), actionEvent -> button.setDisable(false)));
+        tl.setCycleCount(1);
+        tl.play();
+        // Und der Countdown (Quelle: https://asgteach.com/2011/10/javafx-animation-and-binding-simple-countdown-timer-2/)
+        final Timeline countdownTl = new Timeline();
+        timeSeconds = seconds;
+        // update timerLabel
+        button.setText(timeSeconds.toString());
+        countdownTl.setCycleCount(Timeline.INDEFINITE);
+        countdownTl.getKeyFrames().add(new KeyFrame(Duration.seconds(1), event -> {
+            timeSeconds--;
+            // update timerLabel
+            button.setText(timeSeconds.toString());
+            if (timeSeconds <= 0) {
+                countdownTl.stop();
+                button.setText(originalBtnText);
+            }
+        }));
+        countdownTl.playFromStart();
+    }
+
     private void setNextQuestion(int qindex){
         // Deaktiviere underCheck
         underCheck = false;
+        // Deaktiviere Check Button mit Timer Delay für Enabling
+        setButtonActiveWithTimer(checkBtn, 3);
+
         // Publiziere die Frage
         questionText.setText(selectedQuestions.get(qindex).getQuestion());
 
