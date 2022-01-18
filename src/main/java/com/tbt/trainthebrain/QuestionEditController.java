@@ -92,8 +92,6 @@ public class QuestionEditController extends AppController implements Initializab
             con.deleteQuestionAndAnswersInDb(questionId);
             System.out.println("QuestionId > 0 und text ist leer = Question löschen und dazugehörige Answer werden gelöscht in DB");
         }
-
-
     }
 
     public void editNewAnswer(int questionId) {
@@ -208,8 +206,6 @@ public class QuestionEditController extends AppController implements Initializab
         return answerAddList;
     }
 
-
-
     public void fillAnswerTextAndAnswerIdsCheckboxesInArray() {
         //AnswerText in ArrayList abgefüllt
         Collections.addAll(answerTextsArray, answerText0,answerText1,answerText2,answerText3);
@@ -291,7 +287,6 @@ public class QuestionEditController extends AppController implements Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("Question edit Init called");
 
         fillAnswerTextAndAnswerIdsCheckboxesInArray();
 
@@ -313,6 +308,9 @@ public class QuestionEditController extends AppController implements Initializab
             answerTextsArray.get(i).setText(answers.get(i).getText());
             answerIdsArray.get(i).setText(String.valueOf(answers.get(i).getId()));
             isCorrectCheckBoxesArray.get(i).setSelected(answers.get(i).getIsCorrect());
+            if(!answers.get(i).getText().isEmpty()){
+                isCorrectCheckBoxesArray.get(i).setDisable(false);
+            }
         }
 
         // Set used length based on content in Question
@@ -323,6 +321,9 @@ public class QuestionEditController extends AppController implements Initializab
         updateTextCounter(answerText1,limitForAnswerText,answer1TextCounterText);
         updateTextCounter(answerText2,limitForAnswerText,answer2TextCounterText);
         updateTextCounter(answerText3,limitForAnswerText,answer3TextCounterText);
+
+        // Do the checks
+        checkFormValidity();
     }
 
 

@@ -52,9 +52,9 @@ public class QuestionEditOverviewController extends AppController implements Ini
 
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Soll wirklich gelöscht werden?", ButtonType.YES, ButtonType.NO);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "", ButtonType.YES, ButtonType.NO);
         alert.initOwner(stage);
-        alert.setTitle("Sicher?");
+        alert.setTitle("Sicher löschen?");
         alert.setHeaderText("Sollen alle Fragen gelöscht werden?");
         alert.showAndWait();
 
