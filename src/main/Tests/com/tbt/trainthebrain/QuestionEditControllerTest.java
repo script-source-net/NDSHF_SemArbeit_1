@@ -15,15 +15,9 @@ class QuestionEditControllerTest {
        QuestionEditController qec = new QuestionEditController();
 
        ArrayList<Answer> answers = new ArrayList<>();
-       //Manuelles setzen von Correct oder leerer Konstruktor ändern mit boolean isCorrect?
-       Answer answerC = new Answer();
-       answerC.setCorrect(true);
 
-       Answer answerNC = new Answer();
-       answerNC.setCorrect(false);
-
-       answers.add(answerC);
-       answers.add(answerNC);
+       answers.add(new Answer(0, "", true, 0));
+       answers.add(new Answer(0, "", false, 0));
 
        boolean result = qec.checkMinOneAnswerIsTrue(answers);
        Assertions.assertTrue(result);
@@ -34,14 +28,8 @@ class QuestionEditControllerTest {
       QuestionEditController qec = new QuestionEditController();
 
       ArrayList<Answer> answers = new ArrayList<>();
-      Answer answerC = new Answer();
-      answerC.setCorrect(false);
-
-      Answer answerNC = new Answer();
-      answerNC.setCorrect(false);
-
-      answers.add(answerC);
-      answers.add(answerNC);
+      answers.add(new Answer(0, "", false, 0));
+      answers.add(new Answer(0, "", false, 0));
 
       boolean result = qec.checkMinOneAnswerIsTrue(answers);
       Assertions.assertFalse(result);

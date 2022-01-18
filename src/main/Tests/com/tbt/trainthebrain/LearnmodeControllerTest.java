@@ -11,7 +11,7 @@ import java.util.Collections;
 class LearnmodeControllerTest {
 
     @Test
-    public void calcQuestionPts_ShouldReturnCountAnswers_4Answers() {
+    public void calcQuestionPts_ShouldReturnCountOfAnswers_FourAnswers() {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
@@ -26,7 +26,7 @@ class LearnmodeControllerTest {
     }
 
     @Test
-    public void calcQuestionPts_ShouldReturnCountAnswers_3Answers() {
+    public void calcQuestionPts_ShouldReturnCountOfAnswers_ThreeAnswers() {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
@@ -39,7 +39,7 @@ class LearnmodeControllerTest {
         Assertions.assertEquals(3.0, qr.countAnswers);
     }
     @Test
-    public void calcQuestionPts_ShouldReturnCountAnswers_2Answers() {
+    public void calcQuestionPts_ShouldReturnCountOfAnswers_TwoAnswers() {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
@@ -112,7 +112,7 @@ class LearnmodeControllerTest {
     }
 
     @Test
-    public void calcQuestionPts_shouldReturnIfQuestionIsFullyCorrectOneTrueSelectedFalse_False(){
+    public void calcQuestionPts_shouldReturnFalseIfNotFullyCorrectTrueFalse(){
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
@@ -127,7 +127,7 @@ class LearnmodeControllerTest {
     }
 
     @Test
-    public void calcQuestionPts_shouldReturnIfQuestionIsFullyCorrectOneFalseSelectedTrue_False(){
+    public void calcQuestionPts_shouldReturnFalseIfNotFullyCorrectFalseTrue(){
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
@@ -142,7 +142,7 @@ class LearnmodeControllerTest {
     }
 
     @Test
-    public void calcQuestionPts_shouldReturnIfQuestionIsFullyCorrect_True(){
+    public void calcQuestionPts_shouldReturnTrueIfFullyCorrect(){
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 

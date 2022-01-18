@@ -14,7 +14,7 @@ public class Answer {
         this.isCorrect = isCorrect;
         this.questionId = questionId;
     }
-    public Answer(){}
+
 
 
 
