@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-
+import java.util.Collection;
+import java.util.Collections;
 
 
 class LearnmodeControllerTest {
@@ -14,10 +15,11 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(true, false));
-        fakeBoxList.add( new FakeAnswerBox(false, true));
-        fakeBoxList.add(new FakeAnswerBox(false, true));
-        fakeBoxList.add(new FakeAnswerBox(true, false));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(true, false),
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(true, false));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertEquals(4.0, qr.countAnswers);
@@ -28,9 +30,10 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(true, false));
-        fakeBoxList.add( new FakeAnswerBox(false, true));
-        fakeBoxList.add(new FakeAnswerBox(false, true));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(true, false),
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(false, true));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertEquals(3.0, qr.countAnswers);
@@ -40,8 +43,9 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(true, false));
-        fakeBoxList.add( new FakeAnswerBox(false, true));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(true, false),
+                new FakeAnswerBox(false, true));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertEquals(2.0, qr.countAnswers);
@@ -52,10 +56,11 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(true, false));
-        fakeBoxList.add( new FakeAnswerBox(false, true));
-        fakeBoxList.add(new FakeAnswerBox(false, true));
-        fakeBoxList.add(new FakeAnswerBox(true, false));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(true, false),
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(true, false));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertEquals(2.0, qr.countCorrectAnswers);
@@ -66,10 +71,11 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(true, false));
-        fakeBoxList.add( new FakeAnswerBox(false, true));
-        fakeBoxList.add(new FakeAnswerBox(false, true));
-        fakeBoxList.add(new FakeAnswerBox(true, false));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(true, false),
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(true, false));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertEquals(2.0, qr.countWrongAnswers);
@@ -80,10 +86,11 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(true, false));
-        fakeBoxList.add( new FakeAnswerBox(false, true));
-        fakeBoxList.add(new FakeAnswerBox(false, true));
-        fakeBoxList.add(new FakeAnswerBox(true, false));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(true, false),
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(true, false));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertEquals(0.0, qr.pts);
@@ -94,10 +101,11 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(true, true));
-        fakeBoxList.add( new FakeAnswerBox(false, false));
-        fakeBoxList.add(new FakeAnswerBox(false, false));
-        fakeBoxList.add(new FakeAnswerBox(true, true));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(true, true),
+                new FakeAnswerBox(false, false),
+                new FakeAnswerBox(false, false),
+                new FakeAnswerBox(true, true));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertEquals(4.0, qr.pts);
@@ -108,10 +116,11 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(true, false));
-        fakeBoxList.add( new FakeAnswerBox(false, false));
-        fakeBoxList.add(new FakeAnswerBox(false, false));
-        fakeBoxList.add(new FakeAnswerBox(true, true));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(true, false),
+                new FakeAnswerBox(false, false),
+                new FakeAnswerBox(false, false),
+                new FakeAnswerBox(true, true));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertFalse(qr.fullyCorrect);
@@ -122,10 +131,11 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(false, true));
-        fakeBoxList.add( new FakeAnswerBox(false, false));
-        fakeBoxList.add(new FakeAnswerBox(false, false));
-        fakeBoxList.add(new FakeAnswerBox(true, true));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(false, true),
+                new FakeAnswerBox(false, false),
+                new FakeAnswerBox(false, false),
+                new FakeAnswerBox(true, true));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertFalse(qr.fullyCorrect);
@@ -136,10 +146,11 @@ class LearnmodeControllerTest {
         LearnmodeController lmC = new LearnmodeController();
         ArrayList<AnswerBox> fakeBoxList = new ArrayList<>();
 
-        fakeBoxList.add(new FakeAnswerBox(true, true));
-        fakeBoxList.add( new FakeAnswerBox(false, false));
-        fakeBoxList.add(new FakeAnswerBox(false, false));
-        fakeBoxList.add(new FakeAnswerBox(true, true));
+        Collections.addAll(fakeBoxList,
+                new FakeAnswerBox(true, true),
+                new FakeAnswerBox(false, false),
+                new FakeAnswerBox(false, false),
+                new FakeAnswerBox(true, true));
 
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertTrue(qr.fullyCorrect);
