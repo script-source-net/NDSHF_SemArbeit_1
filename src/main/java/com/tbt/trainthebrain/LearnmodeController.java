@@ -27,6 +27,7 @@ public class LearnmodeController extends AppController implements Initializable 
     ArrayList<AnswerBox> answerBoxes = new ArrayList<>();           // AntwortBoxen FXML Elemente
     ArrayList<Question> selectedQuestions = new ArrayList<>();      // Liste der Auswahl an Fragen die getroffen wurde
     ArrayList<QuestionResult> questionResults = new ArrayList<>();  // Beinhaltet alle Resultate des aktuellen Durchlaufs
+    ArrayList<Text> answerTextNodes = new ArrayList<>();            // TextNodes innerhalb der answerBoxen für direkten Zugriff im Loop (unten)
 
 
     @FXML
@@ -43,7 +44,9 @@ public class LearnmodeController extends AppController implements Initializable 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        System.out.println(questions);
+        // Alle AnswerBoxen zur Collection hinzufügen
+        Collections.addAll(answerBoxes, answerBox0, answerBox1, answerBox2, answerBox3);
+        Collections.addAll(answerTextNodes, answer0, answer1, answer2, answer3);
     }
 
     /* Custom Init */
@@ -69,22 +72,23 @@ public class LearnmodeController extends AppController implements Initializable 
         underCheck = false;
         // Publiziere die Frage
         questionText.setText(selectedQuestions.get(qindex).getQuestion());
-        // Lösche alle AnswerBoxen aus der ArrayList (nötig auf Seite 2 <) und adde alle 4 Boxen
-        if(qindex > 0) answerBoxes.clear();
 
-        answerBoxes.add(answerBox0);
-        answerBoxes.add(answerBox1);
-        answerBoxes.add(answerBox2);
-        answerBoxes.add(answerBox3);
+        // Loop über alle AnswerBoxen um Styling (falsch / richtig & selected) zurückzusetzen
+        for (AnswerBox answerBox:answerBoxes) {
+            // CleanUp aller antworten
+            // Alle zuvor gesetzten correct / false / selected Klassen entfernen (Styling)
+            answerBox.getStyleClass().remove("correct");
+            answerBox.getStyleClass().remove("false");
+            answerBox.getStyleClass().remove("selected");
 
-        // TextNodes innerhalb der answerBoxen für direkten Zugriff im Loop (unten)
-        ArrayList<Text> answerTextNodes = new ArrayList<>();
-        answerTextNodes.add(answer0);
-        answerTextNodes.add(answer1);
-        answerTextNodes.add(answer2);
-        answerTextNodes.add(answer3);
+            // Zuerst alle answerBoxen sicher einblenden (Styling)
+            answerBox.setVisible(true);
 
-        // Loop über alle Answers
+            // Alle zuvor selektierten Boxen zurücksetzen (Funktion)
+            answerBox.setIsNotSelected();
+        }
+
+
         for (int i = 0; i < selectedQuestions.get(qindex).getAnswers().size(); i++) {
             // Setze die Id der Antwort
             answerBoxes.get(i).setAnswerId(String.valueOf(selectedQuestions.get(qindex).getAnswers().get(i).getId()));
@@ -92,18 +96,6 @@ public class LearnmodeController extends AppController implements Initializable 
             answerBoxes.get(i).setIsCorrectAnswer(selectedQuestions.get(qindex).getAnswers().get(i).getIsCorrect());
             // Setze Antworttext
             answerTextNodes.get(i).setText(selectedQuestions.get(qindex).getAnswers().get(i).getText());
-
-            // CleanUp aller antworten
-            // Alle zuvor gesetzten correct / false / selected Klassen entfernen (Styling)
-            answerBoxes.get(i).getStyleClass().remove("correct");
-            answerBoxes.get(i).getStyleClass().remove("false");
-            answerBoxes.get(i).getStyleClass().remove("selected");
-
-            // Alle zuvor selektierten Boxen zurücksetzen (Funktion)
-            answerBoxes.get(i).setIsNotSelected();
-
-            // Zuerst alle answerBoxen sicher einblenden (Styling)
-            answerBoxes.get(i).setVisible(true);
         }
 
         // Blende "überflüssige" answerBoxes aus weil wir ggf. weniger als 4 antworten haben (Styling)
