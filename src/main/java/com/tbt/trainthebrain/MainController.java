@@ -1,18 +1,12 @@
 package com.tbt.trainthebrain;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,21 +23,6 @@ public class MainController extends AppController implements Initializable {
 
     @FXML
     Text errText, errDesc;
-
-
-
-    public void switchToEditQuestionsClick(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("question-edit-overview.fxml"));
-        try {
-            Scene questioningScene = new Scene(loader.load());
-            QuestionEditOverviewController sceneController = loader.getController();        // TODO: QuestionEditOverviewController has to extend AppController
-            stage.setScene(questioningScene);
-        }catch (IOException ioe){
-            System.out.println("Could not load scene");
-            ioe.printStackTrace();
-        }
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

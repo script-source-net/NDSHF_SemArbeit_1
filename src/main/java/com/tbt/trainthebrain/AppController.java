@@ -24,27 +24,31 @@ public class AppController {
 
     public void backToMainClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-        try {
-            Scene questioningScene = new Scene(loader.load());
-            AppController sceneController = loader.getController();
-            stage.setScene(questioningScene);
-        }catch (IOException ioe){
-            System.out.println("Could not load scene");
-            ioe.printStackTrace();
-        }
+        switchBasicScenes(stage,"main.fxml" );
     }
 
     public void switchToLearningModeClick(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("learnmode-setup.fxml"));
+        switchBasicScenes(stage,"learnmode-setup.fxml" );
+    }
 
+    public void switchToEditQuestionsClick(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
+        switchBasicScenes(stage,"question-edit-overview.fxml" );
+    }
+
+    public void addNewQuestionClicked(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
+        switchBasicScenes(stage,"question-edit.fxml" );
+    }
+
+    private void switchBasicScenes(Stage stage, String fxmlName){
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource(fxmlName));
         try {
-            Scene newscene = new Scene(loader.load());
-            AppController sceneController = loader.getController();
-            stage.setScene(newscene);
+            Scene questioningScene = new Scene(loader.load());
+            stage.setScene(questioningScene);
         }catch (IOException ioe){
-            System.out.println("Could not load scene");
+            System.out.println("Szene konnte nicht geladen werden: " + fxmlName);
             ioe.printStackTrace();
         }
     }
