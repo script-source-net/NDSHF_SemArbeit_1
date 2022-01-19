@@ -54,7 +54,20 @@ public class LearnmodeController extends AppController implements Initializable 
         Collections.addAll(answerTextNodes, answer0, answer1, answer2, answer3);
     }
 
-    /* Custom Init */
+    /**
+     * Custom Method for view initialisation. Sets content that should be used.
+     * Handles / sets the questions that should be played limited by <code>questionsCount</code>
+     * Calls setNextQuestion(0) Method after setup
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     ArrayList
+     * @see     Question
+     * @see     #setNextQuestion(int) 
+     * @param   questionsCount  <code>int</code> count of questions that should be played
+     * @param   questions       <code>ArrayList</code> of <code>Question</code> elements from database
+     */
     public void initLearnmode(int questionsCount, ArrayList<Question> questions){
         // setze questionsCount basierend auf Wert der Selektion & passe TextNode an
         this.questionsCount = questionsCount;
@@ -67,11 +80,25 @@ public class LearnmodeController extends AppController implements Initializable 
             selectedQuestions.add(questions.get(i));
             Collections.shuffle(selectedQuestions.get(i).getAnswers());
         }
-        System.out.println("Anzahl Fragen:" + selectedQuestions.size());
+
         // "Baue" Frage in die Scene ein:
         setNextQuestion(0);
     }
 
+    /**
+     * Helper Method that disables (locks) a Button object for the given time in seconds
+     * Shows a countdown (second-wise) in place of the defined button text till the given seconds are passed and replaces then the countdown with the original button text
+     *
+     * Inspiration source: https://asgteach.com/2011/10/javafx-animation-and-binding-simple-countdown-timer-2/
+     *
+     * @author  Marco Rensch
+     * @since   1.0
+     * @see     Button
+     * @see     Integer
+     * @see     Timeline
+     * @param   button      <code>Button</code> object that should be used
+     * @param   seconds     <code>Integer</code> value in seconds, defines how long the button should be locked
+     */
     private void setButtonActiveWithTimer(Button button, Integer seconds){
         String originalBtnText = button.getText();
         button.setMinWidth(button.getPrefWidth());
@@ -79,7 +106,6 @@ public class LearnmodeController extends AppController implements Initializable 
         final Timeline tl = new Timeline(new KeyFrame(Duration.seconds(seconds), actionEvent -> button.setDisable(false)));
         tl.setCycleCount(1);
         tl.play();
-        // Und der Countdown (Quelle: https://asgteach.com/2011/10/javafx-animation-and-binding-simple-countdown-timer-2/)
         final Timeline countdownTl = new Timeline();
         timeSeconds = seconds;
         // update timerLabel
@@ -97,6 +123,23 @@ public class LearnmodeController extends AppController implements Initializable 
         countdownTl.playFromStart();
     }
 
+    /**
+     * Switches question object from selectedQuestions ArrayList inside same scene by index
+     *
+     * Replaces question text inside the scene with the text given by the actual object
+     * Removes all given styles (selection,correct,false) from all <code>AnswerBox</code> objects in the scene and re-publish the new answers for the given question
+     * Hides unused <code>AnswerBox</code> elements in the scene
+     * Shows used <code>AnswerBox</code> elements in the scene
+     * Sets underCheck to <code>false</code>
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     #selectedQuestions
+     * @see     ArrayList
+     * @see     AnswerBox
+     * @param   qindex     <code>int</code> index of the actual question inside of the selectedQuestions ArrayList
+     */
     private void setNextQuestion(int qindex){
         // Deaktiviere underCheck
         underCheck = false;
@@ -120,8 +163,7 @@ public class LearnmodeController extends AppController implements Initializable 
             // Alle zuvor selektierten Boxen zurücksetzen (Funktion)
             answerBox.setIsNotSelected();
         }
-
-
+        // Loop über die anzahl der antworten in der aktuellen Frage und setzen der AnswerBox Parameter
         for (int i = 0; i < selectedQuestions.get(qindex).getAnswers().size(); i++) {
             // Setze die Id der Antwort
             answerBoxes.get(i).setAnswerId(String.valueOf(selectedQuestions.get(qindex).getAnswers().get(i).getId()));
@@ -137,12 +179,25 @@ public class LearnmodeController extends AppController implements Initializable 
                 answerBoxes.get(i).setVisible(false);
             }
         }
-
         // Einblende Animationen
         fadeInTransition(questionText,1000,0);
         fadeInTransition(answersGrid, 1000,300);
     }
 
+    /**
+     * Click event handler for <code>AnswerBox</code> elements
+     * If not under check this methods sets the selected class on clicked <code>AnswerBox</code> elements
+     * Can handle clicks on <code>Text</code> Nodes inside <code>AnswerBox</code> elements aswell
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     MouseEvent
+     * @see     #underCheck
+     * @see     AnswerBox
+     * @see     Node
+     * @param   mouseEvent  Click event on an <code>AnswerBox</code> or <code>Text</code> node inside an <coder>AnswerBox</coder>
+     */
     public void clickedOnAnswer(MouseEvent mouseEvent) {
         //Prüfe ob wir im Check Modus sind (Antworten prüfen wurde aktiviert)
         if(!underCheck) {
@@ -163,6 +218,20 @@ public class LearnmodeController extends AppController implements Initializable 
         }
     }
 
+    /**
+     * Click event handler for answer check button, sets the GUI into checkmode by settings #underCheck to <code>true</code>
+     * Sets styling of <code>AnswerBox</code> elements based in selection and isCorrect flag to correct or false
+     * Hides check button after click and shows next button
+     *
+     * Calls calcQuestionPts Method to calculate user points of this question
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     AnswerBox
+     * @see     #calcQuestionPts
+     * @param   actionEvent     ActionEvent fired on click
+     */
     public void checkAnswersClicked(ActionEvent actionEvent) {
         // Aktiviere underCheck
         underCheck = true;
@@ -195,17 +264,36 @@ public class LearnmodeController extends AppController implements Initializable 
         }
     }
 
+    /**
+     * Click handler Method that sets question num counter up by one hides nextQuestion Button and shows check Button again in GUI before showing up the next question
+     * Calls setNextQuestion Method
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     #setNextQuestion(int)
+     * @param   actionEvent ActionEvent fired on click
+     */
     public void switchQuestionClicked(ActionEvent actionEvent) {
         checkBtn.setVisible(true);
         nextQuestBtn.setVisible(false);
         questionIndex++;
-
         actualQuestionNum.setText(Integer.toString(questionIndex+1));
 
         setNextQuestion(questionIndex);
-
     }
 
+    /**
+     * Click Event handler that replaces the current scene by the learnmode-endcard scene
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     Stage
+     * @see     Scene
+     * @see     FXMLLoader
+     * @param   actionEvent ActionEvent fired on click
+     */
     public void goToEndScreenClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("learnmode-endcard.fxml"));
@@ -220,7 +308,17 @@ public class LearnmodeController extends AppController implements Initializable 
         }
     }
 
-    // Note: @Claudia Diese Methode kann getestet werden mittels Injection
+    /**
+     * Calculates the points for this question the user has claimed aswell as the max points possible by the given answer options
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     AnswerBox
+     * @see     QuestionResult
+     * @param   answerBoxes ArrayList of <code>AnswerBox</code> elements for this question
+     * @return  <code>QuestionResult</code> object that holds gained points as well as max points for this question
+     */
     public QuestionResult calcQuestionPts(ArrayList<AnswerBox> answerBoxes){
         QuestionResult qr = new QuestionResult();
         for (AnswerBox a: answerBoxes) {
@@ -247,12 +345,6 @@ public class LearnmodeController extends AppController implements Initializable 
             // Korrektur wenn mehr falsch als richtig selektiert:
             qr.pts = (qr.pts < 0) ? 0 : qr.pts;
         }
-
-        System.out.println("Answers / Max Pts: "+qr.countAnswers);
-        System.out.println("Korrekte Antworten: "+qr.countCorrectAnswers);
-        System.out.println("Falsche Antworten: "+qr.countWrongAnswers);
-        System.out.println("Erreichte Punkte: "+qr.pts);
-        System.out.println("Voll Richtig? "+qr.fullyCorrect);
 
         return qr;
     }
