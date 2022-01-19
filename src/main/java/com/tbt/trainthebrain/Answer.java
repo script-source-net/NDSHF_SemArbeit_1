@@ -2,11 +2,10 @@ package com.tbt.trainthebrain;
 
 public class Answer {
 
-    private int id;
-    private String text;
+    private final int id;
+    private final String text;
     private boolean isCorrect;
-    private int questionId;
-
+    private final int questionId;
 
     public Answer(int id, String text, boolean isCorrect, int questionId) {
         this.id = id;
@@ -14,9 +13,6 @@ public class Answer {
         this.isCorrect = isCorrect;
         this.questionId = questionId;
     }
-
-
-
 
     public int getId() {
         return id;
