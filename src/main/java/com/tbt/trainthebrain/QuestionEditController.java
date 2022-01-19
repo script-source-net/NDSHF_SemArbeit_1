@@ -50,20 +50,46 @@ public class QuestionEditController extends AppController implements Initializab
 
     private final ArrayList<CheckBox> isCorrectCheckBoxesArray = new ArrayList<>();
 
+    /**
+     * Click Handler for simple scene switch call without data --> Wrapper that calls switchToEditOverviewClicked
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     ActionEvent
+     * @see     #switchToEditOverviewClicked(ActionEvent)
+     * @param   actionEvent <code>ActionEvent</code> that initiates the call
+     */
     public void cancelQuestionEditClick(ActionEvent actionEvent) {
         // Back to List of Questions Edit screen
-        switchToEditQuestionsClick(actionEvent);
-    }
-
-    public void saveQuestionEditClick(ActionEvent actionEvent) {
-        handleQuestionInDb();
-        // Back to List of Questions Edit screen
-        switchToEditQuestionsClick(actionEvent);
+        switchToEditOverviewClicked(actionEvent);
     }
 
     /**
-     * Methode prüft ob Frage neu ist, erstellt, aktualisiert oder löscht sie
-     * und zugehörige Answers in der Datenbank.
+     * Click Handler for simple scene switch to edit question overview without data.
+     * Calls method that handles DB Save Event
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     ActionEvent
+     * @see     #handleQuestionInDb
+     * @param   actionEvent <code>ActionEvent</code> that triggers method call
+     */
+    public void saveQuestionEditClick(ActionEvent actionEvent) {
+        handleQuestionInDb();
+        // Back to List of Questions Edit screen
+        switchToEditOverviewClicked(actionEvent);
+    }
+
+    /**
+     * Checks based on the question id if this is a new question or an already saved one that needs to be updated ( id = 0 ==> new question)
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     #addAnswerFromCreatedQuestion(int)
+     * @see     #createOrEditAnswer(int)
      */
     private void handleQuestionInDb() {
         //Wenn question id = 0 und Text hat Länge = insert Questiontext (wenn erzeugt brauche id von Question für Answers)
@@ -84,17 +110,26 @@ public class QuestionEditController extends AppController implements Initializab
         } else if (questionId > 0 && !question.isEmpty()) {
             //Question wird geupdatet und Answers werden geupdatet gelöscht oder neue hinzugefügt
             con.updateQuestion(questionId, question);
-            editNewAnswer(questionId);
-            System.out.println("QuestionId > 0 = Question Update in DB");
+            createOrEditAnswer(questionId);
 
         } else if (questionId > 0) {
             //Question und dazugehörige answers werden gelöscht
             con.deleteQuestionAndAnswersInDb(questionId);
-            System.out.println("QuestionId > 0 und text ist leer = Question löschen und dazugehörige Answer werden gelöscht in DB");
         }
     }
 
-    public void editNewAnswer(int questionId) {
+    /**
+     * Creates, edits or deletes answers in database for the given <code>questionId</code> based on GUI status
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     #createNewAnswerObjects(int)
+     * @see     #verifyIfMinTwoAnswers()
+     * @see     #verifyMinOneAnswerIsTrue()
+     * @param   questionId  <code>int</code> of the actual question that will me modified
+     */
+    public void createOrEditAnswer(int questionId) {
         //erstellt neue Answers zu den bereits erstellten Questions
         //ändert bestehende Answers
         //löscht bestehende Answers, wenn kein Text vorhanden ist.
@@ -119,14 +154,18 @@ public class QuestionEditController extends AppController implements Initializab
                         }
                     }
                 }
-            } else {
-                System.out.println("Mindestens eine Antwort muss als korrekt markiert sein!");
             }
-        } else {
-            System.out.println("Mindestens 2 Antworten müssen eingetragen werden!");
         }
     }
 
+    /**
+     * Will add all answers to the database for the current question, used when a new question got saved
+     *
+     * @author  Claudia Martinez
+     * @author  Marco Rensch
+     * @since   1.0
+     * @param   newCreatedQuestionId <code>int</code>   the new question id that got generated before
+     */
     public void addAnswerFromCreatedQuestion(int newCreatedQuestionId) {
         // Erstellt Answers für neu erstellte Question mit neu erstellter Questionid
         //Diese Methode wird nur ausgeführt, wenn neue question erstellt wird.
@@ -143,6 +182,17 @@ public class QuestionEditController extends AppController implements Initializab
     }
 
     // Verifiziert ob mindestens eine Answer als korrekt markiert wurde.
+
+    /**
+     * Verifies that at least one answer in the given set of answers are marked as correct
+     *
+     * @author  Claudia Martinez
+     * @author  Marco Rensch
+     * @since   1.0
+     * @see     #isCorrectCheckBoxesArray
+     * @see     CheckBox
+     * @return  <code>true</code> if at least one answer is marked as correct <code>false</code> if no answer is marked as correct
+     */
     public boolean verifyMinOneAnswerIsTrue() {
         boolean verify = false;
         for (CheckBox checkBox : isCorrectCheckBoxesArray) {
@@ -154,6 +204,17 @@ public class QuestionEditController extends AppController implements Initializab
         return verify;
     }
 
+    /**
+     * Checks if the related <code>TextArea</code> of an active <code>CheckBox</code> is not empty
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     TextArea
+     * @see     #verifyMinOneAnswerIsTrue()
+     * @param   checkBox    <code>CheckBox</code> element that is tickt
+     * @return  <code>true</code> if related <code>TextArea</code> is not empty <code>false</code> if it is empty
+     */
     private boolean checkIfAnswerWithActiveCheckBoxHasAnswerText(CheckBox checkBox){
         VBox parent = (VBox) checkBox.getParent().getParent();
         TextArea answerTextArea = (TextArea) parent.getChildren().get(1);
@@ -161,7 +222,17 @@ public class QuestionEditController extends AppController implements Initializab
         return !answerTextArea.getText().isEmpty();
     }
 
-    // Verifiziert ob mindestens ein Answerobjekt als korrekt deklariert wurde.
+    /**
+     * Checks if at least one answer from the set of answers inside an <code>ArrayList</code> is marked as correct
+     *
+     * @author  Claudia Martinez
+     * @author  Marco Rensch
+     * @since   1.0
+     * @see     ArrayList
+     * @see     Answer
+     * @param   answers <code>ArrayList</code> of <code>Answer</code> objects that should be checked
+     * @return  <code>true</code> if at least one answer is set as correct, <code>false</code> if no <coder>Answer</coder> in this <code>ArrayList</code> is set as correct <code>Answer</code>
+     */
     public boolean checkMinOneAnswerIsTrue(ArrayList<Answer> answers) {
         boolean verify = false;
         for (Answer answer : answers) {
@@ -173,7 +244,15 @@ public class QuestionEditController extends AppController implements Initializab
         return verify;
     }
 
-    //Verifiziert ob mindestens 2 Answers ausgefüllt wurden (Alle mögliche Kombinationen getestet)
+    /**
+     * Checks that at least two answerTexts got content
+     *
+     * @author  Claudia Martinez
+     * @author  Marco Rensch
+     * @since   1.0
+     * @see     #answerTextsArray
+     * @return  <code>true</code> if at least two Answertext <code>TextArea</code>'s has content and <code>false</code> if not.
+     */
     public boolean verifyIfMinTwoAnswers() {
         boolean verify = false;
         int answersCount = 0;
@@ -187,10 +266,20 @@ public class QuestionEditController extends AppController implements Initializab
                 break;
             }
         }
-
         return verify;
     }
 
+    /**
+     * Creates new <code>Answer</code> Objects including al necessary data
+     *
+     * @author  Claudia Martinez
+     * @author  Marco Rensch
+     * @since   1.0
+     * @see     ArrayList
+     * @see     Answer
+     * @param   questionID  <code>int</code> id of the actual question
+     * @return  <code>ArrayList</code> of newly created <code>Answer</code> objects
+     */
     public ArrayList<Answer> createNewAnswerObjects(int questionID) {
         //erzeugt neue Answerobjekte befüllt sie mit answerId, text, isCorrect, question id von zugehöriger Frage
         //Füllt alle Answerojekte in eine Answer ArrayList
@@ -206,6 +295,16 @@ public class QuestionEditController extends AppController implements Initializab
         return answerAddList;
     }
 
+    /**
+     * Adds all needed FXML Elements (answer texts, answer id's, answer checkboxes) into the related <code>ArrayList</code>
+     *
+     * @author  Claudia Martinez
+     * @author  Marco Rensch
+     * @since   1.0
+     * @see     #answerTextsArray
+     * @see     #answerIdsArray
+     * @see     #isCorrectCheckBoxesArray
+     */
     public void fillAnswerTextAndAnswerIdsCheckboxesInArray() {
         //AnswerText in ArrayList abgefüllt
         Collections.addAll(answerTextsArray, answerText0,answerText1,answerText2,answerText3);
@@ -217,6 +316,15 @@ public class QuestionEditController extends AppController implements Initializab
         Collections.addAll(isCorrectCheckBoxesArray, answerCorrect0,answerCorrect1,answerCorrect2,answerCorrect3);
     }
 
+    /**
+     * Securily parses answer Id's from <code>TextField</code> into an <code>ArrayList</code> of Integers
+     *
+     * @author  Claudia Martinez
+     * @author  Marco Rensch
+     * @since   1.0
+     * @see     ArrayList
+     * @return  <code>ArrayList</code> of Integers for each answer
+     */
     public ArrayList<Integer> parsingAnswerIdIntoInteger() {
         ArrayList<Integer> intAnswerIdsArray = new ArrayList<>();
         for (int i = 0; i < answerIdsArray.size(); i++) {
@@ -229,6 +337,18 @@ public class QuestionEditController extends AppController implements Initializab
         return intAnswerIdsArray;
     }
 
+    /**
+     * KeyEvent listener that updates the char counter of the related <code>Textarea</code> and calls form validity check
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     TextArea
+     * @see     KeyEvent
+     * @see     #updateTextCounter(TextArea, int, Text)
+     * @see     #checkFormValidity()
+     * @param   keyEvent that triggers this method
+     */
     public void updateQuestionTextCounterListener(KeyEvent keyEvent) {
         TextArea ta = ((TextArea) keyEvent.getTarget());
         updateTextCounter(ta, limitForQuestionText, questionTextCounterText);
@@ -237,6 +357,18 @@ public class QuestionEditController extends AppController implements Initializab
         checkFormValidity();
     }
 
+    /**
+     * KeyEvent listener that updates the char counter of the related answer <code>Textarea</code> and calls form validity check
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     TextArea
+     * @see     KeyEvent
+     * @see     #updateTextCounter(TextArea, int, Text)
+     * @see     #checkFormValidity()
+     * @param   keyEvent that triggers this method
+     */
     public void answerTextfieldsListener(KeyEvent keyEvent) {
         TextArea ta = ((TextArea) keyEvent.getTarget());
         Text counter = new Text("Error");
@@ -266,6 +398,34 @@ public class QuestionEditController extends AppController implements Initializab
         checkFormValidity();
     }
 
+    /**
+     * Method that does the defined checks in the edit form view
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     #verifyIfMinTwoAnswers()
+     * @see     #verifyMinOneAnswerIsTrue()
+     */
+    @FXML
+    private void checkFormValidity(){
+        checkTextMin2Answers.setVisible(verifyIfMinTwoAnswers() && !questionText.getText().isEmpty());
+        checkTextMin1True.setVisible(verifyMinOneAnswerIsTrue());
+        saveQuestionBtn.setDisable(!verifyMinOneAnswerIsTrue() || !verifyIfMinTwoAnswers() || questionText.getText().isEmpty());
+    }
+
+    /**
+     * Updates the related <code>Text</code> element with the new amount of chars in the <code>TextArea</code> and blocks input when defined limit is reached.
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     Text
+     * @see     TextArea
+     * @param   textArea      <code>TextArea</code> that got updated by user interaction
+     * @param   limit         <code>int</code> value that sets the limit for the related <code>TextArea</code>
+     * @param   counterText   <code>Text</code> Node that shopuld be updated with the new count of chars
+     */
     public void updateTextCounter(TextArea textArea, int limit, Text counterText){
         String string = textArea.getText();
         int currentLength = textArea.getLength();
@@ -274,15 +434,7 @@ public class QuestionEditController extends AppController implements Initializab
             textArea.setText(string.substring(0, limit));
             textArea.positionCaret(string.length());
         }
-
         counterText.setText(Integer.toString(Math.min(limit, currentLength)));
-    }
-
-    @FXML
-    private void checkFormValidity(){
-        checkTextMin2Answers.setVisible(verifyIfMinTwoAnswers() && !questionText.getText().isEmpty());
-        checkTextMin1True.setVisible(verifyMinOneAnswerIsTrue());
-        saveQuestionBtn.setDisable(!verifyMinOneAnswerIsTrue() || !verifyIfMinTwoAnswers() || questionText.getText().isEmpty());
     }
 
     @Override
@@ -299,6 +451,17 @@ public class QuestionEditController extends AppController implements Initializab
 
     }
 
+    /**
+     * Custom Initiator with <code>Question</code> data - sets content of the given <code>Question</code> element in the form
+     * Calls form validation on load
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     Question
+     * @see     #checkFormValidity()
+     * @param   question    holds the selected <code>Question</code> object and its data that should be setted in the form
+     */
     public void initWithData(Question question) {
         id.setText(Integer.toString(question.getId()));
         questionText.setText(question.getQuestion());

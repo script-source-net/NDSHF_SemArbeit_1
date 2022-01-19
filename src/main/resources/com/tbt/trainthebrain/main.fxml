@@ -21,7 +21,7 @@
                         <Glyph fontFamily="FontAwesome" icon="GRADUATION_CAP" />
                      </graphic>
                   </Button>
-                  <Button fx:id="editModeBtn" minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToEditQuestionsClick" styleClass="btn,btn-default,mainButton,border-remove" text="Fragen editieren">
+                  <Button fx:id="editModeBtn" minHeight="40.0" minWidth="140.0" mnemonicParsing="false" onAction="#switchToEditOverviewClicked" styleClass="btn,btn-default,mainButton,border-remove" text="Fragen editieren">
                      <graphic>
                         <Glyph fontFamily="FontAwesome" icon="COGS" />
                      </graphic>

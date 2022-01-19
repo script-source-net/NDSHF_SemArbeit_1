@@ -29,7 +29,18 @@ public class LearnmodeEndcardController extends AppController implements Initial
 
     }
 
-    /* Custom Init für die Darstellung des Diagrams */
+
+    /**
+     * Custom Initialisation for Learnmode Endcard scene calculates user points and creates Pie chart for fully correct answers.
+     * Places user and max points into the scene as well as calculating percentage of correct answered questions
+     *
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     ArrayList
+     * @param   results <code>ArrayList</code> object that holds the <code>QuestionResults</code> of each played <code>Question</code>
+     */
     public void initResults(ArrayList<QuestionResult> results) {
 
         countOfQuestions = results.size();
@@ -52,7 +63,7 @@ public class LearnmodeEndcardController extends AppController implements Initial
                                                         new PieChart.Data(incorrectAnswered + " falsch", (countOfQuestions - fullyCorrectCount))
                                                     );
         final PieChart chart = new PieChart(pieChartData);
-        chart.setTitle("Völlig korrekt beantwortet:");
+        chart.setTitle("");
 
         summaryContent.getChildren().add(chart);
 

@@ -65,22 +65,6 @@ public class AppController {
     }
 
     /**
-     * Click handler that initiates a switch to the question edit overview view
-     *
-     * @author  Marco Rensch
-     * @author  Claudia Martinez
-     * @since   1.0
-     * @see     Scene
-     * @see     Stage
-     * @see     #switchBasicScenes(Stage, String)
-     * @param   actionEvent The action event that initiates the scene switch
-     */
-    public void switchToEditQuestionsClick(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
-        switchBasicScenes(stage,"question-edit-overview.fxml" );
-    }
-
-    /**
      * Click handler that initiates a switch to the question edit view
      *
      * @author  Marco Rensch
@@ -97,11 +81,30 @@ public class AppController {
     }
 
     /**
+     * Click handler that initiates a switch to the question edit overview view
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     Scene
+     * @see     Stage
+     * @see     #switchBasicScenes(Stage, String)
+     * @param   actionEvent The action event that initiates the scene switch
+     */
+    public void switchToEditOverviewClicked(ActionEvent actionEvent) {
+        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
+        switchBasicScenes(stage,"question-edit-overview.fxml" );
+    }
+
+    /**
      * Method that does the effective scene switch with no additional data
      *
      * @author  Marco Rensch
      * @author  Claudia Martinez
      * @since   1.0
+     * @see     FXMLLoader
+     * @see     Stage
+     * @see     Scene
      * @param   stage       <code>Stage</code> object that should be used to place the new scene
      * @param   fxmlName    <code>String</code> that contains the fxml filename that should be loaded in the new scene
      */
