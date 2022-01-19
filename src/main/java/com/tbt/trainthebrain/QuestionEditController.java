@@ -83,7 +83,7 @@ public class QuestionEditController extends AppController implements Initializab
             }
         } else if (questionId > 0 && !question.isEmpty()) {
             //Question wird geupdatet und Answers werden geupdatet gelöscht oder neue hinzugefügt
-            con.UpdateQuestion(questionId, question);
+            con.updateQuestion(questionId, question);
             editNewAnswer(questionId);
             System.out.println("QuestionId > 0 = Question Update in DB");
 
@@ -107,15 +107,15 @@ public class QuestionEditController extends AppController implements Initializab
                     if (answer.getId() == 0 && !answer.getText().isEmpty()) {
                         con.addOneAnswerInDB(answer);
                     } else if (answer.getId() > 0 && !answer.getText().isEmpty()) {
-                        con.updateAnswers(answer);
+                        con.updateAnswer(answer);
                     } else if (answer.getId() > 0 && answer.getText().isEmpty()) {
                         if (answer.getIsCorrect()) {
                             answer.setCorrect(false);
                             if (checkMinOneAnswerIsTrue(answers)){
-                                con.deleteAnswerInDb(answer.getQuestionId(), answer.getId());
+                                con.deleteAnswerInDb(answer.getId());
                             }
                         } else {
-                            con.deleteAnswerInDb(answer.getQuestionId(), answer.getId());
+                            con.deleteAnswerInDb(answer.getId());
                         }
                     }
                 }
