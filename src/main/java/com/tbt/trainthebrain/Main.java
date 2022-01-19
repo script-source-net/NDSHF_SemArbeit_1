@@ -16,8 +16,6 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), 960.0, 850.0);
         MainController sceneController = fxmlLoader.getController();
         stage.setTitle("TtB - Train the Brain");
-//        stage.setMaxWidth(1280.0);
-//        stage.setMaxHeight(1080.0);
         stage.setMinWidth(960.0);
         stage.setMinHeight(700.0);
         stage.setScene(scene);

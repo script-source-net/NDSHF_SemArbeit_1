@@ -24,9 +24,14 @@ import java.util.ArrayList;
 
 public class ListItemHelper {
     /**
+     * Creates a styled HBox containing the truncated Question Text including tooltips
      *
-     * @param question
-     * @return styled HBox including Questiontext for Listings including Link to EditView
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @see     HBox
+     * @see     Question
+     * @param   question The question that should be returned as list element
+     * @return  <code>HBox</code> including Questiontext for Listings including Link to EditView
      */
     public HBox createSimpleListElementWithLink(Question question){
         /* Container */
@@ -34,8 +39,6 @@ public class ListItemHelper {
         HBox questionElement = new HBox();
         // Binde die CSS Klasse an:
         questionElement.getStyleClass().add("editListQuestionContainer");
-        // Setze das Padding:
-//        questionElement.setPadding(new Insets(10));
 
         //Erstelle eine AnchorPane für die innere Struktur
         AnchorPane anchorPane = new AnchorPane();
@@ -55,8 +58,6 @@ public class ListItemHelper {
         Tooltip editTip = new Tooltip("Frage bearbeiten");
         editTip.setShowDelay(Duration.millis(500.0));
         Tooltip.install(questionTextContainer, editTip);
-
-
 
         /* Answer Statistics */
         String countOfAnswers = Integer.toString(question.getAnswers().size());
@@ -108,8 +109,18 @@ public class ListItemHelper {
         return questionOutterElement;
     }
 
+    /**
+     * Handles the click event and switches the scene to the question edit view by loading the question-edit.fxml
+     * Loads the clicked question Object by using initWithData Method from Scene Controller
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @see     Question
+     * @see     QuestionEditController#initWithData(Question)
+     * @param   mouseEvent    Click event
+     * @param   question      Related Question Object that should be used in the edit view
+     */
     public void switchToEditQMaskClick(MouseEvent mouseEvent, Question question) {
-        System.out.println("switchToEditMaskClicked");
         Stage stage = (Stage) ((Node) mouseEvent.getTarget()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("question-edit.fxml"));
         try {
@@ -126,8 +137,17 @@ public class ListItemHelper {
         }
     }
 
+    /**
+     * Removes a list item <code>HBox</code> from the list by setting its height to 0 and setting visibility to false
+     * calls the required Database Task to delete the question element aswell as its related answers in the database.
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @see     HBox
+     * @param   id            The <code>id</code> of the question element that should be deleted
+     * @param   outterElement The <code>HBox</code> that should be hidden in the GUI after click
+     */
     public void deleteQuestion(int id, HBox outterElement){
-        System.out.println("Delete für " + id);
         outterElement.setMinHeight(0);
         outterElement.setPrefHeight(0);
         outterElement.setMaxHeight(0);

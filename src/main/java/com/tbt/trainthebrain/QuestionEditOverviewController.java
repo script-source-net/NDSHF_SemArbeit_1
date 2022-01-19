@@ -28,6 +28,14 @@ public class QuestionEditOverviewController extends AppController implements Ini
         updateView();
     }
 
+    /**
+     * Resets the view (GUI Elements) and calls Method that sets the Questionlist for the scene
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     #setQuestionsIntoList()
+     */
     private void updateView(){
         deleteAllQuestionsBtn.setDisable(true);
         editListQuestionContainerOutter.getChildren().clear();
@@ -35,8 +43,15 @@ public class QuestionEditOverviewController extends AppController implements Ini
         setQuestionsIntoList();
     }
 
+    /**
+     * Renders <code>Question</code> objects into the scene and hides "no content" information in the scene
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     ListItemHelper
+     */
     private void setQuestionsIntoList(){
-        System.out.println("Anzahl Fragen im questions obj:" + questions.size());
         ListItemHelper lih = new ListItemHelper();
         for (Question q: questions) {
             editListQuestionContainerOutter.getChildren().add(lih.createSimpleListElementWithLink(q));
@@ -48,6 +63,16 @@ public class QuestionEditOverviewController extends AppController implements Ini
         }
     }
 
+    /**
+     * Method that handels the trashAll click event - shows <code>Alert</code> PopUp for confirmation
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     Alert
+     *
+     * @param   actionEvent Click Event that initiates the method call
+     */
     public void trashAllClicked(ActionEvent actionEvent) {
 
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();

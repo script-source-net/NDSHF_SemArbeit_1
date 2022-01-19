@@ -33,6 +33,19 @@ public class LearnmodeSetupController extends AppController implements Initializ
     int countOfQuestionsInDB = 0;
     int questionsCounter = 0;
 
+    /**
+     * Click Handler for scene switch including call to LearnmodeController's custom init that handles the the questions array
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     ActionEvent
+     * @see     Stage
+     * @see     Scene
+     * @see     FXMLLoader
+     * @see     LearnmodeController
+     * @param   actionEvent Click event on Button that initiates the switch
+     */
     public void startTrainingClicked(ActionEvent actionEvent) {
         Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("learnmode.fxml"));
@@ -40,19 +53,6 @@ public class LearnmodeSetupController extends AppController implements Initializ
             Scene questioningScene = new Scene(loader.load());
             LearnmodeController sceneController = loader.getController();
             sceneController.initLearnmode(questionsCounter, questions);
-            stage.setScene(questioningScene);
-        }catch (IOException ioe){
-            System.out.println("Could not load scene");
-            ioe.printStackTrace();
-        }
-    }
-
-    public void switchToEditOverviewClicked(ActionEvent actionEvent) {
-        Stage stage = (Stage) ((Node) actionEvent.getTarget()).getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("question-edit-overview.fxml"));
-        try {
-            Scene questioningScene = new Scene(loader.load());
-            QuestionEditOverviewController sceneController = loader.getController();
             stage.setScene(questioningScene);
         }catch (IOException ioe){
             System.out.println("Could not load scene");
@@ -124,6 +124,16 @@ public class LearnmodeSetupController extends AppController implements Initializ
         }
     }
 
+    /**
+     * Click Event for + / - Counter Buttons - sets new count of questions in questionsToPlayCounter <code>TextField</code>
+     *
+     * @author  Marco Rensch
+     * @author  Claudia Martinez
+     * @since   1.0
+     * @see     ActionEvent
+     * @see     #questionsToPlayCounter
+     * @param   actionEvent <code>ActionEvent</code> that calls this method
+     */
     public void counterChangeClicked(ActionEvent actionEvent) {
         int oldQCount = 0;
 
