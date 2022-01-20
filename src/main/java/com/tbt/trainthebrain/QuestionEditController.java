@@ -219,7 +219,7 @@ public class QuestionEditController extends AppController implements Initializab
         VBox parent = (VBox) checkBox.getParent().getParent();
         TextArea answerTextArea = (TextArea) parent.getChildren().get(1);
 
-        return !answerTextArea.getText().isEmpty();
+        return !answerTextArea.getText().trim().isEmpty();
     }
 
     /**
@@ -377,10 +377,10 @@ public class QuestionEditController extends AppController implements Initializab
         VBox parent = (VBox) ta.getParent();
         // Get Child of type HBox (that contains our Text Nodes)
         for (Node child: parent.getChildren()) {
-            // Set Checkbox "is correct" to to not selected if answerText is now empty
+            // Set Checkbox "is correct" to not selected if answerText is now empty
             if (child instanceof AnchorPane) {
                 checkBox = ((CheckBox) ((AnchorPane) child).getChildren().get(1));
-                if(ta.getText().isEmpty()) {
+                if(ta.getText().trim().isEmpty()) {
                     checkBox.setSelected(false);
                     checkBox.setDisable(true);
                 }else{
