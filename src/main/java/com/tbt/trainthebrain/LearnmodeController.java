@@ -155,6 +155,7 @@ public class LearnmodeController extends AppController implements Initializable 
             // Alle zuvor gesetzten correct / false / selected Klassen entfernen (Styling)
             answerBox.getStyleClass().remove("correct");
             answerBox.getStyleClass().remove("false");
+            answerBox.getStyleClass().remove("false-selected");
             answerBox.getStyleClass().remove("selected");
 
             // Zuerst alle answerBoxen sicher einblenden (Styling)
@@ -242,7 +243,7 @@ public class LearnmodeController extends AppController implements Initializable 
                 if (answerBox.isCorrect) {
                     answerBox.getStyleClass().add("correct");
                 } else {
-                    answerBox.getStyleClass().add("false");
+                    answerBox.getStyleClass().add("false-selected");
                 }
             }else{
                 if (answerBox.isCorrect) {
