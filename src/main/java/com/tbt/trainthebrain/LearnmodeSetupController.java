@@ -71,7 +71,10 @@ public class LearnmodeSetupController extends AppController implements Initializ
             // TextField listener um sicherzustellen das nur nummern eingetragen werden
             questionsToPlayCounter.textProperty().addListener((observable, oldValue, newValue) -> {
                 if (!newValue.isEmpty() || (!newValue.isEmpty() && Integer.parseInt(newValue) > 0)) {
-                    if (!newValue.matches("\\d*") || newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1)) {
+                    if (!newValue.matches("\\d*")) {
+                        questionsToPlayCounter.setText("1");
+                        questionsCounter = 1;
+                    }else if(newValue.length() > 0 && (Integer.parseInt(newValue) > countOfQuestionsInDB || Integer.parseInt(newValue) < 1)) {
                         //make oldvalue compatible if needed
                         if(oldValue.isEmpty()){
                             if(Integer.parseInt(newValue) >  countOfQuestionsInDB){
