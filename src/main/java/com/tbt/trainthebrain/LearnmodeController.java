@@ -342,9 +342,10 @@ public class LearnmodeController extends AppController implements Initializable 
                     }
                 }
             }
-            // Korrektur wenn mehr falsch als richtig selektiert:
-            qr.pts = (qr.pts < 0) ? 0 : qr.pts;
         }
+
+        // Du kannst nicht weniger als 0 Punkte für eine Frage erzielen
+        qr.pts = (qr.pts < 0) ? 0 : qr.pts;
 
         return qr;
     }
