@@ -110,7 +110,7 @@ class LearnmodeControllerTest {
         QuestionResult qr = lmC.calcQuestionPts(fakeBoxList);
         Assertions.assertEquals(4.0, qr.pts);
     }
-    //Nach Bugfix muss dieser Test grün werden!!!!!
+
     @Test
     public void calcQuestionPts_shouldReturnMaxReachedPts_2Pts(){
         LearnmodeController lmC = new LearnmodeController();
